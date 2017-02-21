@@ -1,0 +1,9 @@
+/department-domain/target/
+/department-infrastructure/target/
+/department-application/target/
+/department-gateway/target/
+/department-api/target/
+/.idea/
+/atlassian-ide-plugin.xml
+/**/src/main/resources/rebel.xml
+**/*.iml
