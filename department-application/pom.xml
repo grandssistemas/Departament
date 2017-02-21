@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>br.com.codein</groupId>
+        <artifactId>department</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>department-application</artifactId>
+    <name>department-application</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <packaging>jar</packaging>
+    <dependencies>
+        <!-- DEPENDENCIAS de Módulos    -->
+        <dependency>
+            <groupId>br.com.codein</groupId>
+            <artifactId>department-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>br.com.codein</groupId>
+            <artifactId>department-infrastructure</artifactId>
+        </dependency>
+        <!-- DEPENDENCIAS do Framework GUMGA    -->
+        <dependency>
+            <groupId>io.gumga</groupId>
+            <artifactId>gumga-domain</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>br.com.codein</groupId>
+            <artifactId>buddycharacteristic-application</artifactId>
+            <type>jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>9.3-1102-jdbc4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+    </dependencies>
+</project>
