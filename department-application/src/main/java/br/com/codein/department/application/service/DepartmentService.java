@@ -266,6 +266,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
             department.setCharacteristics(characteristicSet);
             department.getCategories().forEach(category -> {
                 category.setVersion(null);
+                category.setDepartment(department);
                 category.getCharacteristics().forEach(character -> {
                     characterSet.add(createFindCharacteristic(character));
                 });
