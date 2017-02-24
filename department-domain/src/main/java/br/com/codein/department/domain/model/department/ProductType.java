@@ -5,6 +5,7 @@ import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.ControlType;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -15,6 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +37,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(value = "Lista de caracteristicas do tipo de produto.", position = 2)
     private List<AssociativeCharacteristic> characteristics;
     @NotNull(message = "A ProductType should have a father")
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"productTypes"})
     @ManyToOne
     @ApiModelProperty(value = "Categoria a qual pertence este tipo de produto", position = 3, required = true)
     private Category category;
@@ -121,6 +123,16 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.category = category;
         this.isGrid = isGrid;
         this.active = active;
+    }
+
+    public ProductType(String name, boolean isGrid, List<String> nameMount, ControlType controlTypeProduct, TypeLabeling typeLabeling, boolean active) {
+        this.name = name;
+        this.isGrid = isGrid;
+        this.nameMount = nameMount;
+        this.controlTypeProduct = controlTypeProduct;
+        this.typeLabeling = typeLabeling;
+        this.active = active;
+        this.setCharacteristics(new ArrayList<>());
     }
 
     public Long getIntegrationId() {

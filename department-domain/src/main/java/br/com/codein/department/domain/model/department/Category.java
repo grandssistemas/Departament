@@ -189,6 +189,12 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.active = active;
     }
 
+    public Category(String name, HashSet<ProductType> productTypes, boolean active) {
+        this.name = name;
+        this.productTypes = productTypes;
+        this.active = active;
+    }
+
     public Long getIntegrationId() {
         return integrationId;
     }

@@ -61,6 +61,12 @@ public class Department extends GumgaModel<Long> implements Serializable {
     public Department() {
     }
 
+    public Department(String name, Boolean active,Set<Category> categories) {
+        this.name = name;
+        this.categories = categories;
+        this.active = active;
+    }
+
     public Department(String name, Boolean active) {
         this.name = name;
         this.active = active;
@@ -108,6 +114,8 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.variation = variation;
         this.active = active;
     }
+
+
 
     public Long getIntegrationId() {
         return integrationId;

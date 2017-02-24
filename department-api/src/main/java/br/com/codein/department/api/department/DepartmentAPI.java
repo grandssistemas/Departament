@@ -13,10 +13,7 @@ import io.gumga.presentation.GumgaAPI;
 import io.gumga.presentation.api.CSVGeneratorAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -72,5 +69,10 @@ public class DepartmentAPI extends GumgaAPI<Department, Long> implements CSVGene
     @RequestMapping(value = "/all",method = RequestMethod.GET)
     public SearchResult<Department> getAll(){
         return ((DepartmentService) service).getAll();
+    }
+
+    @RequestMapping(value = "/array", method = RequestMethod.POST)
+    public List<Department> saveArray(@RequestBody List<Department> departments) {
+        return ((DepartmentService)service).saveArray(departments);
     }
 }

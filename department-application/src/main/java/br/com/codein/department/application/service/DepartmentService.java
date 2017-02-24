@@ -1,5 +1,7 @@
 package br.com.codein.department.application.service;
 
+import br.com.codein.buddycharacteristic.application.service.characteristic.AssociativeCharacteristicService;
+import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
@@ -20,9 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by gelatti on 21/02/17.
@@ -36,6 +36,8 @@ public class DepartmentService extends GumgaService<Department, Long> {
     private CategoryService categoryService;
     @Autowired
     private CharacteristicService characteristicService;
+    @Autowired
+    private AssociativeCharacteristicService associativeCharacteristicService;
 
 
     @Override
@@ -188,10 +190,10 @@ public class DepartmentService extends GumgaService<Department, Long> {
     @Transactional
     public List<Department> loadAllWithFirstChildrens() {
         String oi = GumgaThreadScope.organizationCode.get();
-        String hql = "SELECT obj FROM Department obj WHERE (obj.oi IS NULL OR obj.oi LIKE '"+oi+"%')";
-        List<Department> toReturn = repository.search(hql,new HashMap<>()).getValues();
+        String hql = "SELECT obj FROM Department obj WHERE (obj.oi IS NULL OR obj.oi LIKE '" + oi + "%')";
+        List<Department> toReturn = repository.search(hql, new HashMap<>()).getValues();
 //        List<Department> toReturn = repository.findAllWithTenancy().getValues();
-        for(Department dep:toReturn){
+        for (Department dep : toReturn) {
             Hibernate.initialize(dep.getCategories());
         }
         return toReturn;
@@ -207,6 +209,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
 
     /**
      * Função para encontrar um departamento pelo id de integração
+     *
      * @param id ID de integração
      * @return O departamento encontrado
      */
@@ -214,9 +217,9 @@ public class DepartmentService extends GumgaService<Department, Long> {
     public Department findByIntegrationId(Long id) {
 
         QueryObject qo = new QueryObject();
-        qo.setAq("obj.integrationId = "+id);
+        qo.setAq("obj.integrationId = " + id);
         SearchResult<Department> result = repository.search(qo);
-        if(result.getValues().isEmpty()){
+        if (result.getValues().isEmpty()) {
             return null;
         }
         return result.getValues().get(0);
@@ -234,7 +237,88 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 .isEmpty();
     }
 
+    /**
+     * Função que retornar todos departmentos cadastrados
+     *
+     * @return Os departamento encontrados
+     */
     public SearchResult<Department> getAll() {
         return repository.findAllWithTenancy();
+    }
+
+    /**
+     * Função que salva um array de departamentos
+     *
+     * @param departments Array de departamentos a ser salvo
+     * @return Os departamentos salvos
+     */
+    @Transactional
+    public List<Department> saveArray(List<Department> departments) {
+        List<Department> savedList = new ArrayList<>();
+        Set<Characteristic> characterSet = new HashSet<>();
+        Set<Characteristic> characteristicSet = new HashSet<>();
+        List<AssociativeCharacteristic> associativeCharacteristicList = new ArrayList<>();
+        for (Department department : departments) {
+            department.setVersion(null);
+            department.getCharacteristics().forEach(characteristic -> {
+                characteristicSet.add(createFindCharacteristic(characteristic));
+            });
+            department.setCharacteristics(characteristicSet);
+            department.getCategories().forEach(category -> {
+                category.setVersion(null);
+                category.getCharacteristics().forEach(character -> {
+                    characterSet.add(createFindCharacteristic(character));
+                });
+                category.setCharacteristics(characterSet);
+                category.getProductTypes().forEach(pt -> {
+                    pt.setCategory(category);
+                    pt.setVersion(null);
+                    pt.getCharacteristics().forEach(associativeCharacteristic -> {
+                        associativeCharacteristic.setCharacteristic(createFindCharacteristic(associativeCharacteristic.getCharacteristic()));
+                        AssociativeCharacteristic associativeCharacteristic1 = associativeCharacteristicService.save(
+                                new AssociativeCharacteristic(associativeCharacteristic.getHaveRequired(),
+                                        associativeCharacteristic.getCharacteristic(), associativeCharacteristic.getIsGrid(),
+                                        associativeCharacteristic.getGridCount()));
+                        associativeCharacteristicList.add(associativeCharacteristic1);
+                    });
+                    pt.setCharacteristics(associativeCharacteristicList);
+                });
+            });
+            save(department);
+            savedList.add(department);
+        }
+        return savedList;
+    }
+
+
+    private Characteristic createFindCharacteristic (Characteristic characteristic) {
+        SearchResult<Characteristic> characterSearchResult = characteristicService.recoveryByNameWithTenancy(characteristic.getName());
+        if (characterSearchResult.getValues().isEmpty()) {
+            Characteristic newCharacter = new Characteristic(characteristic.getName(),
+                    characteristic.getTipoDeValorCaracteristica(), characteristic.getValues(),
+                    characteristic.getOrigin());
+            Characteristic charac = characteristicService.save(newCharacter);
+            return charac;
+        } else {
+            return characterSearchResult.getValues().get(0);
+        }
+    }
+
+    /**
+     * Função que retorna um array com todos os filhos e caracteristicas
+     *
+     * @param departments Array de departamentos a ser carregado
+     * @return Os departamentos carregados
+     */
+    public List<Department> getFatArray(List<Department> departments) {
+        List<Department> departmentList = new ArrayList<>();
+        for (Department department : departments) {
+            departmentList.add(loadDepartmentFatWithCategoriesAndProductType(department.getId()));
+        }
+        return departmentList;
+    }
+
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }
