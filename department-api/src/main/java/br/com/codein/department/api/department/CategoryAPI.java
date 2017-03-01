@@ -109,7 +109,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     public RestResponse<List<CategoryDTO>> loadTree() {
         //TODO ARRUMAR PARA TRAZER TODOS OS DEPARTAMENTOS
         CategoryDTO dto;
-        SearchResult<Department> treeFathers = departmentService.pesquisa(new QueryObject());
+        SearchResult<Department> treeFathers = departmentService.getAll();
         List<CategoryDTO> dtos = new ArrayList<>();
         List<Department> departmentList = treeFathers.getValues();
         departmentService.initializeCharacteristics(departmentList);

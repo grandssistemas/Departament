@@ -1619,4 +1619,19 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
     </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <update tableName="department">
+            <column name="active" type="BOOL" value="TRUE"/>
+        </update>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <update tableName="category">
+            <column name="active" type="BOOL" value="TRUE"/>
+        </update>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <update tableName="producttype">
+            <column name="active" type="BOOL" value="TRUE"/>
+        </update>
+    </changeSet>
 </databaseChangeLog>
