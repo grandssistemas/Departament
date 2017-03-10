@@ -61,50 +61,57 @@ public class Department extends GumgaModel<Long> implements Serializable {
     public Department() {
     }
 
-    public Department(String name, Boolean active,Set<Category> categories) {
+    public Department(String name, Boolean active,Set<Category> categories, GumgaImage image) {
         this.name = name;
         this.categories = categories;
         this.active = active;
+        this.image = image;
     }
 
-    public Department(String name, Boolean active) {
+    public Department(String name, Boolean active, GumgaImage image) {
         this.name = name;
         this.active = active;
+        this.image = image;
     }
 
-    public Department(String name, Set<Characteristic> characteristics, Boolean active) {
+    public Department(String name, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.characteristics = characteristics;
         this.active = active;
+        this.image = image;
     }
-    public Department(Long id, String name, Set<Characteristic> characteristics, Boolean active) {
+    public Department(Long id, String name, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.characteristics = characteristics;
         this.id = id;
         this.active = active;
+        this.image = image;
     }
 
-    public Department(String name, String patterns, Boolean active) {
+    public Department(String name, String patterns, Boolean active, GumgaImage image) {
         this.name = name;
         this.patterns = patterns;
         this.active = active;
+        this.image = image;
     }
 
-    public Department(String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active) {
+    public Department(String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.categories = categories;
         this.active = active;
+        this.image = image;
     }
 
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active) {
+    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.categories = categories;
         this.characteristics = characteristics;
         this.id = id;
         this.active = active;
+        this.image = image;
     }
 
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, String patterns, String variation, Boolean active) {
+    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, String patterns, String variation, Boolean active, GumgaImage image) {
         this.name = name;
         this.categories = categories;
         this.characteristics = characteristics;
@@ -113,6 +120,7 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.patterns = patterns;
         this.variation = variation;
         this.active = active;
+        this.image = image;
     }
 
 

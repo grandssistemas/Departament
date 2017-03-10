@@ -4,6 +4,7 @@ import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharac
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.ControlType;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
+import io.gumga.domain.domains.GumgaImage;
 
 import java.util.List;
 import java.util.Set;
@@ -29,13 +30,14 @@ public class CategoryDTO {
     public ControlType controlTypeProduct;
     public TypeLabeling typeLabeling;
     public Boolean active;
+    public GumgaImage image;
 
     public CategoryDTO() {
     }
 
     public CategoryDTO(String name, List<AssociativeCharacteristic> characteristicsPT, Boolean isGrid,
                        List<CategoryDTO> childrens, Set<Characteristic> characteristics, String description,
-                       CategoryType categoryType, List<String> nameMount, Boolean active) {
+                       CategoryType categoryType, List<String> nameMount, Boolean active, GumgaImage image) {
         this.name = name;
         this.characteristicsPT = characteristicsPT;
         this.isGrid = isGrid;
@@ -45,5 +47,6 @@ public class CategoryDTO {
         this.categoryType = categoryType;
         this.nameMount = nameMount;
         this.active = active;
+        this.image = image;
     }
 }

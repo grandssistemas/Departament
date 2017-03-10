@@ -1634,4 +1634,20 @@
             <column name="active" type="BOOL" value="TRUE"/>
         </update>
     </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addColumn tableName="producttype">
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_size" type="INT"/>
+            <column name="image_type" type="VARCHAR(255)"/>
+            <column name="image_bytes" type="BYTEA"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addColumn tableName="producttype_aud">
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_size" type="INT"/>
+            <column name="image_type" type="VARCHAR(255)"/>
+            <column name="image_bytes" type="BYTEA"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

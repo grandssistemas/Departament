@@ -77,63 +77,70 @@ public class Category extends GumgaModel<Long> implements Serializable {
     public Category() {
     }
 
-    public Category(String name, Boolean active) {
+    public Category(String name, Boolean active, GumgaImage image) {
         this.name = name;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, Department department, Boolean active) {
+    public Category(String name, Department department, Boolean active, GumgaImage image) {
         this.name = name;
         this.department = department;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, Category category, Boolean active) {
+    public Category(String name, Category category, Boolean active, GumgaImage image) {
         this.name = name;
         this.category = category;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, Department department, Set<Characteristic> characteristics, Boolean active) {
+    public Category(String name, Department department, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.department = department;
         this.characteristics = characteristics;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, String description, Department department, Set<Category> categories, Set<Characteristic> characteristics, Boolean active) {
+    public Category(String name, String description, Department department, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.description = description;
         this.department = department;
         this.categories = categories;
         this.characteristics = characteristics;
         this.active = active;
+        this.image = image;
     }
-    public Category(String name, String description, Set<Category> categories, Set<Characteristic> characteristics, Boolean active) {
+    public Category(String name, String description, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.description = description;
         this.categories = categories;
         this.characteristics = characteristics;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, String description, Set<Characteristic> characteristics, Boolean active) {
+    public Category(String name, String description, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.description = description;
         this.characteristics = characteristics;
         this.active = active;
     }
 
-    public Category(String description, String name, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active) {
+    public Category(String description, String name, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.description = description;
         this.name = name;
         this.categories = categories;
         this.productTypes = productTypes;
         this.characteristics = characteristics;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active) {
+    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.description = description;
         this.name = name;
         this.categories = categories;
@@ -141,9 +148,10 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.characteristics = characteristics;
         this.id = id;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department, Boolean active) {
+    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department, Boolean active, GumgaImage image) {
         this.description = description;
         this.name = name;
         this.categories = categories;
@@ -152,9 +160,10 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.id = id;
         this.department =department;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department,List<String> nameMount, Boolean active) {
+    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department,List<String> nameMount, Boolean active, GumgaImage image) {
         this.description = description;
         this.name = name;
         this.categories = categories;
@@ -164,9 +173,10 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.department =department;
         this.nameMount = nameMount;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category, Boolean active) {
+    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category, Boolean active, GumgaImage image) {
         this.description = description;
         this.name = name;
         this.categories = categories;
@@ -175,9 +185,10 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.id = id;
         this.category = category;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category,List<String> nameMount, Boolean active) {
+    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category,List<String> nameMount, Boolean active, GumgaImage image) {
         this.description = description;
         this.name = name;
         this.categories = categories;
@@ -187,12 +198,14 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.category = category;
         this.nameMount = nameMount;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, HashSet<ProductType> productTypes, boolean active) {
+    public Category(String name, HashSet<ProductType> productTypes, boolean active, GumgaImage image) {
         this.name = name;
         this.productTypes = productTypes;
         this.active = active;
+        this.image = image;
     }
 
     public Long getIntegrationId() {
