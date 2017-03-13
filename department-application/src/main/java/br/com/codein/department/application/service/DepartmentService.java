@@ -11,11 +11,13 @@ import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.enums.ValueTypeCharacteristic;
 import br.com.codein.department.application.repository.DepartmentRepository;
 import io.gumga.application.GumgaService;
+import io.gumga.application.GumgaTempFileService;
 import io.gumga.core.GumgaThreadScope;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
+import io.gumga.domain.domains.GumgaImage;
 import io.gumga.domain.repository.GumgaMultitenancyUtil;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +40,30 @@ public class DepartmentService extends GumgaService<Department, Long> {
     private CharacteristicService characteristicService;
     @Autowired
     private AssociativeCharacteristicService associativeCharacteristicService;
+    @Autowired
+    private GumgaTempFileService gumgaTempFileService;
 
 
     @Override
     @Transactional
     public Department save(Department resource) {
         initializeDepartment(resource);
+        resource.setImage(setImage(resource.getImage()));
+        if (resource.getCategories() != null) {
+            resource.getCategories().forEach(category -> {
+                if (category.getImage() != null) {
+                    category.setImage(setImage(category.getImage()));
+                }
+                if (category.getProductTypes() != null) {
+                    category.getProductTypes().forEach(productType -> {
+                        if (productType.getImage() != null) {
+                            productType.setImage(setImage(productType.getImage()));
+                        }
+                    });
+                }
+            });
+        }
+
         if (resource.getPatterns() != null) {
             if (!this.isPatternTypesCountRight(resource.getPatterns())) {
                 throw new ValidationException("In Department patterns count isn't right");
@@ -53,6 +73,17 @@ public class DepartmentService extends GumgaService<Department, Long> {
         }
         super.save(resource);
         return resource;
+    }
+
+    private GumgaImage setImage(GumgaImage image) {
+        if (image != null) {
+            if ("null".equals(image.getName())) {
+                return null;
+            } else if (image.getSize() == 0) {
+                return (GumgaImage) gumgaTempFileService.find(image.getName());
+            }
+        }
+        return image;
     }
 
     @Override

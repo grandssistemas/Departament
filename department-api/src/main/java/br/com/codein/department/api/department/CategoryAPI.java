@@ -7,21 +7,28 @@ import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
 import br.com.codein.department.domain.model.exception.ParamWrongException;
+import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.department.gateway.dto.department.CategoryDTO;
 import br.com.codein.department.gateway.dto.department.CategoryType;
 import br.com.codein.department.gateway.translator.CategoryTranslator;
 import io.gumga.annotations.GumgaSwagger;
 import io.gumga.application.GumgaService;
+import io.gumga.application.GumgaTempFileService;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
+import io.gumga.domain.domains.GumgaImage;
 import io.gumga.presentation.GumgaAPI;
 import io.gumga.presentation.RestResponse;
 import io.gumga.presentation.api.CSVGeneratorAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +45,8 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     private DepartmentService departmentService;
     @Autowired
     private ProductTypeService productTypeService;
+    @Autowired
+    private GumgaTempFileService gumgaTempFileService;
 
 
     @Autowired
@@ -156,7 +165,11 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     @Override
     @GumgaSwagger
     public RestResponse<Category> delete(@PathVariable Long id) {
-        return super.delete(id);
+        try {
+            return super.delete(id);
+        } catch (Exception e) {
+            throw new ValidationException("twd02;;That category are already in use, cannot delete.");
+        }
     }
 
     @Override
@@ -204,5 +217,31 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
                 throw new ParamWrongException("twd01;;CategoryType 'DEPARTMENT' can not be use to search here");
         }
         return new RestResponse<>(dto, "Sucesso");
+    }
+
+    @Override
+    public RestResponse<Category> save(@RequestBody @Valid Category model, BindingResult result) {
+        model.setImage((GumgaImage) gumgaTempFileService.find(model.getImage().getName()));
+        return super.save(model, result);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/image")
+    public String logoUpload(@RequestParam MultipartFile image) throws IOException {
+        GumgaImage gi = new GumgaImage();
+        gi.setBytes(image.getBytes());
+        gi.setMimeType(image.getContentType());
+        gi.setName(image.getName());
+        gi.setSize(image.getSize());
+        return gumgaTempFileService.create(gi);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/image/{fileName}")
+    public String logoDelete(@PathVariable String fileName) {
+        return gumgaTempFileService.delete(fileName);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/image/{fileName}")
+    public byte[] logoGet(@PathVariable(value = "fileName") String fileName) {
+        return gumgaTempFileService.find(fileName).getBytes();
     }
 }

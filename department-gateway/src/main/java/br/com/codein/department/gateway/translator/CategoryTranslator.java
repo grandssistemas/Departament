@@ -41,7 +41,7 @@ public class CategoryTranslator {
 
         switch (dto.categoryType) {
             case DEPARTMENT:
-                toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.patterns, dto.variation, dto.active);
+                toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.patterns, dto.variation, dto.active, dto.image);
                 ((Department) toReturn).setVersion(dto.version);
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Department dep = departmentService.loadDepartmentFat(dto.id);
@@ -58,12 +58,12 @@ public class CategoryTranslator {
                     for(Characteristic characteristic: ((Category)father).getCharacteristics()){
                         if(!dto.characteristics.contains(characteristic)) dto.characteristics.add(characteristic);
                     }
-                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Category) father, dto.nameMount, dto.active);
+                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Category) father, dto.nameMount, dto.active, dto.image);
                 } else {
                     for(Characteristic characteristic: ((Department)father).getCharacteristics()){
                         if(!dto.characteristics.contains(characteristic)) dto.characteristics.add(characteristic);
                     }
-                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active);
+                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.image);
                 }
                 ((Category) toReturn).setVersion(dto.version);
 
@@ -103,7 +103,7 @@ public class CategoryTranslator {
                     }
                 }
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
-                        dto.nameMount, dto.patterns, dto.variation, dto.controlTypeProduct, dto.typeLabeling, dto.active);
+                        dto.nameMount, dto.patterns, dto.variation, dto.controlTypeProduct, dto.typeLabeling, dto.active, dto.image);
                 ((ProductType) toReturn).setVersion(dto.version);
                 break;
         }
@@ -127,6 +127,7 @@ public class CategoryTranslator {
         dto.nameMount = department.getNameMount();
         dto.patterns = department.getPatterns();
         dto.active = department.getActive();
+        dto.image = department.getImage();
         return dto;
     }
 
@@ -147,6 +148,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.nameMount = category.getNameMount();
         dto.active = category.getActive();
+        dto.image = category.getImage();
         return dto;
     }
 
@@ -164,6 +166,7 @@ public class CategoryTranslator {
         dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
+        dto.image = productType.getImage();
         return dto;
     }
 
@@ -182,6 +185,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.patterns = department.getPatterns();
         dto.active = department.getActive();
+        dto.image = department.getImage();
         return dto;
     }
 
@@ -200,6 +204,7 @@ public class CategoryTranslator {
         }
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
+        dto.image = category.getImage();
         return dto;
     }
 
@@ -216,6 +221,7 @@ public class CategoryTranslator {
         dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
+        dto.image = productType.getImage();
         return dto;
     }
 
@@ -244,6 +250,7 @@ public class CategoryTranslator {
         dto.controlTypeProduct = obj.getControlTypeProduct();
         dto.typeLabeling = obj.getTypeLabeling();
         dto.active = obj.getActive();
+        dto.image = obj.getImage();
         return dto;
     }
 
@@ -270,6 +277,7 @@ public class CategoryTranslator {
         dto.characteristics = null;
         dto.nameMount = null;
         dto.active = obj.getActive();
+        dto.image = obj.getImage();
         return dto;
     }
 
@@ -281,7 +289,7 @@ public class CategoryTranslator {
         dto.patterns = obj.getPatterns();
         dto.variation = obj.getVariation();
         dto.active = obj.getActive();
-
+        dto.image = obj.getImage();
         return dto;
     }
 
@@ -296,6 +304,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.nameMount = department.getNameMount();
         dto.active = department.getActive();
+        dto.image = department.getImage();
         return dto;
     }
 
@@ -309,6 +318,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.nameMount = category.getNameMount();
         dto.active = category.getActive();
+        dto.image = category.getImage();
         return dto;
     }
 
@@ -321,6 +331,7 @@ public class CategoryTranslator {
         dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
+        dto.image = productType.getImage();
         return dto;
     }
 
@@ -334,6 +345,7 @@ public class CategoryTranslator {
         dto.name = category.getName();
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
+        dto.image = category.getImage();
         return dto;
     }
 
@@ -347,6 +359,7 @@ public class CategoryTranslator {
         dto.name = productType.getName();
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.active = productType.getActive();
+        dto.image = productType.getImage();
         return dto;
     }
 
@@ -385,6 +398,7 @@ public class CategoryTranslator {
         dto.name = department.getName();
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
+        dto.image = department.getImage();
         List<CategoryDTO> childrens = new ArrayList<>();
         if (department.getCategories() != null) {
             for (Category cat : department.getCategories()) {
@@ -407,6 +421,7 @@ public class CategoryTranslator {
         dto.name = category.getName();
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
+        dto.image = category.getImage();
         List<CategoryDTO> childrens = new ArrayList<>();
         for (Category cat : category.getCategories()) {
             childrens.add(fromWithoutCharacteristics(cat));
