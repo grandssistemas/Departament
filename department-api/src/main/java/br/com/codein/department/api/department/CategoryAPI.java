@@ -225,22 +225,22 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         return super.save(model, result);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/logo")
-    public String logoUpload(@RequestParam MultipartFile logo) throws IOException {
+    @RequestMapping(method = RequestMethod.POST, value = "/image")
+    public String logoUpload(@RequestParam MultipartFile image) throws IOException {
         GumgaImage gi = new GumgaImage();
-        gi.setBytes(logo.getBytes());
-        gi.setMimeType(logo.getContentType());
-        gi.setName(logo.getName());
-        gi.setSize(logo.getSize());
+        gi.setBytes(image.getBytes());
+        gi.setMimeType(image.getContentType());
+        gi.setName(image.getName());
+        gi.setSize(image.getSize());
         return gumgaTempFileService.create(gi);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/logo/{fileName}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/image/{fileName}")
     public String logoDelete(@PathVariable String fileName) {
         return gumgaTempFileService.delete(fileName);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/logo/{fileName}")
+    @RequestMapping(method = RequestMethod.GET, value = "/image/{fileName}")
     public byte[] logoGet(@PathVariable(value = "fileName") String fileName) {
         return gumgaTempFileService.find(fileName).getBytes();
     }

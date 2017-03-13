@@ -6,6 +6,7 @@ import br.com.codein.department.domain.model.department.enums.ControlType;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
 import io.gumga.domain.domains.GumgaImage;
 
+import javax.persistence.Column;
 import java.util.List;
 import java.util.Set;
 
