@@ -79,7 +79,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         if (image != null) {
             if ("null".equals(image.getName())) {
                 return null;
-            } else if (image.getSize() == 0) {
+            } else if (image.getName() != null && !image.getName().equals("image")) {
                 return (GumgaImage) gumgaTempFileService.find(image.getName());
             }
         }
