@@ -27,4 +27,18 @@ public enum ControlType {
     public String getAbbreviation () {
         return this.abbreviation;
     }
+
+
+    public static ControlType getByAbbreviation(String abbreviation){
+        for(int i = 0; i < ControlType.values().length;i++){
+            if(ControlType.values()[i].equalsAbbreviationNoCase(abbreviation)){
+                return ControlType.values()[i];
+            }
+        }
+        return null;
+    }
+
+    private boolean equalsAbbreviationNoCase(String abbreviation) {
+        return this.abbreviation.toUpperCase().equals(abbreviation.toUpperCase());
+    }
 }
