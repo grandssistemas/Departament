@@ -353,4 +353,10 @@ public class DepartmentService extends GumgaService<Department, Long> {
     public void deleteAll() {
         repository.deleteAll();
     }
+
+    @Transactional
+    public List<Department> findAll(){
+        return repository.findAllWithTenancy().getValues();
+    }
+
 }
