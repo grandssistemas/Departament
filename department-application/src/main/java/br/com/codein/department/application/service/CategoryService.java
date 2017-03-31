@@ -253,6 +253,11 @@ public class CategoryService extends GumgaService<Category, Long> {
         }
         return result.getValues().get(0);
     }
+
+    @Transactional
+    public List<Category> findAll(){
+        return repository.findAllWithTenancy().getValues();
+    }
 }
 
 
