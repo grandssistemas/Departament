@@ -164,6 +164,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
 
     @Override
     @GumgaSwagger
+    @Transactional
     public RestResponse<Category> delete(@PathVariable Long id) {
         try {
             return super.delete(id);
@@ -241,7 +242,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/image/{fileName}")
-    public byte[] logoGet(@PathVariable(value = "fileName") String fileName) {
-        return gumgaTempFileService.find(fileName).getBytes();
+    public GumgaImage logoGet(@PathVariable(value = "fileName") String fileName) {
+        return (GumgaImage) gumgaTempFileService.find(fileName);
     }
 }

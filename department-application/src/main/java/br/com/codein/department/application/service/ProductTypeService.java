@@ -1,5 +1,6 @@
 package br.com.codein.department.application.service;
 
+import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
 import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.buddycharacteristic.application.service.characteristic.AssociativeCharacteristicService;
@@ -12,6 +13,7 @@ import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -168,7 +170,13 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     }
 
     public ProductType recoveryByName(String name) {
-        return repository.findByName(name);
+        QueryObject qo = new QueryObject();
+        qo.setAq("obj.name = '"+name+"'");
+        SearchResult<ProductType> result = repository.search(qo);
+        if(result.getValues().isEmpty()){
+            return null;
+        }
+        return result.getValues().get(0);
     }
 
     public void initializeProductType(ProductType resource){
@@ -212,6 +220,11 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
             return null;
         }
         return result.getValues().get(0);
+    }
+
+    @org.springframework.transaction.annotation.Transactional
+    public List<ProductType> findAll(){
+        return repository.findAllWithTenancy().getValues();
     }
 }
 
