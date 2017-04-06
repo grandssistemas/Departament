@@ -1619,6 +1619,66 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
     </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="department" columnName="active"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="department">
+            <column name="active" type="BOOL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-002" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="category" columnName="active"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="category">
+            <column name="active" type="BOOL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-003" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="producttype" columnName="active"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="producttype">
+            <column name="active" type="BOOL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-004" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="department_aud" columnName="active"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="department_aud">
+            <column name="active" type="BOOL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-005" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="category_aud" columnName="active"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="category_aud">
+            <column name="active" type="BOOL"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-006" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="producttype_aud" columnName="active"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="producttype_aud">
+            <column name="active" type="BOOL"/>
+        </addColumn>
+    </changeSet>
     <changeSet author="Bruno Gelatti" id="DEP-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <update tableName="department">
             <column name="active" type="BOOL" value="TRUE"/>
