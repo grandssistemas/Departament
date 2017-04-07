@@ -169,7 +169,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         try {
             return super.delete(id);
         } catch (Exception e) {
-            throw new ValidationException("twd02;;That category are already in use, cannot delete.");
+            throw new ValidationException("twd02;;That category are already in uses, cannot delete.");
         }
     }
 
