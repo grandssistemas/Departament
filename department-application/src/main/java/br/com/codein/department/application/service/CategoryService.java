@@ -117,13 +117,12 @@ public class CategoryService extends GumgaService<Category, Long> {
         return obj;
     }
 
-    //TODO ARRUMAR A REGRA DE NEGOCIO PARA COMPARAR A CARACTERISTICA DE TAMANHO DO PAI
     private Boolean checkCharacteristicContain(Category category) {
         if (category.getDepartment() != null) {
             List<Characteristic> list = new ArrayList<>(category.getDepartment().getCharacteristics());
             for (int i = list.size() - 1; i >= 0; i--) {
                 Characteristic characteristic = list.get(i);
-                if (characteristic.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.TAMANHO) {
+                if (ValueTypeCharacteristic.TAMANHO.equals(characteristic.getCharacteristicValueType())) {
                     list.remove(characteristic);
                 }
             }

@@ -86,12 +86,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.image = image;
     }
 
-    public Department(String name, String patterns, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.active = active;
-        this.image = image;
-    }
-
     public Department(String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.categories = categories;
@@ -108,13 +102,13 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.image = image;
     }
 
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, String patterns, String variation, Boolean active, GumgaImage image) {
+    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, VariationType variation, Boolean active, GumgaImage image) {
         this.name = name;
         this.categories = categories;
         this.characteristics = characteristics;
         this.id = id;
         this.nameMount = nameMount;
-//        this.variation = variation;
+        this.variation = variation;
         this.active = active;
         this.image = image;
     }

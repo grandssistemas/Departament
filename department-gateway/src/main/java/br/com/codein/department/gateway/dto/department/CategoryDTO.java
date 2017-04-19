@@ -4,6 +4,7 @@ import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharac
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.ControlType;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
+import br.com.codein.department.domain.model.department.enums.VariationType;
 import io.gumga.domain.domains.GumgaImage;
 
 import javax.persistence.Column;
@@ -25,8 +26,7 @@ public class CategoryDTO {
     public String description;
     public CategoryType categoryType;
     public List<String> nameMount;
-    public String patterns;
-    public String variation;
+    public VariationType variation;
     public Integer version;
     public ControlType controlTypeProduct;
     public TypeLabeling typeLabeling;

@@ -26,7 +26,7 @@ public class DepartmentCrudUtil {
         return new Department("Department only name", true);
     }
     public static Department departmentWithPattern(){
-        return new Department("Department only name","TAMANHO;COR", true);
+        return new Department("Department only name", true);
     }
     public static Department departmentWithCharacs(){
         Set<Characteristic> values = new HashSet<>();
