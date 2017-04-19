@@ -101,7 +101,7 @@ public class CategoryTranslator {
                     }
                 }
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
-                        dto.nameMount, dto.variation, dto.controlTypeProduct, dto.typeLabeling, dto.active, dto.image);
+                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.image);
                 ((ProductType) toReturn).setVersion(dto.version);
                 break;
         }
@@ -158,7 +158,6 @@ public class CategoryTranslator {
         dto.isGrid = productType.getIsGrid();
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.nameMount = productType.getNameMount();
-        dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.image = productType.getImage();
@@ -210,7 +209,6 @@ public class CategoryTranslator {
         dto.name = productType.getName();
         dto.isGrid = productType.getIsGrid();
         dto.categoryType = CategoryType.PRODUCTTYPE;
-        dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.image = productType.getImage();
@@ -237,7 +235,6 @@ public class CategoryTranslator {
         dto.characteristicsPT = null;
         dto.nameMount = obj.getNameMount();
         dto.variation = obj.getVariation();
-        dto.controlTypeProduct = obj.getControlTypeProduct();
         dto.typeLabeling = obj.getTypeLabeling();
         dto.active = obj.getActive();
         dto.image = obj.getImage();
@@ -316,7 +313,6 @@ public class CategoryTranslator {
         dto.characteristicsPT = productType.getCharacteristics();
         dto.nameMount = productType.getNameMount();
         dto.variation = productType.getVariation();
-        dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.image = productType.getImage();

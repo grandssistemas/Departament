@@ -2,7 +2,6 @@ package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
-import br.com.codein.department.domain.model.department.enums.ControlType;
 import br.com.codein.department.domain.model.department.enums.ProductEspecification;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
 import br.com.codein.department.domain.model.department.enums.VariationType;
@@ -19,7 +18,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -55,15 +53,12 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(value = "Nome do tipo de variação que o tipo de produto segue.", position = 5)
     private VariationType variation;
     @Enumerated(EnumType.STRING)
-    @ApiModelProperty(value = "Especifíca o tipo de controle de estoque", position = 7)
-    private ControlType controlTypeProduct;
-    @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Tipo de etiqueta que pode ser: balance ou common", position = 8)
     private TypeLabeling typeLabeling;
     @ApiModelProperty(value = "ID usado para integração com outros softwares", position = 9)
     private Long integrationId;
     @ApiModelProperty(value = "Determina se o tipo de produto esta ativo ou não", position = 10)
-    private Boolean active;
+    private Boolean active = Boolean.TRUE;
     @Columns(columns = {
             @Column(name = "image_name"),
             @Column(name = "image_size"),
@@ -78,95 +73,39 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     public ProductType() {
     }
 
-    public ProductType(String name, Boolean active, GumgaImage image) {
+    public ProductType(String name, Boolean isGrid) {
         this.name = name;
-        this.active = active;
-        this.image = image;
+        this.isGrid = isGrid;
     }
 
-    public ProductType(String name, List<AssociativeCharacteristic> characteristics, Boolean isGrid, Boolean active, GumgaImage image) {
+    public ProductType(String name, List<AssociativeCharacteristic> characteristics, Category category, Boolean isGrid, List<String> nameMount, VariationType variation, TypeLabeling typeLabeling, Long integrationId, Boolean active, GumgaImage image, ProductEspecification especification) {
         this.name = name;
         this.characteristics = characteristics;
-        this.isGrid = isGrid;
-        this.active = active;
-        this.image = image;
-    }
-
-    public ProductType(Long id, String name, List<AssociativeCharacteristic> characteristics, Boolean isGrid,
-                       Category category, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
-        this.isGrid = isGrid;
-        this.id = id;
         this.category = category;
-        this.active = active;
-        this.image = image;
-    }
-
-    public ProductType(Long id, String name, List<AssociativeCharacteristic> characteristics,
-                       Boolean isGrid, Category category, List<String> nameMount,
-                       VariationType variation, ControlType controlTypeProduct, TypeLabeling typeLabeling, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
         this.isGrid = isGrid;
-        this.id = id;
-        this.category = category;
         this.nameMount = nameMount;
         this.variation = variation;
-        this.controlTypeProduct = controlTypeProduct;
         this.typeLabeling = typeLabeling;
+        this.integrationId = integrationId;
         this.active = active;
         this.image = image;
+        this.especification = especification;
     }
 
-    public ProductType(String name, Boolean isGrid, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.isGrid = isGrid;
-        this.active = active;
-        this.image = image;
-    }
-
-    public ProductType(String name, List<AssociativeCharacteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
-        this.active = active;
-        this.image = image;
-    }
-
-    public ProductType(String name, List<AssociativeCharacteristic> characteristics, Category category,
-                       Boolean isGrid, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
-        this.category = category;
-        this.isGrid = isGrid;
-        this.active = active;
-        this.image = image;
-    }
-
-    public ProductType(String name, boolean isGrid, List<String> nameMount, ControlType controlTypeProduct, TypeLabeling typeLabeling, boolean active, GumgaImage image) {
+    public ProductType(Long id, String name,
+                       List<AssociativeCharacteristic> characteristicsPT,
+                       Boolean isGrid, Category father, List<String> nameMount, VariationType variation,
+                       TypeLabeling typeLabeling, Boolean active, GumgaImage image) {
+        this.id = id;
         this.name = name;
         this.isGrid = isGrid;
         this.nameMount = nameMount;
-        this.controlTypeProduct = controlTypeProduct;
-        this.typeLabeling = typeLabeling;
-        this.active = active;
-        this.setCharacteristics(new ArrayList<>());
-        this.image = image;
-    }
-
-
-    public ProductType(String name, boolean isGrid, List<String> nameMount, ControlType controlTypeProduct, TypeLabeling typeLabeling, boolean active, GumgaImage image, Characteristic row, Characteristic col) {
-        this.name = name;
-        this.isGrid = isGrid;
-        this.nameMount = nameMount;
-        this.controlTypeProduct = controlTypeProduct;
+        this.variation = variation;
         this.typeLabeling = typeLabeling;
         this.active = active;
         this.image = image;
-        List<AssociativeCharacteristic> list = new ArrayList<>();
-        list.add(new AssociativeCharacteristic(row, 1));
-        list.add(new AssociativeCharacteristic(col, 2));
-        this.setCharacteristics(list);
+        this.category = father;
+        this.characteristics = characteristicsPT;
     }
 
     public Long getIntegrationId() {
@@ -223,14 +162,6 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    public ControlType getControlTypeProduct() {
-        return controlTypeProduct;
-    }
-
-    public void setControlTypeProduct(ControlType controlTypeProduct) {
-        this.controlTypeProduct = controlTypeProduct;
     }
 
     public TypeLabeling getTypeLabeling() {

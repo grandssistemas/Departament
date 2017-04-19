@@ -54,66 +54,47 @@ public class Department extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(value = "ID usado para integração com outros softwares", position = 14)
     private Long integrationId;
     @ApiModelProperty(value = "Determina se o departamento esta ativo ou não", position = 15)
-    private Boolean active;
+    private Boolean active = Boolean.TRUE;
 
     public Department() {
     }
 
-    public Department(String name, Boolean active,Set<Category> categories, GumgaImage image) {
+    public Department(String name) {
         this.name = name;
+    }
+
+    public Department(String name, Set<Characteristic> characteristics) {
+        this.name = name;
+        this.characteristics = characteristics;
+    }
+
+    public Department(String name, GumgaImage image, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, VariationType variation, Long integrationId, Boolean active) {
+        this.name = name;
+        this.image = image;
         this.categories = categories;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
+        this.variation = variation;
+        this.integrationId = integrationId;
         this.active = active;
-        this.image = image;
     }
 
-    public Department(String name, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Department(String name, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
-        this.active = active;
-        this.image = image;
-    }
-    public Department(Long id, String name, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
+    public Department(Long id, String name,
+                      Set<Category> categories,
+                      Set<Characteristic> characteristics,
+                      List<String> nameMount,
+                      VariationType variation,
+                      Boolean active,
+                      GumgaImage image) {
         this.id = id;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Department(String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
-        this.categories = categories;
-        this.active = active;
         this.image = image;
-    }
-
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
         this.categories = categories;
         this.characteristics = characteristics;
-        this.id = id;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, VariationType variation, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.categories = categories;
-        this.characteristics = characteristics;
-        this.id = id;
         this.nameMount = nameMount;
         this.variation = variation;
         this.active = active;
-        this.image = image;
     }
-
-
 
     public Long getIntegrationId() {
         return integrationId;

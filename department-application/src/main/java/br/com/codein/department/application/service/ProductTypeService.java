@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -37,23 +38,15 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     @Override
     @Transactional
     public ProductType save(ProductType resource) {
-        if (!isGridPatternRight(resource)) {
-            throw new ValidationException("The gridPattern is not right for the grid configuration in this product type");
-        }
         if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("The father characteristics are no contained in characteristics");
         }
         if (resource.getIsGrid()) {
-//            if (!departmentService.isPatternTypesCountRight(resource.getGridPattern())) {
-//                throw new ValidationException("In ProductType patterns count isn't right");
-//            } else if (!departmentService.isPatternTypesRight(resource.getGridPattern())) {
-//                throw new ValidationException("In ProductType patterns types aren't right");
-//            } else
             if (!isGridCharacteristicRight(resource)) {
                 throw new ValidationException("The grid characteristics values is not in the right quantity");
             } else if (!isGridValuesTypeRight(resource)) {
-                throw new ValidationException("The grid characteristics values types are not matching with the gridPattern");
-            } else if (gridCharacteristicCount(resource) < 1 && gridCharacteristicCount(resource) > 2) {
+                throw new ValidationException("The grid characteristics values types are not matching the valid grid type values");
+            } else if (gridCharacteristicCount(resource) < 1 || gridCharacteristicCount(resource) > 2) {
                 throw new ValidationException("This product type grid characteristic count is not right");
             }
         } else {
@@ -113,30 +106,20 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
                 row = cpt.getCharacteristic();
             }
         }
-//        String[] arr = productType.getGridPattern().split(";");
-//        Boolean rowIsRight = row != null && row.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.getByName(arr[0]);
-//        Boolean colIsRight = col != null && col.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.getByName(arr[1]);
-        return false;
+        EnumSet validTypes = EnumSet.of(ValueTypeCharacteristic.MULTISELECAO, ValueTypeCharacteristic.COR, ValueTypeCharacteristic.TAMANHO, ValueTypeCharacteristic.LOGICO);
+        Boolean rowIsRight = row == null || validTypes.contains(row.getCharacteristicValueType());
+        Boolean colIsRight = col != null && validTypes.contains(col.getCharacteristicValueType());
+        return rowIsRight && colIsRight;
     }
 
     private Boolean isGridCharacteristicRight(ProductType productType) {
         Characteristic col = null;
-        Characteristic row = null;
         for (AssociativeCharacteristic cpt : productType.getCharacteristics()) {
             if (cpt.getGridCount() == 1) {
                 col = cpt.getCharacteristic();
-            } else if (cpt.getGridCount() == 2) {
-                row = cpt.getCharacteristic();
             }
         }
-        Boolean haveRow = row != null;
-        Boolean haveCol = col != null;
-        return haveCol && haveRow;
-    }
-
-    private Boolean isGridPatternRight(ProductType resource) {
-//        return (resource.getIsGrid() && resource.getGridPattern() != null) || (!resource.getIsGrid() && resource.getGridPattern() == null);
-        return false;
+        return col != null;
     }
 
     private Integer gridCharacteristicCount(ProductType resource) {

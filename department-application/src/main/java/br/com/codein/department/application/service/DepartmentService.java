@@ -63,14 +63,6 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 }
             });
         }
-
-//        if (resource.getPatterns() != null) {
-//            if (!this.isPatternTypesCountRight(resource.getPatterns())) {
-//                throw new ValidationException("In Department patterns count isn't right");
-//            } else if (!this.isPatternTypesRight(resource.getPatterns())) {
-//                throw new ValidationException("In Department patterns types aren't right");
-//            }
-//        }
         super.save(resource);
         return resource;
     }
