@@ -44,11 +44,12 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
             throw new ValidationException("The father characteristics are no contained in characteristics");
         }
         if (resource.getIsGrid()) {
-            if (!departmentService.isPatternTypesCountRight(resource.getGridPattern())) {
-                throw new ValidationException("In ProductType patterns count isn't right");
-            } else if (!departmentService.isPatternTypesRight(resource.getGridPattern())) {
-                throw new ValidationException("In ProductType patterns types aren't right");
-            } else if (!isGridCharacteristicRight(resource)) {
+//            if (!departmentService.isPatternTypesCountRight(resource.getGridPattern())) {
+//                throw new ValidationException("In ProductType patterns count isn't right");
+//            } else if (!departmentService.isPatternTypesRight(resource.getGridPattern())) {
+//                throw new ValidationException("In ProductType patterns types aren't right");
+//            } else
+                if (!isGridCharacteristicRight(resource)) {
                 throw new ValidationException("The grid characteristics values is not in the right quantity");
             } else if (!isGridValuesTypeRight(resource)) {
                 throw new ValidationException("The grid characteristics values types are not matching with the gridPattern");
@@ -112,10 +113,10 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
                 row = cpt.getCharacteristic();
             }
         }
-        String[] arr = productType.getGridPattern().split(";");
-        Boolean rowIsRight = row != null && row.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.getByName(arr[0]);
-        Boolean colIsRight = col != null && col.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.getByName(arr[1]);
-        return rowIsRight && colIsRight;
+//        String[] arr = productType.getGridPattern().split(";");
+//        Boolean rowIsRight = row != null && row.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.getByName(arr[0]);
+//        Boolean colIsRight = col != null && col.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.getByName(arr[1]);
+        return false;
     }
 
     private Boolean isGridCharacteristicRight(ProductType productType) {
@@ -134,7 +135,8 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     }
 
     private Boolean isGridPatternRight(ProductType resource){
-        return (resource.getIsGrid() && resource.getGridPattern() != null) || (!resource.getIsGrid() && resource.getGridPattern() == null);
+//        return (resource.getIsGrid() && resource.getGridPattern() != null) || (!resource.getIsGrid() && resource.getGridPattern() == null);
+        return false;
     }
 
     private Integer gridCharacteristicCount(ProductType resource){

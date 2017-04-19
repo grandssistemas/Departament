@@ -3,8 +3,9 @@ package br.com.codein.department.domain.model.department;
 import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.ControlType;
+import br.com.codein.department.domain.model.department.enums.ProductEspecification;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.com.codein.department.domain.model.department.enums.VariationType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
@@ -50,10 +51,9 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     @Column(name="name_mount")
     @ApiModelProperty(hidden = true)
     private List<String> nameMount;
+    @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Nome do tipo de variação que o tipo de produto segue.", position = 5)
-    private String variation;
-    @ApiModelProperty(value = "Guarda 1 ou 2 valores separados por ';' que podem ser: MULTISELECAO, COR, TAMANHO, LOGICO", position = 6)
-    private String gridPattern;
+    private VariationType variation;
     @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Especifíca o tipo de controle de estoque", position = 7)
     private ControlType controlTypeProduct;
@@ -73,6 +73,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(value = "Salva dados da imagem da categoria", position = 11)
     private GumgaImage image;
 
+    private ProductEspecification especification;
     public ProductType() {
     }
 
@@ -103,14 +104,13 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
 
     public ProductType(Long id, String name, List<AssociativeCharacteristic> characteristics,
                        Boolean isGrid, Category category, List<String> nameMount, String gridPattern,
-                       String variation, ControlType controlTypeProduct, TypeLabeling typeLabeling, Boolean active, GumgaImage image) {
+                       VariationType variation, ControlType controlTypeProduct, TypeLabeling typeLabeling, Boolean active, GumgaImage image) {
         this.name = name;
         this.characteristics = characteristics;
         this.isGrid = isGrid;
         this.id = id;
         this.category = category;
         this.nameMount = nameMount;
-        this.gridPattern = gridPattern;
         this.variation = variation;
         this.controlTypeProduct = controlTypeProduct;
         this.typeLabeling = typeLabeling;
@@ -216,28 +216,12 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.nameMount = nameMount;
     }
 
-    public String getGridPattern() {
-        return gridPattern;
-    }
-
-    public void setGridPattern(String gridPattern) {
-        this.gridPattern = gridPattern;
-    }
-
     public Integer getVersion() {
         return version;
     }
 
     public void setVersion(Integer version) {
         this.version = version;
-    }
-
-    public String getVariation() {
-        return variation;
-    }
-
-    public void setVariation(String variation) {
-        this.variation = variation;
     }
 
     public ControlType getControlTypeProduct() {
@@ -286,5 +270,21 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
 
     public void setImage(GumgaImage image) {
         this.image = image;
+    }
+
+    public ProductEspecification getEspecification() {
+        return especification;
+    }
+
+    public void setEspecification(ProductEspecification especification) {
+        this.especification = especification;
+    }
+
+    public VariationType getVariation() {
+        return variation;
+    }
+
+    public void setVariation(VariationType variation) {
+        this.variation = variation;
     }
 }

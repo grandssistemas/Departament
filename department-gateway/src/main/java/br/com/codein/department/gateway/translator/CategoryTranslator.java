@@ -102,8 +102,8 @@ public class CategoryTranslator {
 
                     }
                 }
-                toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
-                        dto.nameMount, dto.patterns, dto.variation, dto.controlTypeProduct, dto.typeLabeling, dto.active, dto.image);
+//                toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
+//                        dto.nameMount, dto.patterns, dto.variation, dto.controlTypeProduct, dto.typeLabeling, dto.active, dto.image);
                 ((ProductType) toReturn).setVersion(dto.version);
                 break;
         }
@@ -117,7 +117,7 @@ public class CategoryTranslator {
         dto.id = department.getId();
         dto.version = department.getVersion();
         dto.name = department.getName();
-        dto.variation = department.getVariation();
+//        dto.variation = department.getVariation();
         dto.characteristics = department.getCharacteristics();
         dto.childrens = new ArrayList<>();
         for (Category category : department.getCategories()) {
@@ -125,7 +125,7 @@ public class CategoryTranslator {
         }
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.nameMount = department.getNameMount();
-        dto.patterns = department.getPatterns();
+//        dto.patterns = department.getPatterns();
         dto.active = department.getActive();
         dto.image = department.getImage();
         return dto;
@@ -157,12 +157,12 @@ public class CategoryTranslator {
         dto.id = productType.getId();
         dto.version = productType.getVersion();
         dto.name = productType.getName();
-        dto.variation = productType.getVariation();
+//        dto.variation = productType.getVariation();
         dto.characteristicsPT = productType.getCharacteristics();
         dto.isGrid = productType.getIsGrid();
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.nameMount = productType.getNameMount();
-        dto.patterns = productType.getGridPattern();
+//        dto.patterns = productType.getGridPattern();
         dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
@@ -176,14 +176,14 @@ public class CategoryTranslator {
         dto.id = department.getId();
         dto.version = department.getVersion();
         dto.name = department.getName();
-        dto.variation = department.getVariation();
+//        dto.variation = department.getVariation();
 
         dto.childrens = new ArrayList<>();
         for (Category category : department.getCategories()) {
             dto.childrens.add(from(category));
         }
         dto.categoryType = CategoryType.DEPARTMENT;
-        dto.patterns = department.getPatterns();
+//        dto.patterns = department.getPatterns();
         dto.active = department.getActive();
         dto.image = department.getImage();
         return dto;
@@ -212,12 +212,12 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = productType.getId();
         dto.version = productType.getVersion();
-        dto.variation = productType.getVariation();
+//        dto.variation = productType.getVariation();
 
         dto.name = productType.getName();
         dto.isGrid = productType.getIsGrid();
         dto.categoryType = CategoryType.PRODUCTTYPE;
-        dto.patterns = productType.getGridPattern();
+//        dto.patterns = productType.getGridPattern();
         dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
@@ -244,9 +244,9 @@ public class CategoryTranslator {
         dtoAux.childrens.add(dtoObj);
         dto.characteristicsPT = null;
         dto.nameMount = obj.getNameMount();
-        dto.variation = obj.getVariation();
+//        dto.variation = obj.getVariation();
 
-        dto.patterns = obj.getGridPattern();
+//        dto.patterns = obj.getGridPattern();
         dto.controlTypeProduct = obj.getControlTypeProduct();
         dto.typeLabeling = obj.getTypeLabeling();
         dto.active = obj.getActive();
@@ -286,8 +286,8 @@ public class CategoryTranslator {
         dto.childrens = new ArrayList<>();
         dto.characteristics = null;
         dto.nameMount = null;
-        dto.patterns = obj.getPatterns();
-        dto.variation = obj.getVariation();
+//        dto.patterns = obj.getPatterns();
+//        dto.variation = obj.getVariation();
         dto.active = obj.getActive();
         dto.image = obj.getImage();
         return dto;
@@ -299,7 +299,7 @@ public class CategoryTranslator {
         dto.id = department.getId();
         dto.version = department.getVersion();
         dto.name = department.getName();
-        dto.variation = department.getVariation();
+//        dto.variation = department.getVariation();
         dto.characteristics = department.getCharacteristics();
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.nameMount = department.getNameMount();
@@ -326,8 +326,8 @@ public class CategoryTranslator {
         CategoryDTO dto = from(productType);
         dto.characteristicsPT = productType.getCharacteristics();
         dto.nameMount = productType.getNameMount();
-        dto.variation = productType.getVariation();
-        dto.patterns = productType.getGridPattern();
+//        dto.variation = productType.getVariation();
+//        dto.patterns = productType.getGridPattern();
         dto.controlTypeProduct = productType.getControlTypeProduct();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();

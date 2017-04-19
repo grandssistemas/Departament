@@ -5,8 +5,7 @@ package br.com.codein.department.domain.model.department.enums;
  */
 public enum ControlType {
     AMOUNT("Quantidade (Un)", "Un"),
-    WEIGHT("Peso (Kg)", "Kg"),
-    GASTYPE("Combustível", "Comb");
+    WEIGHT("Peso (Kg)", "Kg");
 
     private final String label;
     private final String abbreviation;
