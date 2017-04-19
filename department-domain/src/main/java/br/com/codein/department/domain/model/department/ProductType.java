@@ -18,6 +18,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     private String name;
     @OneToMany(orphanRemoval = true)
     @ApiModelProperty(value = "Lista de caracteristicas do tipo de produto.", position = 2)
-    private List<AssociativeCharacteristic> characteristics;
+    private List<AssociativeCharacteristic> characteristics = new ArrayList<>();
     @NotNull(message = "A ProductType should have a father")
     @JsonIgnoreProperties(value = {"productTypes"})
     @ManyToOne
@@ -50,7 +51,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(hidden = true)
     private List<String> nameMount;
     @Enumerated(EnumType.STRING)
-    @ApiModelProperty(value = "Nome do tipo de variação que o tipo de produto segue.", position = 5)
+    @ApiModelProperty(value = "Tipo de variação que o tipo de produto segue.", position = 5)
     private VariationType variation;
     @Enumerated(EnumType.STRING)
     @ApiModelProperty(value = "Tipo de etiqueta que pode ser: balance ou common", position = 8)
@@ -71,6 +72,10 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     private ProductEspecification especification;
 
     public ProductType() {
+    }
+
+    public ProductType(String name) {
+        this.name = name;
     }
 
     public ProductType(String name, Boolean isGrid) {
@@ -106,6 +111,23 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.image = image;
         this.category = father;
         this.characteristics = characteristicsPT;
+    }
+
+    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid, Characteristic row, Characteristic col){
+        this.name = name;
+        this.isGrid = isGrid;
+        this.nameMount = nameMount;
+        this.typeLabeling = typeLabeling;
+        List<AssociativeCharacteristic> list = new ArrayList<>();
+        list.add(new AssociativeCharacteristic(row,1));
+        list.add(new AssociativeCharacteristic(col,2));
+        this.setCharacteristics(list);
+    }
+    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid){
+        this.name = name;
+        this.isGrid = isGrid;
+        this.nameMount = nameMount;
+        this.typeLabeling = typeLabeling;
     }
 
     public Long getIntegrationId() {

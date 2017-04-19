@@ -63,8 +63,14 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.name = name;
     }
 
-    public Department(String name, Set<Characteristic> characteristics) {
+    public Department(String name, Set<Category> categories) {
         this.name = name;
+        this.categories = categories;
+    }
+
+    public Department(String name, Set<Category> categories, Set<Characteristic> characteristics) {
+        this.name = name;
+        this.categories = categories;
         this.characteristics = characteristics;
     }
 

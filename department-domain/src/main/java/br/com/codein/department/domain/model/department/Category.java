@@ -92,6 +92,11 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.category = category;
     }
 
+    public Category(String name, Set<ProductType> productTypes) {
+        this.name = name;
+        this.productTypes = productTypes;
+    }
+
     public Category(String name, String description, Department department, Category category, Set<Category> categories, Set<ProductType> productTypes, GumgaImage image, Set<Characteristic> characteristics, List<String> nameMount, Long integrationId, Boolean active) {
         this.name = name;
         this.description = description;

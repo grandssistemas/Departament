@@ -32,7 +32,7 @@ public class DepartmentCrudUtil {
         Set<Characteristic> values = new HashSet<>();
         values.add(CharacteristicUtil.characteristicLogic());
         values.add(CharacteristicUtil.charactersticTamanho());
-        return new Department("Department characteristics",values);
+        return new Department("Department characteristics",null,values);
     }
 
     @Transactional
