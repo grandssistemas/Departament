@@ -6,8 +6,7 @@ package br.com.codein.department.domain.model.department.enums;
 public enum TypeLabeling {
 
     COMMON("Comum"),
-    BALANCE_UNIT("Balança Unitário"),
-    BALANCE_WEIGHT("Balança Peso");
+    BALANCE("Balança");
 
     private final String label;
 

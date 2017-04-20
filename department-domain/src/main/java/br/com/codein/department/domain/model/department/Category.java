@@ -2,7 +2,6 @@ package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -26,8 +25,8 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
  */
 @Entity
 @GumgaMultitenancy(policy = GumgaMultitenancyPolicy.ORGANIZATIONAL)
-@Table(name = "Category")
-@Inheritance(strategy = SINGLE_TABLE)
+@Table(name="Category")
+@Inheritance(strategy=SINGLE_TABLE)
 @SequenceGenerator(name = GumgaModel.SEQ_NAME, sequenceName = "SEQ_CATEGORY")
 @DiscriminatorColumn
 @DiscriminatorValue(value = "category")
@@ -59,7 +58,7 @@ public class Category extends GumgaModel<Long> implements Serializable {
             @Column(name = "image_name"),
             @Column(name = "image_size"),
             @Column(name = "image_type"),
-            @Column(name = "image_bytes", length = 50 * 1024 * 1024)
+            @Column(name = "image_bytes",length = 50*1024*1024)
     })
     @ApiModelProperty(value = "Salva dados da imagem da categoria", position = 7)
     private GumgaImage image;
@@ -68,13 +67,13 @@ public class Category extends GumgaModel<Long> implements Serializable {
     private Set<Characteristic> characteristics = new HashSet<>();
 
     @ElementCollection
-    @Column(name = "name_mount")
+    @Column(name="name_mount")
     @ApiModelProperty(hidden = true)
     private List<String> nameMount;
     @ApiModelProperty(value = "ID usado para integração com outros softwares", position = 9)
     private Long integrationId;
     @ApiModelProperty(value = "Determina se a categoria esta ativa ou não", position = 10)
-    private Boolean active = Boolean.TRUE;
+    private Boolean active;
 
     public Category() {
         this.categories = new HashSet<>();
@@ -83,67 +82,135 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.productTypes = new HashSet<>();
     }
 
-    public Category(String name) {
+    public Category(String name, Boolean active, GumgaImage image) {
         this.name = name;
+        this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, Department department) {
+    public Category(String name, Department department, Boolean active, GumgaImage image) {
         this.name = name;
         this.department = department;
+        this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, Category category) {
+    public Category(String name, Category category, Boolean active, GumgaImage image) {
         this.name = name;
         this.category = category;
+        this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, Set<ProductType> productTypes) {
+    public Category(String name, Department department, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
-        this.productTypes = productTypes;
+        this.department = department;
+        this.characteristics = characteristics;
+        this.active = active;
+        this.image = image;
     }
 
-    public Category(String name, String description, Department department, Category category, Set<Category> categories, Set<ProductType> productTypes, GumgaImage image, Set<Characteristic> characteristics, List<String> nameMount, Long integrationId, Boolean active) {
+    public Category(String name, String description, Department department, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
         this.name = name;
         this.description = description;
         this.department = department;
+        this.categories = categories;
+        this.characteristics = characteristics;
+        this.active = active;
+        this.image = image;
+    }
+    public Category(String name, String description, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
+        this.characteristics = characteristics;
+        this.active = active;
+        this.image = image;
+    }
+
+    public Category(String name, String description, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+        this.name = name;
+        this.description = description;
+        this.characteristics = characteristics;
+        this.active = active;
+    }
+
+    public Category(String description, String name, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+        this.description = description;
+        this.name = name;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.characteristics = characteristics;
+        this.active = active;
+        this.image = image;
+    }
+
+    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+        this.description = description;
+        this.name = name;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.characteristics = characteristics;
+        this.id = id;
+        this.active = active;
+        this.image = image;
+    }
+
+    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department, Boolean active, GumgaImage image) {
+        this.description = description;
+        this.name = name;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.characteristics = characteristics;
+        this.id = id;
+        this.department =department;
+        this.active = active;
+        this.image = image;
+    }
+
+    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department,List<String> nameMount, Boolean active, GumgaImage image) {
+        this.description = description;
+        this.name = name;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.characteristics = characteristics;
+        this.id = id;
+        this.department =department;
+        this.nameMount = nameMount;
+        this.active = active;
+        this.image = image;
+    }
+
+    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category, Boolean active, GumgaImage image) {
+        this.description = description;
+        this.name = name;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.characteristics = characteristics;
+        this.id = id;
         this.category = category;
-        this.categories = categories;
-        this.productTypes = productTypes;
-        this.image = image;
-        this.characteristics = characteristics;
-        this.nameMount = nameMount;
-        this.integrationId = integrationId;
         this.active = active;
+        this.image = image;
     }
 
-    public Category(Long id, String name,
-                    String description, Set<Category> categories,
-                    Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Category father, List<String> nameMount, Boolean active, GumgaImage image) {
-        this.id = id;
-        this.name = name;
+    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category,List<String> nameMount, Boolean active, GumgaImage image) {
         this.description = description;
+        this.name = name;
         this.categories = categories;
         this.productTypes = productTypes;
-        this.image = image;
         this.characteristics = characteristics;
+        this.id = id;
+        this.category = category;
         this.nameMount = nameMount;
         this.active = active;
-        this.category = father;
+        this.image = image;
     }
 
-    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, GumgaImage image) {
-        this.id = id;
+    public Category(String name, HashSet<ProductType> productTypes, boolean active, GumgaImage image) {
         this.name = name;
-        this.description = description;
-        this.categories = categories;
         this.productTypes = productTypes;
-        this.image = image;
-        this.characteristics = characteristics;
-        this.nameMount = nameMount;
         this.active = active;
-        this.department = father;
+        this.image = image;
     }
 
     public Long getIntegrationId() {

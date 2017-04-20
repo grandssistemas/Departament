@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ProductTypeUtil {
     public static ProductType productType(){
-        ProductType pt = new ProductType("ProductType",false);
+        ProductType pt = new ProductType("ProductType",false, true);
         pt.setCategory(CategoryUtil.categoryWithDepartment());
         List<AssociativeCharacteristic> list = new ArrayList<>();
         list.add(AssociativeCharacteristicUtils.logic());
