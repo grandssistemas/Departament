@@ -2,11 +2,10 @@ package br.com.codein.department.gateway.dto.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
-import br.com.codein.department.domain.model.department.enums.ControlType;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
+import br.com.codein.department.domain.model.department.enums.VariationType;
 import io.gumga.domain.domains.GumgaImage;
 
-import javax.persistence.Column;
 import java.util.List;
 import java.util.Set;
 
@@ -25,10 +24,8 @@ public class CategoryDTO {
     public String description;
     public CategoryType categoryType;
     public List<String> nameMount;
-    public String patterns;
-    public String variation;
+    public VariationType variation;
     public Integer version;
-    public ControlType controlTypeProduct;
     public TypeLabeling typeLabeling;
     public Boolean active;
     public GumgaImage image;

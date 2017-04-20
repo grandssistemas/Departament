@@ -63,14 +63,6 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 }
             });
         }
-
-        if (resource.getPatterns() != null) {
-            if (!this.isPatternTypesCountRight(resource.getPatterns())) {
-                throw new ValidationException("In Department patterns count isn't right");
-            } else if (!this.isPatternTypesRight(resource.getPatterns())) {
-                throw new ValidationException("In Department patterns types aren't right");
-            }
-        }
         super.save(resource);
         return resource;
     }
@@ -308,8 +300,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
                     pt.getCharacteristics().forEach(associativeCharacteristic -> {
                         associativeCharacteristic.setCharacteristic(createFindCharacteristic(associativeCharacteristic.getCharacteristic()));
                         AssociativeCharacteristic associativeCharacteristic1 = associativeCharacteristicService.save(
-                                new AssociativeCharacteristic(associativeCharacteristic.getHaveRequired(),
-                                        associativeCharacteristic.getCharacteristic(), associativeCharacteristic.getIsGrid(),
+                                new AssociativeCharacteristic(associativeCharacteristic.getCharacteristic(),
                                         associativeCharacteristic.getGridCount()));
                         associativeCharacteristicList.add(associativeCharacteristic1);
                     });
@@ -327,7 +318,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         SearchResult<Characteristic> characterSearchResult = characteristicService.recoveryByNameWithTenancy(characteristic.getName());
         if (characterSearchResult.getValues().isEmpty()) {
             Characteristic newCharacter = new Characteristic(characteristic.getName(),
-                    characteristic.getTipoDeValorCaracteristica(), characteristic.getValues(),
+                    characteristic.getCharacteristicValueType(), characteristic.getValues(),
                     characteristic.getOrigin());
             Characteristic charac = characteristicService.save(newCharacter);
             return charac;

@@ -9,13 +9,13 @@ import br.com.codein.department.domain.model.department.Category;
 public class CategoryUtil {
 
     public static Category categoryWithDepartment(){
-        return new Category("Category", DepartmentCrudUtil.departmentOnlyName(), true);
+        return new Category("Category", DepartmentCrudUtil.departmentOnlyName());
     }
     public static Category category(){
-        return new Category("Category", true);
+        return new Category("Category");
     }
     public static Category categoryWithCategory(){
-        return new Category("Category", category(), true);
+        return new Category("Category", category());
     }
 
 }

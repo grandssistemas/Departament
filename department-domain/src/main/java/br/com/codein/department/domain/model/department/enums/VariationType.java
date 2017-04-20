@@ -1,17 +1,16 @@
 package br.com.codein.department.domain.model.department.enums;
 
 /**
- * Created by gelatti on 21/02/17.
+ * Created by luizaugusto on 19/04/17.
  */
-public enum TypeLabeling {
-
-    COMMON("Comum"),
-    BALANCE_UNIT("Balança Unitário"),
-    BALANCE_WEIGHT("Balança Peso");
+public enum VariationType {
+    CLOTHING("Moda"),
+    DRINKS("Bebidas"),
+    OTHER("Outros");
 
     private final String label;
 
-    TypeLabeling(String label) {
+    VariationType(String label){
         this.label = label;
     }
 
