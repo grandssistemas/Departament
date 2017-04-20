@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
@@ -236,4 +237,20 @@ public class Category extends GumgaModel<Long> implements Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public void setOnChildrens(){
+        if(this.categories != null){
+            this.categories = this.categories.stream().map(category -> {
+                category.setCategory(this);
+                return category;
+            }).collect(Collectors.toSet());
+        }
+        if(this.productTypes != null){
+            this.productTypes = this.productTypes.stream().map(productType -> {
+                productType.setCategory(this);
+                return productType;
+            }).collect(Collectors.toSet());
+        }
+    }
+
 }

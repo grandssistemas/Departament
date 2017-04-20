@@ -157,12 +157,17 @@ public class DepartmentService extends GumgaService<Department, Long> {
     }
 
     @Transactional
-    public Department loadDepartmentFatWithCategoriesAndProductType(Long id) {
-        Department obj = this.loadDepartmentFatWithCategories(id);
+    public Department loadFat(Department obj) {
+        Hibernate.initialize(obj.getCategories());
         for (Category category : obj.getCategories()) {
             categoryService.initializeCategory(category);
         }
         return obj;
+    }
+
+    @Transactional
+    public Department loadDepartmentFatWithCategoriesAndProductType(Long id) {
+        return loadFat(this.loadDepartmentFatWithCategories(id));
     }
 
     public SearchResult<Department> recupera(String father, String hql) {

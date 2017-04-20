@@ -16,6 +16,8 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * Created by gelatti on 21/02/17.
@@ -174,5 +176,14 @@ public class Department extends GumgaModel<Long> implements Serializable {
 
     public void setVariation(VariationType variation) {
         this.variation = variation;
+    }
+
+    public void setOnChildrens(){
+        if(this.categories != null){
+            this.categories = this.categories.stream().map(category -> {
+                category.setDepartment(this);
+                return category;
+            }).collect(Collectors.toSet());
+        }
     }
 }
