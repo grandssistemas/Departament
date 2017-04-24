@@ -12,6 +12,7 @@ import org.hibernate.envers.Audited;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,6 +60,9 @@ public class Department extends GumgaModel<Long> implements Serializable {
     private Boolean active;
 
     public Department() {
+        this.categories = new HashSet<>();
+        this.characteristics = new HashSet<>();
+        this.nameMount = new ArrayList<>();
     }
 
     public Department(String name, Boolean active,Set<Category> categories, GumgaImage image) {
