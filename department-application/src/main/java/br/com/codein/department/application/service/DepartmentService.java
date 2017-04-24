@@ -54,10 +54,16 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 if (category.getImage() != null) {
                     category.setImage(setImage(category.getImage()));
                 }
+                if (category.getDepartment() == null){
+                    category.setDepartment(resource);
+                }
                 if (category.getProductTypes() != null) {
                     category.getProductTypes().forEach(productType -> {
                         if (productType.getImage() != null) {
                             productType.setImage(setImage(productType.getImage()));
+                        }
+                        if (productType.getCategory() == null){
+                            productType.setCategory(category);
                         }
                     });
                 }
