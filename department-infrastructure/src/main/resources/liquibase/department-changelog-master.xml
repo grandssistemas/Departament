@@ -24,5 +24,6 @@
     <include file="classpath:liquibase/buddycharacteristic-changelog-master.xml"/>
 
     <include file="DEP-v1.0.0-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="DEP-v1.1.0-SNAPSHOT-changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
