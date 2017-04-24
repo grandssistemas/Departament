@@ -69,6 +69,8 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(value = "Salva dados da imagem da categoria", position = 11)
     private GumgaImage image;
 
+    @Enumerated(EnumType.STRING)
+    @ApiModelProperty("Informa qual a especificação de produto esse tipo de produto vai conter.")
     private ProductEspecification especification;
 
     public ProductType() {
