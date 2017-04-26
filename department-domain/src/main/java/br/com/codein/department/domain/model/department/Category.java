@@ -240,16 +240,10 @@ public class Category extends GumgaModel<Long> implements Serializable {
 
     public void setOnChildrens(){
         if(this.categories != null){
-            this.categories = this.categories.stream().map(category -> {
-                category.setCategory(this);
-                return category;
-            }).collect(Collectors.toSet());
+            this.categories.forEach(category -> category.setCategory(this));
         }
         if(this.productTypes != null){
-            this.productTypes = this.productTypes.stream().map(productType -> {
-                productType.setCategory(this);
-                return productType;
-            }).collect(Collectors.toSet());
+            this.productTypes.forEach(pt -> pt.setCategory(this));
         }
     }
 

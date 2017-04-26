@@ -38,6 +38,12 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     @Override
     @Transactional
     public ProductType save(ProductType resource) {
+        validateProductType(resource);
+        super.save(resource);
+        return resource;
+    }
+
+    public void validateProductType(ProductType resource){
         if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("The father characteristics are no contained in characteristics");
         }
@@ -54,8 +60,6 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
                 throw new ValidationException("This product type should not have grid characteristic");
             }
         }
-        super.save(resource);
-        return resource;
     }
 
     @Override

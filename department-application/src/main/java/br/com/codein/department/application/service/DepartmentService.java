@@ -42,6 +42,8 @@ public class DepartmentService extends GumgaService<Department, Long> {
     private AssociativeCharacteristicService associativeCharacteristicService;
     @Autowired
     private GumgaTempFileService gumgaTempFileService;
+    @Autowired
+    private ProductTypeService productTypeService;
 
 
     @Override
@@ -65,8 +67,10 @@ public class DepartmentService extends GumgaService<Department, Long> {
                         if (productType.getCategory() == null){
                             productType.setCategory(category);
                         }
+                        productTypeService.validateProductType(productType);
                     });
                 }
+                categoryService.validateCategory(category);
             });
         }
         super.save(resource);

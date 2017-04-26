@@ -180,10 +180,7 @@ public class Department extends GumgaModel<Long> implements Serializable {
 
     public void setOnChildrens(){
         if(this.categories != null){
-            this.categories = this.categories.stream().map(category -> {
-                category.setDepartment(this);
-                return category;
-            }).collect(Collectors.toSet());
+            this.categories.forEach(category -> category.setDepartment(this));
         }
     }
 }
