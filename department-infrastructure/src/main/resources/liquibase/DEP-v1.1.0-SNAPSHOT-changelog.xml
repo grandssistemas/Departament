@@ -61,32 +61,32 @@
     </changeSet>
     <changeSet author="Luiz Augusto" id="DEP-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql dbms="postgresql">
-            UPDATE "producttype" SET variation = "CLOTHING" WHERE variation = "MODA";
+            UPDATE "producttype" SET "variation" = 'CLOTHING' WHERE "variation" = 'MODA';
         </sql>
     </changeSet>
     <changeSet author="Luiz Augusto" id="DEP-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql dbms="postgresql">
-            UPDATE "producttype" SET variation = "OTHER" WHERE variation = "OUTRA";
+            UPDATE "producttype" SET "variation" = 'OTHER' WHERE "variation" = 'OUTRA';
         </sql>
     </changeSet>
     <changeSet author="Luiz Augusto" id="DEP-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql dbms="postgresql">
-            UPDATE "producttype" SET variation = "DRINKS" WHERE variation = "BEBIDAS";
+            UPDATE "producttype" SET "variation" = 'DRINKS' WHERE "variation" = 'BEBIDAS';
         </sql>
     </changeSet>
     <changeSet author="Luiz Augusto" id="DEP-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql dbms="postgresql">
-            UPDATE "department" SET variation = "CLOTHING" WHERE variation = "MODA";
+            UPDATE "department" SET "variation" = 'CLOTHING' WHERE "variation" = 'MODA';
         </sql>
     </changeSet>
     <changeSet author="Luiz Augusto" id="DEP-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql dbms="postgresql">
-            UPDATE "department" SET variation = "OTHER" WHERE variation = "OUTRA";
+            UPDATE "department" SET "variation" = 'OTHER' WHERE "variation" = 'OUTRA';
         </sql>
     </changeSet>
     <changeSet author="Luiz Augusto" id="DEP-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <sql dbms="postgresql">
-            UPDATE "department" SET variation = "DRINKS" WHERE variation = "BEBIDAS";
+            UPDATE "department" SET "variation" = 'DRINKS' WHERE "variation" = 'BEBIDAS';
         </sql>
     </changeSet>
 </databaseChangeLog>
