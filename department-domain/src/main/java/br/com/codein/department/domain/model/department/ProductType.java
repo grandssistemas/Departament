@@ -74,6 +74,8 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     private ProductEspecification especification;
 
     public ProductType() {
+        this.characteristics = new ArrayList<>();
+        this.nameMount = new ArrayList<>();
     }
 
     public ProductType(String name) {

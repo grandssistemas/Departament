@@ -2,7 +2,6 @@ package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -14,10 +13,10 @@ import org.hibernate.envers.Audited;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static javax.persistence.InheritanceType.SINGLE_TABLE;
 
@@ -77,6 +76,10 @@ public class Category extends GumgaModel<Long> implements Serializable {
     private Boolean active = Boolean.TRUE;
 
     public Category() {
+        this.categories = new HashSet<>();
+        this.characteristics = new HashSet<>();
+        this.nameMount = new ArrayList<>();
+        this.productTypes = new HashSet<>();
     }
 
     public Category(String name) {
