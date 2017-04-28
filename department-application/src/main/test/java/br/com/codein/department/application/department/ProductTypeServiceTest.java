@@ -11,12 +11,14 @@ import br.com.codein.department.application.utils.AssociativeCharacteristicUtils
 import br.com.codein.department.application.utils.CategoryUtil;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.ProductType;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -72,18 +74,17 @@ public class ProductTypeServiceTest extends AbstractTest {
 
         characList2 = new ArrayList<>();
         characList2.add(characProdLogic2);
-        productType = new ProductType("ProductType", true, true);
-        productType2 = new ProductType("ProductType2", true, true);
-        productType3 = new ProductType("ProductType3", true, true);
-        productType4 = new ProductType("ProductType4", true, true);
+        productType = new ProductType("ProductType", true);
+        productType2 = new ProductType("ProductType2", true);
+        productType3 = new ProductType("ProductType3", true);
+        productType4 = new ProductType("ProductType4", true);
     }
 
     @Test
     @Transactional
-    public void testIsGridValuesTypeRight(){
+    public void testIsGridCharacteriticCountRight(){
         productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType.setCharacteristics(characList1);
-        productType.setGridPattern("LOGICO;LOGICO");
         productType.setIsGrid(true);
         assertNotNull(productTypeService.save(productType).getId());
         productType2.setIsGrid(true);
@@ -92,9 +93,9 @@ public class ProductTypeServiceTest extends AbstractTest {
         categoryService.save(c);
         productType2.setCategory(c);
         productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;LOGICO");
-        productTypeService.save(productType);
         try{
+            productTypeService.save(productType2);
+            Assert.fail();
         }catch (RuntimeException e){
             assertEquals(e.getMessage(),"The grid characteristics values is not in the right quantity");
         }
@@ -106,58 +107,18 @@ public class ProductTypeServiceTest extends AbstractTest {
         productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
-        productType.setGridPattern("LOGICO;LOGICO");
         assertNotNull(productTypeService.save(productType).getId());
         productType2.setIsGrid(true);
         productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        AssociativeCharacteristic tamanho = AssociativeCharacteristicUtils.tamanhoGrid1();
+        AssociativeCharacteristic tamanho = AssociativeCharacteristicUtils.textoGrade();
         tamanho.setCharacteristic(characteristicService.save(tamanho.getCharacteristic()));
         characList2.add(tamanho);
         productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;LOGICO");
         try{
             productTypeService.save(productType2);
+            Assert.fail();
         }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"The grid characteristics values types are not matching with the gridPattern");
-        }
-    }
-
-    @Test
-    @Transactional
-    public void testIsGridPatternRight(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        productType.setCharacteristics(characList1);
-        productType.setGridPattern("LOGICO;LOGICO");
-        productType.setIsGrid(true);
-        assertNotNull(productTypeService.save(productType).getId());
-
-        AssociativeCharacteristic characProdLogic1= AssociativeCharacteristicUtils.logicGrid2();
-        characProdLogic1.setCharacteristic(characteristicService.save(characProdLogic1.getCharacteristic()));
-        characList2.add(characProdLogic1);
-        productType2.setIsGrid(true);
-        productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
-        productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;LOGICO");
-        productType2.setIsGrid(false);
-        try{
-            productTypeService.save(productType);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"The gridPattern is not right for the grid configuration in this product type");
-        }
-
-        productType3.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        productType3.setCharacteristics(characList);
-        productType3.setIsGrid(false);
-        assertNotNull(productTypeService.save(productType3).getId());
-        productType3.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
-        productType3.setCharacteristics(characList2);
-        productType3.setIsGrid(true);
-        try{
-            productTypeService.save(productType);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"The gridPattern is not right for the grid configuration in this product type");
+            assertEquals(e.getMessage(),"The grid characteristics values types are not matching the valid grid type values");
         }
     }
 
@@ -168,19 +129,22 @@ public class ProductTypeServiceTest extends AbstractTest {
         productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
-        productType.setGridPattern("LOGICO;LOGICO");
         assertNotNull(productTypeService.save(productType).getId());
         productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType2.setIsGrid(true);
         characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
+        characList2.add(AssociativeCharacteristicUtils.tamanhoGrid3());
         productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;LOGICO");
         try{
-            productTypeService.save(productType);
+            productTypeService.save(productType2);
+            Assert.fail();
         }catch (RuntimeException e){
             assertEquals(e.getMessage(),"This product type grid characteristic count is not right");
         }
+    }
 
+    @Test
+    public void testShouldNotExistCharacteristic(){
         productType3.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType3.setCharacteristics(characList);
         productType3.setIsGrid(false);
@@ -189,50 +153,10 @@ public class ProductTypeServiceTest extends AbstractTest {
         productType3.setCharacteristics(characList2);
         productType3.setIsGrid(false);
         try{
-            productTypeService.save(productType);
+            productTypeService.save(productType3);
+            Assert.fail();
         }catch (RuntimeException e){
             assertEquals(e.getMessage(),"This product type should not have grid characteristic");
-        }
-    }
-
-    @Test
-    @Transactional
-    public void testIsPatternTypesCountRight(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        productType.setCharacteristics(characList1);
-        productType.setIsGrid(true);
-        productType.setGridPattern("LOGICO;LOGICO");
-        assertNotNull(productTypeService.save(productType).getId());
-        productType2.setIsGrid(true);
-        productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
-        productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;LOGICO;TAMANHO");
-        try{
-            productTypeService.save(productType);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"In ProductType patterns count isn't right");
-        }
-    }
-
-
-    @Test
-    @Transactional
-    public void testIsPatternTypesRight(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        productType.setCharacteristics(characList1);
-        productType.setIsGrid(true);
-        productType.setGridPattern("LOGICO;LOGICO");
-        assertNotNull(productTypeService.save(productType).getId());
-        productType2.setIsGrid(true);
-        productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
-        characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
-        productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;TEXTO");
-        try{
-            productTypeService.save(productType);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"In ProductType patterns types aren't right");
         }
     }
 
@@ -242,15 +166,14 @@ public class ProductTypeServiceTest extends AbstractTest {
         productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
-        productType.setGridPattern("LOGICO;LOGICO");
         assertNotNull(productTypeService.save(productType).getId());
-        productType2.setIsGrid(true);
-        productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
-        productType2.setCharacteristics(characList2);
-        productType2.setGridPattern("LOGICO;TEXTO");
+        productType.getCategory().setCharacteristics(new HashSet<>());
+        productType.getCategory().getCharacteristics().add(characList2.get(0).getCharacteristic());
+
         try{
             productTypeService.save(productType);
+            Assert.fail();
         }catch (RuntimeException e){
             assertEquals(e.getMessage(),"The father characteristics are no contained in characteristics");
         }

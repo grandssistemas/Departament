@@ -1,14 +1,14 @@
 package br.com.codein.department.application.service;
 
-import br.com.codein.department.domain.model.department.Category;
-import br.com.codein.department.domain.model.department.Department;
-import br.com.codein.department.domain.model.department.ProductType;
-import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.buddycharacteristic.application.service.characteristic.CharacteristicService;
 import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.enums.ValueTypeCharacteristic;
 import br.com.codein.department.application.repository.CategoryRepository;
+import br.com.codein.department.domain.model.department.Category;
+import br.com.codein.department.domain.model.department.Department;
+import br.com.codein.department.domain.model.department.ProductType;
+import br.com.codein.department.domain.model.exception.ValidationException;
 import io.gumga.application.GumgaService;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
@@ -117,13 +117,12 @@ public class CategoryService extends GumgaService<Category, Long> {
         return obj;
     }
 
-    //TODO ARRUMAR A REGRA DE NEGOCIO PARA COMPARAR A CARACTERISTICA DE TAMANHO DO PAI
     private Boolean checkCharacteristicContain(Category category) {
         if (category.getDepartment() != null) {
             List<Characteristic> list = new ArrayList<>(category.getDepartment().getCharacteristics());
             for (int i = list.size() - 1; i >= 0; i--) {
                 Characteristic characteristic = list.get(i);
-                if (characteristic.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.TAMANHO) {
+                if (ValueTypeCharacteristic.TAMANHO.equals(characteristic.getCharacteristicValueType())) {
                     list.remove(characteristic);
                 }
             }
@@ -263,5 +262,3 @@ public class CategoryService extends GumgaService<Category, Long> {
         return repository.findAllWithTenancy().getValues();
     }
 }
-
-
