@@ -155,7 +155,15 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     }
 
     public void setCharacteristics(List<AssociativeCharacteristic> characteristics) {
-        this.characteristics = characteristics;
+        if (this.characteristics == null){
+            this.characteristics = new ArrayList<>();
+        }
+        if (characteristics != null){
+            this.characteristics.clear();
+            this.characteristics.addAll(characteristics);
+        } else {
+            this.characteristics = characteristics;
+        }
     }
 
     public Boolean getIsGrid() {
