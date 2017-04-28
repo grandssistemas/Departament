@@ -282,11 +282,11 @@
             </plugins>
         </pluginManagement>
     </build>
-  <modules>
-    <module>department-domain</module>
-    <module>department-infrastructure</module>
-    <module>department-application</module>
-    <module>department-gateway</module>
-    <module>department-api</module>
-  </modules>
+    <modules>
+        <module>department-domain</module>
+        <module>department-infrastructure</module>
+        <module>department-application</module>
+        <module>department-gateway</module>
+        <module>department-api</module>
+    </modules>
 </project>

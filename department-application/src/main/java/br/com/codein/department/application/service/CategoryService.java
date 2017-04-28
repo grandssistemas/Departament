@@ -141,6 +141,12 @@ public class CategoryService extends GumgaService<Category, Long> {
     @Override
     @Transactional
     public Category save(Category resource) {
+        validateCategory(resource);
+        super.save(resource);
+        return resource;
+    }
+
+    public void validateCategory(Category resource){
         if (!haveFather(resource)) {
             throw new ValidationException("Category should have a father");
         } else if (!checkFatherCountIsRight(resource)) {
@@ -148,8 +154,6 @@ public class CategoryService extends GumgaService<Category, Long> {
         } else if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("Category should have father's characteristics");
         }
-        super.save(resource);
-        return resource;
     }
 
     @Override

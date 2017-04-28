@@ -308,4 +308,14 @@ public class Category extends GumgaModel<Long> implements Serializable {
     public void setActive(Boolean active) {
         this.active = active;
     }
+
+    public void setOnChildrens(){
+        if(this.categories != null){
+            this.categories.forEach(category -> category.setCategory(this));
+        }
+        if(this.productTypes != null){
+            this.productTypes.forEach(pt -> pt.setCategory(this));
+        }
+    }
+
 }

@@ -42,6 +42,8 @@ public class DepartmentService extends GumgaService<Department, Long> {
     private AssociativeCharacteristicService associativeCharacteristicService;
     @Autowired
     private GumgaTempFileService gumgaTempFileService;
+    @Autowired
+    private ProductTypeService productTypeService;
 
 
     @Override
@@ -54,13 +56,21 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 if (category.getImage() != null) {
                     category.setImage(setImage(category.getImage()));
                 }
+                if (category.getDepartment() == null){
+                    category.setDepartment(resource);
+                }
                 if (category.getProductTypes() != null) {
                     category.getProductTypes().forEach(productType -> {
                         if (productType.getImage() != null) {
                             productType.setImage(setImage(productType.getImage()));
                         }
+                        if (productType.getCategory() == null){
+                            productType.setCategory(category);
+                        }
+                        productTypeService.validateProductType(productType);
                     });
                 }
+                categoryService.validateCategory(category);
             });
         }
 
@@ -165,12 +175,17 @@ public class DepartmentService extends GumgaService<Department, Long> {
     }
 
     @Transactional
-    public Department loadDepartmentFatWithCategoriesAndProductType(Long id) {
-        Department obj = this.loadDepartmentFatWithCategories(id);
+    public Department loadFat(Department obj) {
+        Hibernate.initialize(obj.getCategories());
         for (Category category : obj.getCategories()) {
             categoryService.initializeCategory(category);
         }
         return obj;
+    }
+
+    @Transactional
+    public Department loadDepartmentFatWithCategoriesAndProductType(Long id) {
+        return loadFat(this.loadDepartmentFatWithCategories(id));
     }
 
     public SearchResult<Department> recupera(String father, String hql) {
