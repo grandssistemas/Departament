@@ -101,7 +101,7 @@ public class CategoryTranslator {
                     }
                 }
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
-                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.image);
+                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.image, dto.especification);
                 ((ProductType) toReturn).setVersion(dto.version);
                 break;
         }
@@ -115,7 +115,7 @@ public class CategoryTranslator {
         dto.id = department.getId();
         dto.version = department.getVersion();
         dto.name = department.getName();
-//        dto.variation = department.getVariation();
+        dto.variation = department.getVariation();
         dto.characteristics = department.getCharacteristics();
         dto.childrens = new ArrayList<>();
         for (Category category : department.getCategories()) {
@@ -161,6 +161,7 @@ public class CategoryTranslator {
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.image = productType.getImage();
+        dto.especification = productType.getEspecification();
         return dto;
     }
 
@@ -204,14 +205,14 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = productType.getId();
         dto.version = productType.getVersion();
-//        dto.variation = productType.getVariation();
-
+        dto.variation = productType.getVariation();
         dto.name = productType.getName();
         dto.isGrid = productType.getIsGrid();
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.image = productType.getImage();
+        dto.especification = productType.getEspecification();
         return dto;
     }
 
@@ -238,6 +239,7 @@ public class CategoryTranslator {
         dto.typeLabeling = obj.getTypeLabeling();
         dto.active = obj.getActive();
         dto.image = obj.getImage();
+        dto.especification = obj.getEspecification();
         return dto;
     }
 
@@ -316,6 +318,7 @@ public class CategoryTranslator {
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.image = productType.getImage();
+        dto.especification = productType.getEspecification();
         return dto;
     }
 
@@ -344,6 +347,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.active = productType.getActive();
         dto.image = productType.getImage();
+        dto.especification = productType.getEspecification();
         return dto;
     }
 

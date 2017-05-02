@@ -102,7 +102,8 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     public ProductType(Long id, String name,
                        List<AssociativeCharacteristic> characteristicsPT,
                        Boolean isGrid, Category father, List<String> nameMount, VariationType variation,
-                       TypeLabeling typeLabeling, Boolean active, GumgaImage image) {
+                       TypeLabeling typeLabeling, Boolean active, GumgaImage image,
+                       ProductEspecification especification) {
         this.id = id;
         this.name = name;
         this.isGrid = isGrid;
@@ -113,6 +114,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.image = image;
         this.category = father;
         this.characteristics = characteristicsPT;
+        this.especification = especification;
     }
 
     public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid, Characteristic row, Characteristic col){
