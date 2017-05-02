@@ -10,11 +10,12 @@ import br.com.codein.department.domain.model.exception.ParamWrongException;
 import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.department.gateway.dto.department.CategoryDTO;
 import br.com.codein.department.gateway.dto.department.CategoryType;
+import br.com.codein.department.gateway.dto.department.ProductEspecificationDTO;
+import br.com.codein.department.gateway.dto.department.VariationTypeDTO;
 import br.com.codein.department.gateway.translator.CategoryTranslator;
 import io.gumga.annotations.GumgaSwagger;
 import io.gumga.application.GumgaService;
 import io.gumga.application.GumgaTempFileService;
-import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
 import io.gumga.domain.domains.GumgaImage;
 import io.gumga.presentation.GumgaAPI;
@@ -244,5 +245,17 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     @RequestMapping(method = RequestMethod.GET, value = "/image/{fileName}")
     public GumgaImage logoGet(@PathVariable(value = "fileName") String fileName) {
         return (GumgaImage) gumgaTempFileService.find(fileName);
+    }
+
+    @RequestMapping(value = "/variationtype", method = RequestMethod.GET)
+    public RestResponse<List<VariationTypeDTO>> getVariationType() {
+        List<VariationTypeDTO> typeDTOS = VariationTypeDTO.getValues();
+        return new RestResponse<>(typeDTOS,"sucesso");
+    }
+
+    @RequestMapping(value = "/productespecification", method = RequestMethod.GET)
+    public RestResponse<List<ProductEspecificationDTO>> getProductEspecification() {
+        List<ProductEspecificationDTO> especificationDTOS = ProductEspecificationDTO.getValues();
+        return new RestResponse<>(especificationDTOS,"sucesso");
     }
 }

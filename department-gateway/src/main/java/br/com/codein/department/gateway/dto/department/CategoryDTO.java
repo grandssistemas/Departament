@@ -2,6 +2,7 @@ package br.com.codein.department.gateway.dto.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
+import br.com.codein.department.domain.model.department.enums.ProductEspecification;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
 import br.com.codein.department.domain.model.department.enums.VariationType;
 import io.gumga.domain.domains.GumgaImage;
@@ -29,13 +30,15 @@ public class CategoryDTO {
     public TypeLabeling typeLabeling;
     public Boolean active;
     public GumgaImage image;
+    public ProductEspecification especification;
 
     public CategoryDTO() {
     }
 
     public CategoryDTO(String name, List<AssociativeCharacteristic> characteristicsPT, Boolean isGrid,
                        List<CategoryDTO> childrens, Set<Characteristic> characteristics, String description,
-                       CategoryType categoryType, List<String> nameMount, Boolean active, GumgaImage image) {
+                       CategoryType categoryType, List<String> nameMount, Boolean active, GumgaImage image,
+                       ProductEspecification especification) {
         this.name = name;
         this.characteristicsPT = characteristicsPT;
         this.isGrid = isGrid;
@@ -46,5 +49,6 @@ public class CategoryDTO {
         this.nameMount = nameMount;
         this.active = active;
         this.image = image;
+        this.especification = especification;
     }
 }
