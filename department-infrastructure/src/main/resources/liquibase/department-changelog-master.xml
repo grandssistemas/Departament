@@ -21,6 +21,7 @@
     <property name="varchar_4000" value="java.sql.Types.VARCHAR(4000)" />
     <property name="boolean" value="java.sql.Types.BOOLEAN"/>
 
+    <include file="classpath:liquibase/mobiagecore-changelog-master.xml"/>
     <include file="classpath:liquibase/buddycharacteristic-changelog-master.xml"/>
 
     <include file="DEP-v1.0.0-changelog.xml" relativeToChangelogFile="true"/>

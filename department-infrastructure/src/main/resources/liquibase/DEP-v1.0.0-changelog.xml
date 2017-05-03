@@ -43,78 +43,6 @@
         </preConditions>
         <createSequence sequenceName="seq_department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gtag_valu_defi"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gtag_valu_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_ctm_fld"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_ctm_fld"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_fld_vle"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_fld_vle"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_glog"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_glog"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_gtag"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_gtag"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_gtag_defi"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_gtag_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_gtag_valu"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_gtag_valu"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_msg"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_msg"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_guser_gdata"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_guser_gdata"/>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -551,215 +479,6 @@
             <column name="revtype" type="SMALLINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gtag_vdefi"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gtag_vdefi">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_ctm_fld"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_ctm_fld">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="active" type="BOOL"/>
-            <column name="clazz" type="VARCHAR(255)"/>
-            <column name="defaultvaluescript" type="VARCHAR(255)"/>
-            <column name="description" type="VARCHAR(255)"/>
-            <column name="fieldgroup" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="optionlabelfield" type="VARCHAR(255)"/>
-            <column name="optionvaluefield" type="VARCHAR(255)"/>
-            <column name="options" type="VARCHAR(255)"/>
-            <column name="optionscollection" type="VARCHAR(255)"/>
-            <column name="translatekey" type="VARCHAR(255)"/>
-            <column name="type" type="VARCHAR(255)"/>
-            <column name="validationdescription" type="VARCHAR(255)"/>
-            <column name="validationscript" type="VARCHAR(255)"/>
-            <column name="visualizationorder" type="FLOAT8"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_fld_vle"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_fld_vle">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="datevalue" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="gumgamodelid" type="BIGINT"/>
-            <column name="logicvalue" type="BOOL"/>
-            <column name="numbervalue" type="numeric(19, 2)"/>
-            <column name="textvalue" type="VARCHAR(255)"/>
-            <column name="field_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_glog"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_glog">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="was_allowed" type="BOOL"/>
-            <column name="gumga_endpoint" type="VARCHAR(255)"/>
-            <column name="gumga_ip" type="VARCHAR(255)"/>
-            <column name="gumga_login" type="VARCHAR(255)"/>
-            <column name="gumga_method" type="VARCHAR(255)"/>
-            <column name="gumga_operation" type="VARCHAR(255)"/>
-            <column name="gumga_organization" type="VARCHAR(255)"/>
-            <column name="gumga_organization_code" type="VARCHAR(255)"/>
-            <column name="gumga_moment" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="gumga_software" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="objectid" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="objecttype" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-            <column name="definition_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag_defi"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag_defi">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag_defi_gtag_vdefi"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag_defi_gtag_vdefi">
-            <column name="gumga_gtag_defi_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="attributes_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag_valu"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag_valu">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="value" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-            <column name="definition_id" type="BIGINT"/>
-            <column name="g_values" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_msg"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_msg">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="destinationlogin" type="VARCHAR(255)"/>
-            <column name="message" type="VARCHAR(255)"/>
-            <column name="senderlogin" type="VARCHAR(255)"/>
-            <column name="viewedin" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="visibleon" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumgarevisionentity"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumgarevisionentity">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ip" type="VARCHAR(255)"/>
-            <column name="moment" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="userlogin" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="guser_gdata"/>
-            </not>
-        </preConditions>
-        <createTable tableName="guser_gdata">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="description" type="VARCHAR(255)"/>
-            <column name="data_key" type="VARCHAR(255)"/>
-            <column name="userlogin" type="VARCHAR(255)"/>
-            <column name="data_value" type="VARCHAR(4096)"/>
-        </createTable>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -1061,86 +780,6 @@
         </preConditions>
         <addPrimaryKey columnNames="id" constraintName="department_pkey" tableName="department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-74" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gtag_vdefi"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gtag_vdefi_pkey" tableName="gtag_vdefi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-75" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_ctm_fld"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_ctm_fld_pkey" tableName="gumga_ctm_fld"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-76" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_fld_vle"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_fld_vle_pkey" tableName="gumga_fld_vle"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-77" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_glog"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_glog_pkey" tableName="gumga_glog"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-78" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_gtag_defi"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_gtag_defi_pkey" tableName="gumga_gtag_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-79" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_gtag"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_gtag_pkey" tableName="gumga_gtag"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-80" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_gtag_valu"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_gtag_valu_pkey" tableName="gumga_gtag_valu"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-81" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_msg"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_msg_pkey" tableName="gumga_msg"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-82" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumgarevisionentity"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumgarevisionentity_pkey" tableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-83" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="guser_gdata"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="guser_gdata_pkey" tableName="guser_gdata"/>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-84" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -1203,15 +842,6 @@
         <addUniqueConstraint columnNames="oi, name, origin" constraintName="uk_characteristic_name_oi_origin"
                              tableName="characteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-91" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <indexExists indexName="uk_nrn6egicx3rmmdetq0w9jluhm"/>
-            </not>
-        </preConditions>
-        <addUniqueConstraint columnNames="attributes_id" constraintName="uk_nrn6egicx3rmmdetq0w9jluhm"
-                             tableName="gumga_gtag_defi_gtag_vdefi"/>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-92" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -1254,17 +884,6 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-96" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_5m4hlu5yiqx34fyohd2xs9v2e"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="definition_id" baseTableName="gumga_gtag"
-                                 constraintName="fk_5m4hlu5yiqx34fyohd2xs9v2e" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumga_gtag_defi"/>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-97" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -1275,17 +894,6 @@
                                  constraintName="fk_5r4ui9ga25gr1yhgpebqhev1j" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="characteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-98" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_657qdk193u11wjv9sr6abaacs"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="field_id" baseTableName="gumga_fld_vle"
-                                 constraintName="fk_657qdk193u11wjv9sr6abaacs" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumga_ctm_fld"/>
     </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-99" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
@@ -1374,17 +982,6 @@
                                  constraintName="fk_efgbccnhw3kpg8yfc652iditl" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-108" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_fruw3hhib0tetl5erif2owpi6"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="gumga_gtag_defi_id" baseTableName="gumga_gtag_defi_gtag_vdefi"
-                                 constraintName="fk_fruw3hhib0tetl5erif2owpi6" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumga_gtag_defi"/>
     </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-109" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
@@ -1475,17 +1072,6 @@
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="producttype"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-117" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_n15r1jcrqi2do3470wjvjdgjv"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="definition_id" baseTableName="gumga_gtag_valu"
-                                 constraintName="fk_n15r1jcrqi2do3470wjvjdgjv" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gtag_vdefi"/>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-118" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -1496,17 +1082,6 @@
                                  constraintName="fk_nqh29cw4bq3f7mhslkm89ywi2" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
                                  referencedColumnNames="id" referencedTableName="optionvaluecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-119" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_nrn6egicx3rmmdetq0w9jluhm"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="attributes_id" baseTableName="gumga_gtag_defi_gtag_vdefi"
-                                 constraintName="fk_nrn6egicx3rmmdetq0w9jluhm" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gtag_vdefi"/>
     </changeSet>
     <changeSet author="Bruno Gelatti" id="1487702329731-120" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
