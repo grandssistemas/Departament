@@ -5,6 +5,7 @@ import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.ProductEspecification;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
 import br.com.codein.department.domain.model.department.enums.VariationType;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
@@ -60,18 +61,12 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     private Long integrationId;
     @ApiModelProperty(value = "Determina se o tipo de produto esta ativo ou não", position = 10)
     private Boolean active = Boolean.TRUE;
-    @Columns(columns = {
-            @Column(name = "image_name"),
-            @Column(name = "image_size"),
-            @Column(name = "image_type"),
-            @Column(name = "image_bytes", length = 50 * 1024 * 1024)
-    })
-    @ApiModelProperty(value = "Salva dados da imagem da categoria", position = 11)
-    private GumgaImage image;
-
     @Enumerated(EnumType.STRING)
     @ApiModelProperty("Informa qual a especificação de produto esse tipo de produto vai conter.")
     private ProductEspecification especification;
+    @OneToOne
+    @ApiModelProperty(value = "Imagem do tipo de produto", position = 11)
+    private StorageFile file;
 
     public ProductType() {
     }
@@ -85,7 +80,9 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.isGrid = isGrid;
     }
 
-    public ProductType(String name, List<AssociativeCharacteristic> characteristics, Category category, Boolean isGrid, List<String> nameMount, VariationType variation, TypeLabeling typeLabeling, Long integrationId, Boolean active, GumgaImage image, ProductEspecification especification) {
+    public ProductType(String name, List<AssociativeCharacteristic> characteristics, Category category, Boolean isGrid,
+                       List<String> nameMount, VariationType variation, TypeLabeling typeLabeling, Long integrationId,
+                       Boolean active, StorageFile file, ProductEspecification especification) {
         this.name = name;
         this.characteristics = characteristics;
         this.category = category;
@@ -95,14 +92,14 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.typeLabeling = typeLabeling;
         this.integrationId = integrationId;
         this.active = active;
-        this.image = image;
+        this.file = file;
         this.especification = especification;
     }
 
     public ProductType(Long id, String name,
                        List<AssociativeCharacteristic> characteristicsPT,
                        Boolean isGrid, Category father, List<String> nameMount, VariationType variation,
-                       TypeLabeling typeLabeling, Boolean active, GumgaImage image,
+                       TypeLabeling typeLabeling, Boolean active, StorageFile file,
                        ProductEspecification especification) {
         this.id = id;
         this.name = name;
@@ -111,23 +108,24 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.variation = variation;
         this.typeLabeling = typeLabeling;
         this.active = active;
-        this.image = image;
+        this.file = file;
         this.category = father;
         this.characteristics = characteristicsPT;
         this.especification = especification;
     }
 
-    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid, Characteristic row, Characteristic col){
+    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid, Characteristic row, Characteristic col) {
         this.name = name;
         this.isGrid = isGrid;
         this.nameMount = nameMount;
         this.typeLabeling = typeLabeling;
         List<AssociativeCharacteristic> list = new ArrayList<>();
-        list.add(new AssociativeCharacteristic(row,1));
-        list.add(new AssociativeCharacteristic(col,2));
+        list.add(new AssociativeCharacteristic(row, 1));
+        list.add(new AssociativeCharacteristic(col, 2));
         this.setCharacteristics(list);
     }
-    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid){
+
+    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid) {
         this.name = name;
         this.isGrid = isGrid;
         this.nameMount = nameMount;
@@ -224,14 +222,6 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         return getGrid(2);
     }
 
-    public GumgaImage getImage() {
-        return image;
-    }
-
-    public void setImage(GumgaImage image) {
-        this.image = image;
-    }
-
     public ProductEspecification getEspecification() {
         return especification;
     }
@@ -246,5 +236,13 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
 
     public void setVariation(VariationType variation) {
         this.variation = variation;
+    }
+
+    public StorageFile getFile() {
+        return file;
+    }
+
+    public void setFile(StorageFile file) {
+        this.file = file;
     }
 }

@@ -46,20 +46,13 @@ public class DepartmentService extends GumgaService<Department, Long> {
     @Transactional
     public Department save(Department resource) {
         initializeDepartment(resource);
-        resource.setImage(setImage(resource.getImage()));
         if (resource.getCategories() != null) {
             resource.getCategories().forEach(category -> {
-                if (category.getImage() != null) {
-                    category.setImage(setImage(category.getImage()));
-                }
                 if (category.getDepartment() == null){
                     category.setDepartment(resource);
                 }
                 if (category.getProductTypes() != null) {
                     category.getProductTypes().forEach(productType -> {
-                        if (productType.getImage() != null) {
-                            productType.setImage(setImage(productType.getImage()));
-                        }
                         if (productType.getCategory() == null){
                             productType.setCategory(category);
                         }
@@ -71,17 +64,6 @@ public class DepartmentService extends GumgaService<Department, Long> {
         }
         super.save(resource);
         return resource;
-    }
-
-    private GumgaImage setImage(GumgaImage image) {
-        if (image != null) {
-            if ("null".equals(image.getName())) {
-                return null;
-            } else if (image.getName() != null && !image.getName().equals("image")) {
-                return (GumgaImage) gumgaTempFileService.find(image.getName());
-            }
-        }
-        return image;
     }
 
     @Override

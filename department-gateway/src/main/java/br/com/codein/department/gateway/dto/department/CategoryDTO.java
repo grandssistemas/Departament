@@ -5,6 +5,7 @@ import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.ProductEspecification;
 import br.com.codein.department.domain.model.department.enums.TypeLabeling;
 import br.com.codein.department.domain.model.department.enums.VariationType;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import io.gumga.domain.domains.GumgaImage;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class CategoryDTO {
     public Integer version;
     public TypeLabeling typeLabeling;
     public Boolean active;
-    public GumgaImage image;
+    public StorageFile file;
     public ProductEspecification especification;
 
     public CategoryDTO() {
@@ -37,7 +38,7 @@ public class CategoryDTO {
 
     public CategoryDTO(String name, List<AssociativeCharacteristic> characteristicsPT, Boolean isGrid,
                        List<CategoryDTO> childrens, Set<Characteristic> characteristics, String description,
-                       CategoryType categoryType, List<String> nameMount, Boolean active, GumgaImage image,
+                       CategoryType categoryType, List<String> nameMount, Boolean active, StorageFile file,
                        ProductEspecification especification) {
         this.name = name;
         this.characteristicsPT = characteristicsPT;
@@ -48,7 +49,7 @@ public class CategoryDTO {
         this.categoryType = categoryType;
         this.nameMount = nameMount;
         this.active = active;
-        this.image = image;
+        this.file = file;
         this.especification = especification;
     }
 }
