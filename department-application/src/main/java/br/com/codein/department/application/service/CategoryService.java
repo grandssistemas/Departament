@@ -9,6 +9,7 @@ import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
 import br.com.codein.department.domain.model.exception.ValidationException;
+import br.com.codein.mobiagecore.application.service.storage.StorageFileService;
 import io.gumga.application.GumgaService;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
@@ -38,6 +39,8 @@ public class CategoryService extends GumgaService<Category, Long> {
     private DepartmentService departmentService;
     @Autowired
     private CharacteristicService characteristicService;
+    @Autowired
+    private StorageFileService storageFileService;
 
     @Autowired
     public CategoryService(CategoryRepository repository) {
@@ -141,6 +144,9 @@ public class CategoryService extends GumgaService<Category, Long> {
     @Transactional
     public Category save(Category resource) {
         validateCategory(resource);
+        if (resource.getFile() != null) {
+            storageFileService.save(resource.getFile());
+        }
         super.save(resource);
         return resource;
     }

@@ -8,11 +8,13 @@ import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharac
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.enums.ValueTypeCharacteristic;
 import br.com.codein.department.application.repository.ProductTypeRepository;
+import br.com.codein.mobiagecore.application.service.storage.StorageFileService;
 import io.gumga.application.GumgaService;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +36,16 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     private DepartmentService departmentService;
     @Autowired
     private AssociativeCharacteristicService associativeCharacteristicService;
+    @Autowired
+    private StorageFileService storageFileService;
 
     @Override
     @Transactional
     public ProductType save(ProductType resource) {
         validateProductType(resource);
+        if (resource.getFile() != null) {
+            storageFileService.save(resource.getFile());
+        }
         super.save(resource);
         return resource;
     }
