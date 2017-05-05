@@ -2,6 +2,7 @@ package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -39,7 +40,7 @@ public class Category extends GumgaModel<Long> implements Serializable {
     private String name;
     @ApiModelProperty(value = "Descrição da categoria", position = 2)
     private String description;
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"categories"})
     @ManyToOne
     @ApiModelProperty(value = "Especifica a qual departamento pertence esta categoria", position = 3)
     private Department department;
