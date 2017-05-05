@@ -3,15 +3,9 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="Bruno Gelatti" id="1487702329731-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_associativecharacteristic"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_associativecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+
+
+    <changeSet author="rafael (generated)" id="1493923960750-15">
         <preConditions onFail="MARK_RAN">
             <not>
                 <sequenceExists sequenceName="seq_category"/>
@@ -19,23 +13,7 @@
         </preConditions>
         <createSequence sequenceName="seq_category"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_characteristic"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_characteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_characteristicvalue"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_characteristicvalue"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-27">
         <preConditions onFail="MARK_RAN">
             <not>
                 <sequenceExists sequenceName="seq_department"/>
@@ -43,87 +21,7 @@
         </preConditions>
         <createSequence sequenceName="seq_department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gtag_valu_defi"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gtag_valu_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_ctm_fld"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_ctm_fld"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_fld_vle"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_fld_vle"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_glog"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_glog"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_gtag"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_gtag"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_gtag_defi"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_gtag_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_gtag_valu"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_gtag_valu"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_gumga_msg"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_gumga_msg"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_guser_gdata"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_guser_gdata"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seq_opcaodevalordacaracteristica"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seq_opcaodevalordacaracteristica"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-91">
         <preConditions onFail="MARK_RAN">
             <not>
                 <sequenceExists sequenceName="seq_producttype"/>
@@ -131,67 +29,9 @@
         </preConditions>
         <createSequence sequenceName="seq_producttype"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <sequenceExists sequenceName="seqrev"/>
-            </not>
-        </preConditions>
-        <createSequence sequenceName="seqrev"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="associativecharacteristic"/>
-            </not>
-        </preConditions>
-        <createTable tableName="associativecharacteristic">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="gridcount" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="haverequired" type="BOOL">
-                <constraints nullable="false"/>
-            </column>
-            <column name="isgrid" type="BOOL">
-                <constraints nullable="false"/>
-            </column>
-            <column name="isrequired" type="BOOL">
-                <constraints nullable="false"/>
-            </column>
-            <column name="orderlist" type="INT"/>
-            <column name="version" type="INT"/>
-            <column name="characteristic_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="associativecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="associativecharacteristic_aud">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="gridcount" type="INT"/>
-            <column name="haverequired" type="BOOL"/>
-            <column name="isgrid" type="BOOL"/>
-            <column name="isrequired" type="BOOL"/>
-            <column name="orderlist" type="INT"/>
-            <column name="characteristic_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+
+
+    <changeSet author="rafael (generated)" id="1493923960750-137">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="category"/>
@@ -205,7 +45,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="oi" type="VARCHAR(255)"/>
-            <column name="active" type="BOOL"/>
+            <column name="active" type="BOOLEAN"/>
             <column name="description" type="VARCHAR(255)"/>
             <column name="image_name" type="VARCHAR(255)"/>
             <column name="image_size" type="INT"/>
@@ -220,36 +60,7 @@
             <column name="department_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="category_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="category_aud">
-            <column name="dtype" type="VARCHAR(31)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="active" type="BOOL"/>
-            <column name="description" type="VARCHAR(255)"/>
-            <column name="image_name" type="VARCHAR(255)"/>
-            <column name="image_size" type="INT"/>
-            <column name="image_type" type="VARCHAR(255)"/>
-            <column name="image_bytes" type="BYTEA"/>
-            <column name="integrationid" type="BIGINT"/>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="category_id" type="BIGINT"/>
-            <column name="department_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-138">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="category_characteristic"/>
@@ -264,26 +75,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="category_characteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="category_characteristic_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="category_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="characteristics_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-139">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="category_namemount"/>
@@ -296,146 +88,7 @@
             <column name="name_mount" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="category_namemount_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="category_namemount_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="category_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="name_mount" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="characteristic"/>
-            </not>
-        </preConditions>
-        <createTable tableName="characteristic">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="origin" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="tipodevalorcaracteristica" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="characteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="characteristic_aud">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="origin" type="VARCHAR(255)"/>
-            <column name="tipodevalorcaracteristica" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-28" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="characteristic_optionvaluecharacteristic"/>
-            </not>
-        </preConditions>
-        <createTable tableName="characteristic_optionvaluecharacteristic">
-            <column name="characteristic_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="values_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-29" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="characteristic_optionvaluecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="characteristic_optionvaluecharacteristic_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="characteristic_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="values_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-30" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="characteristicvalue"/>
-            </not>
-        </preConditions>
-        <createTable tableName="characteristicvalue">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="datevalue" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="logicvalue" type="BOOL"/>
-            <column name="numericvalue" type="FLOAT8"/>
-            <column name="stringvalue" type="VARCHAR(255)"/>
-            <column name="version" type="INT"/>
-            <column name="characteristic_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="selectionvalue_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-31" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="characteristicvalue_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="characteristicvalue_aud">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="datevalue" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="logicvalue" type="BOOL"/>
-            <column name="numericvalue" type="FLOAT8"/>
-            <column name="stringvalue" type="VARCHAR(255)"/>
-            <column name="characteristic_id" type="BIGINT"/>
-            <column name="selectionvalue_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-32" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-160">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="department"/>
@@ -446,7 +99,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="oi" type="VARCHAR(255)"/>
-            <column name="active" type="BOOL"/>
+            <column name="active" type="BOOLEAN"/>
             <column name="image_name" type="VARCHAR(255)"/>
             <column name="image_size" type="INT"/>
             <column name="image_type" type="VARCHAR(255)"/>
@@ -455,37 +108,11 @@
             <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="patterns" type="VARCHAR(255)"/>
-            <column name="variation" type="VARCHAR(255)"/>
+            <column name="variation" type="INT"/>
             <column name="version" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-33" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="department_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="department_aud">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="active" type="BOOL"/>
-            <column name="image_name" type="VARCHAR(255)"/>
-            <column name="image_size" type="INT"/>
-            <column name="image_type" type="VARCHAR(255)"/>
-            <column name="image_bytes" type="BYTEA"/>
-            <column name="integrationid" type="BIGINT"/>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="patterns" type="VARCHAR(255)"/>
-            <column name="variation" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-34" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-161">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="department_characteristic"/>
@@ -500,26 +127,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-35" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="department_characteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="department_characteristic_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="department_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="characteristics_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-36" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-162">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="department_namemount"/>
@@ -532,269 +140,7 @@
             <column name="name_mount" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-37" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="department_namemount_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="department_namemount_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="department_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="name_mount" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-38" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gtag_vdefi"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gtag_vdefi">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-39" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_ctm_fld"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_ctm_fld">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="active" type="BOOL"/>
-            <column name="clazz" type="VARCHAR(255)"/>
-            <column name="defaultvaluescript" type="VARCHAR(255)"/>
-            <column name="description" type="VARCHAR(255)"/>
-            <column name="fieldgroup" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="optionlabelfield" type="VARCHAR(255)"/>
-            <column name="optionvaluefield" type="VARCHAR(255)"/>
-            <column name="options" type="VARCHAR(255)"/>
-            <column name="optionscollection" type="VARCHAR(255)"/>
-            <column name="translatekey" type="VARCHAR(255)"/>
-            <column name="type" type="VARCHAR(255)"/>
-            <column name="validationdescription" type="VARCHAR(255)"/>
-            <column name="validationscript" type="VARCHAR(255)"/>
-            <column name="visualizationorder" type="FLOAT8"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-40" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_fld_vle"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_fld_vle">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="datevalue" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="gumgamodelid" type="BIGINT"/>
-            <column name="logicvalue" type="BOOL"/>
-            <column name="numbervalue" type="numeric(19, 2)"/>
-            <column name="textvalue" type="VARCHAR(255)"/>
-            <column name="field_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-41" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_glog"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_glog">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="was_allowed" type="BOOL"/>
-            <column name="gumga_endpoint" type="VARCHAR(255)"/>
-            <column name="gumga_ip" type="VARCHAR(255)"/>
-            <column name="gumga_login" type="VARCHAR(255)"/>
-            <column name="gumga_method" type="VARCHAR(255)"/>
-            <column name="gumga_operation" type="VARCHAR(255)"/>
-            <column name="gumga_organization" type="VARCHAR(255)"/>
-            <column name="gumga_organization_code" type="VARCHAR(255)"/>
-            <column name="gumga_moment" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="gumga_software" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-42" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="objectid" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="objecttype" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-            <column name="definition_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-43" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag_defi"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag_defi">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="name" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-44" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag_defi_gtag_vdefi"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag_defi_gtag_vdefi">
-            <column name="gumga_gtag_defi_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="attributes_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-45" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_gtag_valu"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_gtag_valu">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="value" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-            <column name="definition_id" type="BIGINT"/>
-            <column name="g_values" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-46" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumga_msg"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumga_msg">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="destinationlogin" type="VARCHAR(255)"/>
-            <column name="message" type="VARCHAR(255)"/>
-            <column name="senderlogin" type="VARCHAR(255)"/>
-            <column name="viewedin" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="visibleon" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-47" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="gumgarevisionentity"/>
-            </not>
-        </preConditions>
-        <createTable tableName="gumgarevisionentity">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="ip" type="VARCHAR(255)"/>
-            <column name="moment" type="TIMESTAMP(6) WITHOUT TIME ZONE"/>
-            <column name="userlogin" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-48" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="guser_gdata"/>
-            </not>
-        </preConditions>
-        <createTable tableName="guser_gdata">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="description" type="VARCHAR(255)"/>
-            <column name="data_key" type="VARCHAR(255)"/>
-            <column name="userlogin" type="VARCHAR(255)"/>
-            <column name="data_value" type="VARCHAR(4096)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-49" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="optionvaluecharacteristic"/>
-            </not>
-        </preConditions>
-        <createTable tableName="optionvaluecharacteristic">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="oi" type="VARCHAR(255)"/>
-            <column name="value" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="version" type="INT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="optionvaluecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="optionvaluecharacteristic_aud">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="value" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-297">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="producttype"/>
@@ -805,11 +151,14 @@
                 <constraints nullable="false"/>
             </column>
             <column name="oi" type="VARCHAR(255)"/>
-            <column name="active" type="BOOL"/>
-            <column name="controltypeproduct" type="VARCHAR(255)"/>
-            <column name="gridpattern" type="VARCHAR(255)"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="especification" type="VARCHAR(255)"/>
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_size" type="INT"/>
+            <column name="image_type" type="VARCHAR(255)"/>
+            <column name="image_bytes" type="BYTEA"/>
             <column name="integrationid" type="BIGINT"/>
-            <column name="isgrid" type="BOOL">
+            <column name="isgrid" type="BOOLEAN">
                 <constraints nullable="false"/>
             </column>
             <column name="name" type="VARCHAR(255)">
@@ -823,7 +172,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-298">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="producttype_associativecharacteristic"/>
@@ -838,51 +187,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-53" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="producttype_associativecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="producttype_associativecharacteristic_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="producttype_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="characteristics_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-54" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="producttype_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="producttype_aud">
-            <column name="id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-            <column name="active" type="BOOL"/>
-            <column name="controltypeproduct" type="VARCHAR(255)"/>
-            <column name="gridpattern" type="VARCHAR(255)"/>
-            <column name="integrationid" type="BIGINT"/>
-            <column name="isgrid" type="BOOL"/>
-            <column name="name" type="VARCHAR(255)"/>
-            <column name="typelabeling" type="VARCHAR(255)"/>
-            <column name="variation" type="VARCHAR(255)"/>
-            <column name="category_id" type="BIGINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-55" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-299">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="producttype_namemount"/>
@@ -895,79 +200,17 @@
             <column name="name_mount" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-56" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="producttype_namemount_aud"/>
-            </not>
-        </preConditions>
-        <createTable tableName="producttype_namemount_aud">
-            <column name="rev" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="producttype_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="name_mount" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="revtype" type="SMALLINT"/>
-        </createTable>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-57" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="associativecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="associativecharacteristic_aud_pkey"
-                       tableName="associativecharacteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-58" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="associativecharacteristic"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="associativecharacteristic_pkey"
-                       tableName="associativecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-59" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="category_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="category_aud_pkey" tableName="category_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-60" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="category_characteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, category_id, characteristics_id"
-                       constraintName="category_characteristic_aud_pkey" tableName="category_characteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-61" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+
+
+    <changeSet author="rafael (generated)" id="1493923960750-361">
         <preConditions onFail="MARK_RAN">
             <not>
                 <primaryKeyExists tableName="category_characteristic"/>
             </not>
         </preConditions>
-        <addPrimaryKey columnNames="category_id, characteristics_id" constraintName="category_characteristic_pkey"
-                       tableName="category_characteristic"/>
+        <addPrimaryKey columnNames="category_id, characteristics_id" constraintName="category_characteristic_pkey" tableName="category_characteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-62" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="category_namemount_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, category_id, name_mount" constraintName="category_namemount_aud_pkey"
-                       tableName="category_namemount_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-63" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-362">
         <preConditions onFail="MARK_RAN">
             <not>
                 <primaryKeyExists tableName="category"/>
@@ -975,85 +218,15 @@
         </preConditions>
         <addPrimaryKey columnNames="id" constraintName="category_pkey" tableName="category"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-64" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="characteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="characteristic_aud_pkey" tableName="characteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-65" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="characteristic_optionvaluecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, characteristic_id, values_id"
-                       constraintName="characteristic_optionvaluecharacteristic_aud_pkey"
-                       tableName="characteristic_optionvaluecharacteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-66" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="characteristic"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="characteristic_pkey" tableName="characteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-67" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="characteristicvalue_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="characteristicvalue_aud_pkey"
-                       tableName="characteristicvalue_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-68" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="characteristicvalue"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="characteristicvalue_pkey" tableName="characteristicvalue"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-69" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="department_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="department_aud_pkey" tableName="department_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-70" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="department_characteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, department_id, characteristics_id"
-                       constraintName="department_characteristic_aud_pkey" tableName="department_characteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-71" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-382">
         <preConditions onFail="MARK_RAN">
             <not>
                 <primaryKeyExists tableName="department_characteristic"/>
             </not>
         </preConditions>
-        <addPrimaryKey columnNames="department_id, characteristics_id" constraintName="department_characteristic_pkey"
-                       tableName="department_characteristic"/>
+        <addPrimaryKey columnNames="department_id, characteristics_id" constraintName="department_characteristic_pkey" tableName="department_characteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-72" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="department_namemount_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, department_id, name_mount" constraintName="department_namemount_aud_pkey"
-                       tableName="department_namemount_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-73" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-383">
         <preConditions onFail="MARK_RAN">
             <not>
                 <primaryKeyExists tableName="department"/>
@@ -1061,132 +234,7 @@
         </preConditions>
         <addPrimaryKey columnNames="id" constraintName="department_pkey" tableName="department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-74" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gtag_vdefi"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gtag_vdefi_pkey" tableName="gtag_vdefi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-75" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_ctm_fld"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_ctm_fld_pkey" tableName="gumga_ctm_fld"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-76" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_fld_vle"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_fld_vle_pkey" tableName="gumga_fld_vle"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-77" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_glog"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_glog_pkey" tableName="gumga_glog"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-78" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_gtag_defi"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_gtag_defi_pkey" tableName="gumga_gtag_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-79" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_gtag"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_gtag_pkey" tableName="gumga_gtag"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-80" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_gtag_valu"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_gtag_valu_pkey" tableName="gumga_gtag_valu"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-81" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumga_msg"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumga_msg_pkey" tableName="gumga_msg"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-82" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="gumgarevisionentity"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="gumgarevisionentity_pkey" tableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-83" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="guser_gdata"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="guser_gdata_pkey" tableName="guser_gdata"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-84" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="optionvaluecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="optionvaluecharacteristic_aud_pkey"
-                       tableName="optionvaluecharacteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-85" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="optionvaluecharacteristic"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id" constraintName="optionvaluecharacteristic_pkey"
-                       tableName="optionvaluecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-86" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="producttype_associativecharacteristic_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, producttype_id, characteristics_id"
-                       constraintName="producttype_associativecharacteristic_aud_pkey"
-                       tableName="producttype_associativecharacteristic_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-87" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="producttype_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="id, rev" constraintName="producttype_aud_pkey" tableName="producttype_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-88" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <primaryKeyExists tableName="producttype_namemount_aud"/>
-            </not>
-        </preConditions>
-        <addPrimaryKey columnNames="rev, producttype_id, name_mount" constraintName="producttype_namemount_aud_pkey"
-                       tableName="producttype_namemount_aud"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-89" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-467">
         <preConditions onFail="MARK_RAN">
             <not>
                 <primaryKeyExists tableName="producttype"/>
@@ -1194,520 +242,107 @@
         </preConditions>
         <addPrimaryKey columnNames="id" constraintName="producttype_pkey" tableName="producttype"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-90" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <indexExists indexName="uk_characteristic_name_oi_origin"/>
-            </not>
-        </preConditions>
-        <addUniqueConstraint columnNames="oi, name, origin" constraintName="uk_characteristic_name_oi_origin"
-                             tableName="characteristic"/>
+
+
+
+    <changeSet author="rafael (generated)" id="1493923960750-546">
+        <addUniqueConstraint columnNames="characteristics_id" constraintName="uk_pxysa9wrhkjse0dbfu1tayodv" tableName="producttype_associativecharacteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-91" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <indexExists indexName="uk_nrn6egicx3rmmdetq0w9jluhm"/>
-            </not>
-        </preConditions>
-        <addUniqueConstraint columnNames="attributes_id" constraintName="uk_nrn6egicx3rmmdetq0w9jluhm"
-                             tableName="gumga_gtag_defi_gtag_vdefi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-92" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <indexExists indexName="uk_pxysa9wrhkjse0dbfu1tayodv"/>
-            </not>
-        </preConditions>
-        <addUniqueConstraint columnNames="characteristics_id" constraintName="uk_pxysa9wrhkjse0dbfu1tayodv"
-                             tableName="producttype_associativecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-93" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-570">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_27jfacqnxpnexh8ybk4e17kk1"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category_characteristic"
-                                 constraintName="fk_27jfacqnxpnexh8ybk4e17kk1" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="category"/>
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category_characteristic" constraintName="fk_27jfacqnxpnexh8ybk4e17kk1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-94" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_2vfxt0bjtruyo9koqfvpmmde9"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="associativecharacteristic_aud"
-                                 constraintName="fk_2vfxt0bjtruyo9koqfvpmmde9" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-95" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_37t57q2dsleg8wyksjfgxc8q5"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="category_namemount_aud"
-                                 constraintName="fk_37t57q2dsleg8wyksjfgxc8q5" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-96" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_5m4hlu5yiqx34fyohd2xs9v2e"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="definition_id" baseTableName="gumga_gtag"
-                                 constraintName="fk_5m4hlu5yiqx34fyohd2xs9v2e" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumga_gtag_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-97" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_5r4ui9ga25gr1yhgpebqhev1j"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="characteristic_id" baseTableName="characteristicvalue"
-                                 constraintName="fk_5r4ui9ga25gr1yhgpebqhev1j" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="characteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-98" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_657qdk193u11wjv9sr6abaacs"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="field_id" baseTableName="gumga_fld_vle"
-                                 constraintName="fk_657qdk193u11wjv9sr6abaacs" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumga_ctm_fld"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-99" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_6atppb23pe2ptccialgyawhjs"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_namemount_aud"
-                                 constraintName="fk_6atppb23pe2ptccialgyawhjs" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-100" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-625">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_6vml0di5vqh1g013u2gwu4b7y"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="characteristics_id" baseTableName="category_characteristic"
-                                 constraintName="fk_6vml0di5vqh1g013u2gwu4b7y" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="characteristic"/>
+        <addForeignKeyConstraint baseColumnNames="characteristics_id" baseTableName="category_characteristic" constraintName="fk_6vml0di5vqh1g013u2gwu4b7y" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="characteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-102" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_854vfdh9uyy5jx20m8g7xfpbv"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="optionvaluecharacteristic_aud"
-                                 constraintName="fk_854vfdh9uyy5jx20m8g7xfpbv" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-103" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-655">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_8pct981wfnqkwddktvyjq4btg"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="producttype_id" baseTableName="producttype_namemount"
-                                 constraintName="fk_8pct981wfnqkwddktvyjq4btg" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="producttype"/>
+        <addForeignKeyConstraint baseColumnNames="producttype_id" baseTableName="producttype_namemount" constraintName="fk_8pct981wfnqkwddktvyjq4btg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="producttype"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-104" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_ayw9hr3ix5x14aq7g8o7iqtex"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="characteristic_optionvaluecharacteristic_aud"
-                                 constraintName="fk_ayw9hr3ix5x14aq7g8o7iqtex" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-105" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-688">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_d4t1sqdcwf9qm2be84rce90bh"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category"
-                                 constraintName="fk_d4t1sqdcwf9qm2be84rce90bh" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="category"/>
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category" constraintName="fk_d4t1sqdcwf9qm2be84rce90bh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-106" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-692">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_daxrip0r801kij6hye4meyuxu"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="characteristics_id" baseTableName="department_characteristic"
-                                 constraintName="fk_daxrip0r801kij6hye4meyuxu" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="characteristic"/>
+        <addForeignKeyConstraint baseColumnNames="characteristics_id" baseTableName="department_characteristic" constraintName="fk_daxrip0r801kij6hye4meyuxu" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="characteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-107" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_efgbccnhw3kpg8yfc652iditl"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="category_characteristic_aud"
-                                 constraintName="fk_efgbccnhw3kpg8yfc652iditl" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-108" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_fruw3hhib0tetl5erif2owpi6"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="gumga_gtag_defi_id" baseTableName="gumga_gtag_defi_gtag_vdefi"
-                                 constraintName="fk_fruw3hhib0tetl5erif2owpi6" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumga_gtag_defi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-109" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-719">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_g40jtkl3lbhn9x3kuom7pexoc"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="producttype"
-                                 constraintName="fk_g40jtkl3lbhn9x3kuom7pexoc" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="category"/>
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="producttype" constraintName="fk_g40jtkl3lbhn9x3kuom7pexoc" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-110" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-725">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_gd0mirb9idaj53eko70pj2lrq"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="category"
-                                 constraintName="fk_gd0mirb9idaj53eko70pj2lrq" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="department"/>
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="category" constraintName="fk_gd0mirb9idaj53eko70pj2lrq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-111" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_gythr70tdvw21nyf9b877m2hg"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="department_characteristic_aud"
-                                 constraintName="fk_gythr70tdvw21nyf9b877m2hg" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-112" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_in10gu155v5lpbruxarnrcd19"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="department_namemount_aud"
-                                 constraintName="fk_in10gu155v5lpbruxarnrcd19" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-113" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_jxg2sv3c5ic6afl5gx79h4pg7"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="characteristic_id" baseTableName="associativecharacteristic"
-                                 constraintName="fk_jxg2sv3c5ic6afl5gx79h4pg7" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="characteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-114" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_k1udl7nudslo3fx2yaonveff"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="category_aud"
-                                 constraintName="fk_k1udl7nudslo3fx2yaonveff" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-115" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_l5tbnm2dlrpnumodinm0awh72"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="characteristic_id"
-                                 baseTableName="characteristic_optionvaluecharacteristic"
-                                 constraintName="fk_l5tbnm2dlrpnumodinm0awh72" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="characteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-116" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-781">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_ldkdai3urltwiwief4o7n5vtl"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="producttype_id" baseTableName="producttype_associativecharacteristic"
-                                 constraintName="fk_ldkdai3urltwiwief4o7n5vtl" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="producttype"/>
+        <addForeignKeyConstraint baseColumnNames="producttype_id" baseTableName="producttype_associativecharacteristic" constraintName="fk_ldkdai3urltwiwief4o7n5vtl" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="producttype"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-117" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_n15r1jcrqi2do3470wjvjdgjv"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="definition_id" baseTableName="gumga_gtag_valu"
-                                 constraintName="fk_n15r1jcrqi2do3470wjvjdgjv" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gtag_vdefi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-118" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_nqh29cw4bq3f7mhslkm89ywi2"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="values_id" baseTableName="characteristic_optionvaluecharacteristic"
-                                 constraintName="fk_nqh29cw4bq3f7mhslkm89ywi2" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="optionvaluecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-119" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_nrn6egicx3rmmdetq0w9jluhm"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="attributes_id" baseTableName="gumga_gtag_defi_gtag_vdefi"
-                                 constraintName="fk_nrn6egicx3rmmdetq0w9jluhm" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gtag_vdefi"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-120" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_o0fmlv1xe9slakvn7ai9v8nc1"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="department_aud"
-                                 constraintName="fk_o0fmlv1xe9slakvn7ai9v8nc1" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-121" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-828">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_pl354axovxk5qf5yyo55flm7o"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="department_namemount"
-                                 constraintName="fk_pl354axovxk5qf5yyo55flm7o" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="department"/>
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="department_namemount" constraintName="fk_pl354axovxk5qf5yyo55flm7o" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-122" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-834">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_pxysa9wrhkjse0dbfu1tayodv"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="characteristics_id"
-                                 baseTableName="producttype_associativecharacteristic"
-                                 constraintName="fk_pxysa9wrhkjse0dbfu1tayodv" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="associativecharacteristic"/>
+        <addForeignKeyConstraint baseColumnNames="characteristics_id" baseTableName="producttype_associativecharacteristic" constraintName="fk_pxysa9wrhkjse0dbfu1tayodv" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="associativecharacteristic"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-123" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_qeym15kqrixlqdsg69qtr579h"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_aud"
-                                 constraintName="fk_qeym15kqrixlqdsg69qtr579h" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-124" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_qimaqkmxgtwaxkb33c5323o5y"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="selectionvalue_id" baseTableName="characteristicvalue"
-                                 constraintName="fk_qimaqkmxgtwaxkb33c5323o5y" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="optionvaluecharacteristic"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-125" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-847">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_qjf61rpvo69nyx7bxgwwk99kk"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category_namemount"
-                                 constraintName="fk_qjf61rpvo69nyx7bxgwwk99kk" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="category"/>
+        <addForeignKeyConstraint baseColumnNames="category_id" baseTableName="category_namemount" constraintName="fk_qjf61rpvo69nyx7bxgwwk99kk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="category"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-126" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_ru8nj7awysm6bc7d4wj65md6p"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_associativecharacteristic_aud"
-                                 constraintName="fk_ru8nj7awysm6bc7d4wj65md6p" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-127" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_siqds7th3f9rmeow0152kcoe2"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="characteristic_aud"
-                                 constraintName="fk_siqds7th3f9rmeow0152kcoe2" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-128" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="rafael (generated)" id="1493923960750-879">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_squldnqlojt6pdfmucivmp6db"/>
             </not>
         </preConditions>
-        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="department_characteristic"
-                                 constraintName="fk_squldnqlojt6pdfmucivmp6db" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="department"/>
+        <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="department_characteristic" constraintName="fk_squldnqlojt6pdfmucivmp6db" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="department"/>
     </changeSet>
-    <changeSet author="Bruno Gelatti" id="1487702329731-129" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_sy8sjyexydfg97kyxr5djel67"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="characteristicvalue_aud"
-                                 constraintName="fk_sy8sjyexydfg97kyxr5djel67" deferrable="false"
-                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
-                                 referencedColumnNames="id" referencedTableName="gumgarevisionentity"/>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-001" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists tableName="department" columnName="active"/>
-            </not>
-        </preConditions>
-        <addColumn tableName="department">
-            <column name="active" type="BOOL"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-002" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists tableName="category" columnName="active"/>
-            </not>
-        </preConditions>
-        <addColumn tableName="category">
-            <column name="active" type="BOOL"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-003" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists tableName="producttype" columnName="active"/>
-            </not>
-        </preConditions>
-        <addColumn tableName="producttype">
-            <column name="active" type="BOOL"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-004" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists tableName="department_aud" columnName="active"/>
-            </not>
-        </preConditions>
-        <addColumn tableName="department_aud">
-            <column name="active" type="BOOL"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-005" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists tableName="category_aud" columnName="active"/>
-            </not>
-        </preConditions>
-        <addColumn tableName="category_aud">
-            <column name="active" type="BOOL"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-006" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists tableName="producttype_aud" columnName="active"/>
-            </not>
-        </preConditions>
-        <addColumn tableName="producttype_aud">
-            <column name="active" type="BOOL"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <update tableName="department">
-            <column name="active" type="BOOL" value="TRUE"/>
-        </update>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <update tableName="category">
-            <column name="active" type="BOOL" value="TRUE"/>
-        </update>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <update tableName="producttype">
-            <column name="active" type="BOOL" value="TRUE"/>
-        </update>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addColumn tableName="producttype">
-            <column name="image_name" type="VARCHAR(255)"/>
-            <column name="image_size" type="INT"/>
-            <column name="image_type" type="VARCHAR(255)"/>
-            <column name="image_bytes" type="BYTEA"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Bruno Gelatti" id="DEP-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <addColumn tableName="producttype_aud">
-            <column name="image_name" type="VARCHAR(255)"/>
-            <column name="image_size" type="INT"/>
-            <column name="image_type" type="VARCHAR(255)"/>
-            <column name="image_bytes" type="BYTEA"/>
-        </addColumn>
-    </changeSet>
+
 </databaseChangeLog>
