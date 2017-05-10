@@ -16,6 +16,7 @@ import br.com.codein.department.gateway.translator.CategoryTranslator;
 import io.gumga.annotations.GumgaSwagger;
 import io.gumga.application.GumgaService;
 import io.gumga.application.GumgaTempFileService;
+import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
 import io.gumga.domain.domains.GumgaImage;
 import io.gumga.presentation.GumgaAPI;
@@ -32,6 +33,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by gelatti on 21/02/17.
@@ -256,5 +258,28 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     public RestResponse<List<ProductEspecificationDTO>> getProductEspecification() {
         List<ProductEspecificationDTO> especificationDTOS = ProductEspecificationDTO.getValues();
         return new RestResponse<>(especificationDTOS,"sucesso");
+    }
+
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "/search/{type}/{name}", method = RequestMethod.GET)
+    public RestResponse<List<CategoryDTO>> searchByNameByType(@PathVariable("type") CategoryType type, @PathVariable("name") String name){
+        List<CategoryDTO> result = new ArrayList<>();
+        QueryObject qo = new QueryObject();
+        qo.setAq(String.format("lower(obj.name) = lower(\'%s\')",name));
+        switch (type) {
+            case DEPARTMENT:
+                List<Department> dep = departmentService.pesquisa(qo).getValues();
+                result = dep.stream().map(department -> translator.from(department)).collect(Collectors.toList());
+                break;
+            case CATEGORY:
+                List<Category> cat = categoryService.pesquisa(qo).getValues();
+                result = cat.stream().map(category -> translator.from(category)).collect(Collectors.toList());
+                break;
+            case PRODUCTTYPE:
+                List<ProductType> pt  = productTypeService.pesquisa(qo).getValues();
+                result = pt.stream().map(productType -> translator.from(productType)).collect(Collectors.toList());
+                break;
+        }
+        return new RestResponse<>(result, "Sucesso");
     }
 }

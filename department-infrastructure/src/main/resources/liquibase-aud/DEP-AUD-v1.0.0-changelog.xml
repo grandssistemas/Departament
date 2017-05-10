@@ -1,0 +1,454 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet author="rafael (generated)" id="1493924206514-19">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="category_aud">
+            <column name="dtype" type="VARCHAR(31)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_size" type="INT"/>
+            <column name="image_type" type="VARCHAR(255)"/>
+            <column name="image_bytes" type="BYTEA"/>
+            <column name="integrationid" type="BIGINT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="category_id" type="BIGINT"/>
+            <column name="department_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-20">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category_characteristic_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="category_characteristic_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="characteristics_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-21">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="category_namemount_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="category_namemount_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_mount" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-42">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="department_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="department_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_size" type="INT"/>
+            <column name="image_type" type="VARCHAR(255)"/>
+            <column name="image_bytes" type="BYTEA"/>
+            <column name="integrationid" type="BIGINT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="variation" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-43">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="department_characteristic_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="department_characteristic_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="department_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="characteristics_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-44">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="department_namemount_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="department_namemount_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="department_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_mount" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-168">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="producttype_associativecharacteristic_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="producttype_associativecharacteristic_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="producttype_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="characteristics_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-169">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="producttype_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="producttype_aud">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="especification" type="VARCHAR(255)"/>
+            <column name="image_name" type="VARCHAR(255)"/>
+            <column name="image_size" type="INT"/>
+            <column name="image_type" type="VARCHAR(255)"/>
+            <column name="image_bytes" type="BYTEA"/>
+            <column name="integrationid" type="BIGINT"/>
+            <column name="isgrid" type="BOOLEAN"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="typelabeling" type="VARCHAR(255)"/>
+            <column name="variation" type="VARCHAR(255)"/>
+            <column name="category_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-170">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="producttype_namemount_aud"/>
+            </not>
+        </preConditions>
+        <createTable tableName="producttype_namemount_aud">
+            <column name="rev" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="producttype_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_mount" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="revtype" type="SMALLINT"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="rafael (generated)" id="1493924206514-234">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="category_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="id, rev" constraintName="category_aud_pkey" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-235">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="category_characteristic_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="rev, category_id, characteristics_id" constraintName="category_characteristic_aud_pkey" tableName="category_characteristic_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-236">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="category_namemount_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="rev, category_id, name_mount" constraintName="category_namemount_aud_pkey" tableName="category_namemount_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-257">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="department_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="id, rev" constraintName="department_aud_pkey" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-258">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="department_characteristic_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="rev, department_id, characteristics_id" constraintName="department_characteristic_aud_pkey" tableName="department_characteristic_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-259">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="department_namemount_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="rev, department_id, name_mount" constraintName="department_namemount_aud_pkey" tableName="department_namemount_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-383">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="producttype_associativecharacteristic_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="rev, producttype_id, characteristics_id" constraintName="producttype_associativecharacteristic_aud_pkey" tableName="producttype_associativecharacteristic_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-384">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="producttype_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="id, rev" constraintName="producttype_aud_pkey" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-385">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <primaryKeyExists tableName="producttype_namemount_aud"/>
+            </not>
+        </preConditions>
+        <addPrimaryKey columnNames="rev, producttype_id, name_mount" constraintName="producttype_namemount_aud_pkey" tableName="producttype_namemount_aud"/>
+    </changeSet>
+
+
+
+    <changeSet author="rafael (generated)" id="1493924206514-452">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_37t57q2dsleg8wyksjfgxc8q5"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="category_namemount_aud" constraintName="fk_37t57q2dsleg8wyksjfgxc8q5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-471">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_6atppb23pe2ptccialgyawhjs"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_namemount_aud" constraintName="fk_6atppb23pe2ptccialgyawhjs" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-526">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_efgbccnhw3kpg8yfc652iditl"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="category_characteristic_aud" constraintName="fk_efgbccnhw3kpg8yfc652iditl" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-552">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_gythr70tdvw21nyf9b877m2hg"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="department_characteristic_aud" constraintName="fk_gythr70tdvw21nyf9b877m2hg" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-562">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_in10gu155v5lpbruxarnrcd19"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="department_namemount_aud" constraintName="fk_in10gu155v5lpbruxarnrcd19" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-575">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_k1udl7nudslo3fx2yaonveff"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="category_aud" constraintName="fk_k1udl7nudslo3fx2yaonveff" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-605">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_o0fmlv1xe9slakvn7ai9v8nc1"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="department_aud" constraintName="fk_o0fmlv1xe9slakvn7ai9v8nc1" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-616">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_qeym15kqrixlqdsg69qtr579h"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_aud" constraintName="fk_qeym15kqrixlqdsg69qtr579h" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+    <changeSet author="rafael (generated)" id="1493924206514-630">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_ru8nj7awysm6bc7d4wj65md6p"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_associativecharacteristic_aud" constraintName="fk_ru8nj7awysm6bc7d4wj65md6p" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
+    </changeSet>
+
+    <changeSet author="Bruno Gelatti" id="DEP-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="department_aud" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="department_aud">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="category_aud" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="category_aud">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="producttype_aud" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="producttype_aud">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>
