@@ -32,6 +32,7 @@ public class CategoryDTO {
     public Boolean active;
     public StorageFile file;
     public ProductEspecification especification;
+    public Long integrationId;
 
     public CategoryDTO() {
     }
@@ -39,7 +40,7 @@ public class CategoryDTO {
     public CategoryDTO(String name, List<AssociativeCharacteristic> characteristicsPT, Boolean isGrid,
                        List<CategoryDTO> childrens, Set<Characteristic> characteristics, String description,
                        CategoryType categoryType, List<String> nameMount, Boolean active, StorageFile file,
-                       ProductEspecification especification) {
+                       ProductEspecification especification, Long integrationId) {
         this.name = name;
         this.characteristicsPT = characteristicsPT;
         this.isGrid = isGrid;
@@ -51,5 +52,6 @@ public class CategoryDTO {
         this.active = active;
         this.file = file;
         this.especification = especification;
+        this.integrationId = integrationId;
     }
 }

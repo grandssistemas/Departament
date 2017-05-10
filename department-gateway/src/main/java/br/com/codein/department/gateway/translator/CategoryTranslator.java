@@ -43,6 +43,7 @@ public class CategoryTranslator {
             case DEPARTMENT:
                 toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.variation, dto.active, dto.file);
                 ((Department) toReturn).setVersion(dto.version);
+                ((Department) toReturn).setIntegrationId(dto.integrationId);
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Department dep = departmentService.loadDepartmentFat(dto.id);
                     for (Category cat : dep.getCategories()) {
@@ -66,6 +67,7 @@ public class CategoryTranslator {
                     toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.file);
                 }
                 ((Category) toReturn).setVersion(dto.version);
+                ((Category) toReturn).setIntegrationId(dto.integrationId);
 
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Category dep = categoryService.loadCategoriaFat(dto.id);
@@ -103,6 +105,7 @@ public class CategoryTranslator {
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
                         dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.file, dto.especification);
                 ((ProductType) toReturn).setVersion(dto.version);
+                ((ProductType) toReturn).setIntegrationId(dto.integrationId);
                 break;
         }
 
@@ -125,6 +128,7 @@ public class CategoryTranslator {
         dto.nameMount = department.getNameMount();
         dto.active = department.getActive();
         dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         return dto;
     }
 
@@ -146,6 +150,7 @@ public class CategoryTranslator {
         dto.nameMount = category.getNameMount();
         dto.active = category.getActive();
         dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -162,6 +167,7 @@ public class CategoryTranslator {
         dto.active = productType.getActive();
         dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -179,6 +185,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
         dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         return dto;
     }
 
@@ -198,6 +205,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
         dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -213,6 +221,7 @@ public class CategoryTranslator {
         dto.active = productType.getActive();
         dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -240,6 +249,7 @@ public class CategoryTranslator {
         dto.active = obj.getActive();
         dto.file = obj.getFile();
         dto.especification = obj.getEspecification();
+        dto.integrationId = obj.getIntegrationId();
         return dto;
     }
 
@@ -267,6 +277,7 @@ public class CategoryTranslator {
         dto.nameMount = null;
         dto.active = obj.getActive();
         dto.file = obj.getFile();
+        dto.integrationId = obj.getIntegrationId();
         return dto;
     }
 
@@ -278,6 +289,7 @@ public class CategoryTranslator {
         dto.variation = obj.getVariation();
         dto.active = obj.getActive();
         dto.file = obj.getFile();
+        dto.integrationId = obj.getIntegrationId();
         return dto;
     }
 
@@ -293,6 +305,7 @@ public class CategoryTranslator {
         dto.nameMount = department.getNameMount();
         dto.active = department.getActive();
         dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         return dto;
     }
 
@@ -307,6 +320,7 @@ public class CategoryTranslator {
         dto.nameMount = category.getNameMount();
         dto.active = category.getActive();
         dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -319,6 +333,7 @@ public class CategoryTranslator {
         dto.active = productType.getActive();
         dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -333,6 +348,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
         dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -348,6 +364,7 @@ public class CategoryTranslator {
         dto.active = productType.getActive();
         dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -387,6 +404,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
         dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         List<CategoryDTO> childrens = new ArrayList<>();
         if (department.getCategories() != null) {
             for (Category cat : department.getCategories()) {
@@ -410,6 +428,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
         dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         List<CategoryDTO> childrens = new ArrayList<>();
         for (Category cat : category.getCategories()) {
             childrens.add(fromWithoutCharacteristics(cat));
