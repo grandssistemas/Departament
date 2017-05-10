@@ -3,92 +3,6 @@
                    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet author="Luiz Augusto" id="DEP-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="department" columnName="patterns"></columnExists>
-        </preConditions>
-        <dropColumn tableName="department" columnName="patterns"/>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="department_aud" columnName="patterns"></columnExists>
-        </preConditions>
-        <dropColumn tableName="department_aud" columnName="patterns"/>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="producttype" columnName="gridpattern"></columnExists>
-        </preConditions>
-        <dropColumn tableName="producttype" columnName="gridpattern"/>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="producttype_aud" columnName="gridpattern"></columnExists>
-        </preConditions>
-        <dropColumn tableName="producttype_aud" columnName="gridpattern"/>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="producttype" columnName="controltypeproduct"></columnExists>
-        </preConditions>
-        <dropColumn tableName="producttype" columnName="controltypeproduct"/>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <columnExists tableName="producttype_aud" columnName="controltypeproduct"></columnExists>
-        </preConditions>
-        <dropColumn tableName="producttype_aud" columnName="controltypeproduct"/>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists columnName="especification" tableName="producttype"></columnExists>
-            </not>
-        </preConditions>
-        <addColumn tableName="producttype">
-            <column name="especification" type="VARCHAR(255)"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <columnExists columnName="especification" tableName="producttype_aud"></columnExists>
-            </not>
-        </preConditions>
-        <addColumn tableName="producttype_aud">
-            <column name="especification" type="VARCHAR(255)"/>
-        </addColumn>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql dbms="postgresql">
-            UPDATE "producttype" SET "variation" = 'CLOTHING' WHERE "variation" = 'MODA';
-        </sql>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql dbms="postgresql">
-            UPDATE "producttype" SET "variation" = 'OTHER' WHERE "variation" = 'OUTRA';
-        </sql>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql dbms="postgresql">
-            UPDATE "producttype" SET "variation" = 'DRINKS' WHERE "variation" = 'BEBIDAS';
-        </sql>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql dbms="postgresql">
-            UPDATE "department" SET "variation" = 'CLOTHING' WHERE "variation" = 'MODA';
-        </sql>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql dbms="postgresql">
-            UPDATE "department" SET "variation" = 'OTHER' WHERE "variation" = 'OUTRA';
-        </sql>
-    </changeSet>
-    <changeSet author="Luiz Augusto" id="DEP-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
-        <sql dbms="postgresql">
-            UPDATE "department" SET "variation" = 'DRINKS' WHERE "variation" = 'BEBIDAS';
-        </sql>
-    </changeSet>
     <changeSet author="Bruno Gelatti" id="DEP-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions>
             <columnExists tableName="department" columnName="image_name"/>
@@ -292,6 +206,41 @@
         <addColumn tableName="producttype_aud">
             <column name="file_id" type="BIGINT"/>
         </addColumn>
+    </changeSet>
+
+
+    <changeSet author="Bruno Gelatti" id="DEP-50" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="department_storagefile_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="file_id" baseTableName="department"
+                                 constraintName="department_storagefile_fk" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="storagefile"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-51" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="category_storagefile_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="file_id" baseTableName="category"
+                                 constraintName="category_storagefile_fk" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="storagefile"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-52" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="producttype_storagefile_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="file_id" baseTableName="producttype"
+                                 constraintName="producttype_storagefile_fk" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="storagefile"/>
     </changeSet>
 
 </databaseChangeLog>
