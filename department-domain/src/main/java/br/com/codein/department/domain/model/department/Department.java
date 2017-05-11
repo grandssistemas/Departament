@@ -2,6 +2,7 @@ package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.domain.model.department.enums.VariationType;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -32,14 +33,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
     @NotNull(message = "Name should be informed.")
     @ApiModelProperty(position = 1, value="O nome do Departamento.", required = true)
     private String name;
-    @Columns(columns = {
-            @Column(name = "image_name"),
-            @Column(name = "image_size"),
-            @Column(name = "image_type"),
-            @Column(name = "image_bytes", length = 50 * 1024 * 1024)
-    })
-    @ApiModelProperty(position = 2, value="A imagem de descrição do departamento.")
-    private GumgaImage image;
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     @ApiModelProperty(hidden = true)
     private Set<Category> categories;
@@ -56,6 +49,9 @@ public class Department extends GumgaModel<Long> implements Serializable {
     private Long integrationId;
     @ApiModelProperty(value = "Determina se o departamento esta ativo ou não", position = 15)
     private Boolean active = Boolean.TRUE;
+    @OneToOne
+    @ApiModelProperty(value = "Imagem do departamento", position = 11)
+    private StorageFile file;
 
     public Department() {
         this.categories = new HashSet<>();
@@ -78,9 +74,10 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.characteristics = characteristics;
     }
 
-    public Department(String name, GumgaImage image, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, VariationType variation, Long integrationId, Boolean active) {
+    public Department(String name, StorageFile file, Set<Category> categories, Set<Characteristic> characteristics,
+                      List<String> nameMount, VariationType variation, Long integrationId, Boolean active) {
         this.name = name;
-        this.image = image;
+        this.file = file;
         this.categories = categories;
         this.characteristics = characteristics;
         this.nameMount = nameMount;
@@ -95,10 +92,10 @@ public class Department extends GumgaModel<Long> implements Serializable {
                       List<String> nameMount,
                       VariationType variation,
                       Boolean active,
-                      GumgaImage image) {
+                      StorageFile file) {
         this.id = id;
         this.name = name;
-        this.image = image;
+        this.file = file;
         this.categories = categories;
         this.characteristics = characteristics;
         this.nameMount = nameMount;
@@ -120,14 +117,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public GumgaImage getImage() {
-        return image;
-    }
-
-    public void setImage(GumgaImage image) {
-        this.image = image;
     }
 
     public Set<Category> getCategories() {
@@ -154,7 +143,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.nameMount = nameMount;
     }
 
-
     public Integer getVersion() {
         return version;
     }
@@ -162,7 +150,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
     public void setVersion(Integer version) {
         this.version = version;
     }
-
 
     public Boolean getActive() {
         return active;
@@ -184,5 +171,13 @@ public class Department extends GumgaModel<Long> implements Serializable {
         if(this.categories != null){
             this.categories.forEach(category -> category.setDepartment(this));
         }
+    }
+
+    public StorageFile getFile() {
+        return file;
+    }
+
+    public void setFile(StorageFile file) {
+        this.file = file;
     }
 }

@@ -66,7 +66,6 @@ public class ProductTypeAPI extends GumgaAPI<ProductType, Long> implements CSVGe
 
     @Override
     public RestResponse<ProductType> save(@RequestBody @Valid ProductType model, BindingResult result) {
-        model.setImage((GumgaImage) gumgaTempFileService.find(model.getImage().getName()));
         return super.save(model, result);
     }
 }

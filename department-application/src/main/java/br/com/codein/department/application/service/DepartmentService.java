@@ -9,6 +9,8 @@ import br.com.codein.department.application.repository.DepartmentRepository;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
+import br.com.codein.mobiagecore.application.service.storage.StorageFileService;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import io.gumga.application.GumgaService;
 import io.gumga.application.GumgaTempFileService;
 import io.gumga.core.GumgaThreadScope;
@@ -37,7 +39,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
     @Autowired
     private AssociativeCharacteristicService associativeCharacteristicService;
     @Autowired
-    private GumgaTempFileService gumgaTempFileService;
+    private StorageFileService storageFileService;
     @Autowired
     private ProductTypeService productTypeService;
 
@@ -46,22 +48,21 @@ public class DepartmentService extends GumgaService<Department, Long> {
     @Transactional
     public Department save(Department resource) {
         initializeDepartment(resource);
-        resource.setImage(setImage(resource.getImage()));
         if (resource.getCategories() != null) {
             resource.getCategories().forEach(category -> {
-                if (category.getImage() != null) {
-                    category.setImage(setImage(category.getImage()));
-                }
                 if (category.getDepartment() == null){
                     category.setDepartment(resource);
                 }
+                if (category.getFile() != null) {
+                    storageFileService.save(category.getFile());
+                }
                 if (category.getProductTypes() != null) {
                     category.getProductTypes().forEach(productType -> {
-                        if (productType.getImage() != null) {
-                            productType.setImage(setImage(productType.getImage()));
-                        }
                         if (productType.getCategory() == null){
                             productType.setCategory(category);
+                        }
+                        if (productType.getFile() != null) {
+                            storageFileService.save(productType.getFile());
                         }
                         productTypeService.validateProductType(productType);
                     });
@@ -69,19 +70,11 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 categoryService.validateCategory(category);
             });
         }
+        if (resource.getFile() != null) {
+            storageFileService.save(resource.getFile());
+        }
         super.save(resource);
         return resource;
-    }
-
-    private GumgaImage setImage(GumgaImage image) {
-        if (image != null) {
-            if ("null".equals(image.getName())) {
-                return null;
-            } else if (image.getName() != null && !image.getName().equals("image")) {
-                return (GumgaImage) gumgaTempFileService.find(image.getName());
-            }
-        }
-        return image;
     }
 
     @Override

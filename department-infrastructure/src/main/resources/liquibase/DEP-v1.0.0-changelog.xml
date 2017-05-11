@@ -345,4 +345,140 @@
         <addForeignKeyConstraint baseColumnNames="department_id" baseTableName="department_characteristic" constraintName="fk_squldnqlojt6pdfmucivmp6db" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="department"/>
     </changeSet>
 
+    <changeSet author="Bruno Gelatti" id="DEP-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions>
+            <columnExists tableName="department" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="department"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="department"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="department"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="department"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="category"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="category"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="category"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="category"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="producttype"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="producttype"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="producttype"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="producttype"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="department" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="department">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="category" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="category">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="producttype" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="producttype">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="department_storagefile_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="file_id" baseTableName="department"
+                                 constraintName="department_storagefile_fk" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="storagefile"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="category_storagefile_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="file_id" baseTableName="category"
+                                 constraintName="category_storagefile_fk" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="storagefile"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="producttype_storagefile_fk"/>
+            </not>
+        </preConditions>
+        <addForeignKeyConstraint baseColumnNames="file_id" baseTableName="producttype"
+                                 constraintName="producttype_storagefile_fk" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="storagefile"/>
+    </changeSet>
+
 </databaseChangeLog>

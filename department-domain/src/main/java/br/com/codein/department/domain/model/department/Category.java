@@ -1,6 +1,7 @@
 package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.gumga.domain.GumgaModel;
@@ -54,18 +55,9 @@ public class Category extends GumgaModel<Long> implements Serializable {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     @ApiModelProperty(value = "Set de tipo de produtos referentes a esta categoria", position = 6)
     private Set<ProductType> productTypes;
-    @Columns(columns = {
-            @Column(name = "image_name"),
-            @Column(name = "image_size"),
-            @Column(name = "image_type"),
-            @Column(name = "image_bytes", length = 50 * 1024 * 1024)
-    })
-    @ApiModelProperty(value = "Salva dados da imagem da categoria", position = 7)
-    private GumgaImage image;
     @ManyToMany
     @ApiModelProperty(value = "Especifica um set de caracteristicas referentes a esta categoria", position = 8)
     private Set<Characteristic> characteristics = new HashSet<>();
-
     @ElementCollection
     @Column(name = "name_mount")
     @ApiModelProperty(hidden = true)
@@ -74,6 +66,9 @@ public class Category extends GumgaModel<Long> implements Serializable {
     private Long integrationId;
     @ApiModelProperty(value = "Determina se a categoria esta ativa ou não", position = 10)
     private Boolean active = Boolean.TRUE;
+    @OneToOne
+    @ApiModelProperty(value = "Imagem da categoria do produto", position = 11)
+    private StorageFile file;
 
     public Category() {
     }
@@ -97,14 +92,16 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.productTypes = productTypes;
     }
 
-    public Category(String name, String description, Department department, Category category, Set<Category> categories, Set<ProductType> productTypes, GumgaImage image, Set<Characteristic> characteristics, List<String> nameMount, Long integrationId, Boolean active) {
+    public Category(String name, String description, Department department, Category category, Set<Category> categories,
+                    Set<ProductType> productTypes, StorageFile file, Set<Characteristic> characteristics,
+                    List<String> nameMount, Long integrationId, Boolean active) {
         this.name = name;
         this.description = description;
         this.department = department;
         this.category = category;
         this.categories = categories;
         this.productTypes = productTypes;
-        this.image = image;
+        this.file = file;
         this.characteristics = characteristics;
         this.nameMount = nameMount;
         this.integrationId = integrationId;
@@ -114,13 +111,13 @@ public class Category extends GumgaModel<Long> implements Serializable {
     public Category(Long id, String name,
                     String description, Set<Category> categories,
                     Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Category father, List<String> nameMount, Boolean active, GumgaImage image) {
+                    Set<Characteristic> characteristics, Category father, List<String> nameMount, Boolean active, StorageFile file) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.categories = categories;
         this.productTypes = productTypes;
-        this.image = image;
+        this.file = file;
         this.characteristics = characteristics;
         this.nameMount = nameMount;
         this.active = active;
@@ -128,13 +125,13 @@ public class Category extends GumgaModel<Long> implements Serializable {
     }
 
     public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, GumgaImage image) {
+                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, StorageFile file) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.categories = categories;
         this.productTypes = productTypes;
-        this.image = image;
+        this.file = file;
         this.characteristics = characteristics;
         this.nameMount = nameMount;
         this.active = active;
@@ -189,14 +186,6 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.productTypes = productTypes;
     }
 
-    public GumgaImage getImage() {
-        return image;
-    }
-
-    public void setImage(GumgaImage image) {
-        this.image = image;
-    }
-
     public Set<Characteristic> getCharacteristics() {
         return characteristics;
     }
@@ -246,4 +235,11 @@ public class Category extends GumgaModel<Long> implements Serializable {
         }
     }
 
+    public StorageFile getFile() {
+        return file;
+    }
+
+    public void setFile(StorageFile file) {
+        this.file = file;
+    }
 }

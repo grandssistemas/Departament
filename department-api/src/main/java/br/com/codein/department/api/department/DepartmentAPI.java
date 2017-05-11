@@ -96,9 +96,6 @@ public class DepartmentAPI extends GumgaAPI<Department, Long> implements CSVGene
 
     @Override
     public RestResponse<Department> save(@RequestBody @Valid Department model, BindingResult result) {
-        if (model.getImage() != null){
-            model.setImage((GumgaImage) gumgaTempFileService.find(model.getImage().getName()));
-        }
         return super.save(model, result);
     }
 }

@@ -225,7 +225,6 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
 
     @Override
     public RestResponse<Category> save(@RequestBody @Valid Category model, BindingResult result) {
-        model.setImage((GumgaImage) gumgaTempFileService.find(model.getImage().getName()));
         return super.save(model, result);
     }
 

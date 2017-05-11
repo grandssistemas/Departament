@@ -41,8 +41,9 @@ public class CategoryTranslator {
 
         switch (dto.categoryType) {
             case DEPARTMENT:
-                toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.variation, dto.active, dto.image);
+                toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.variation, dto.active, dto.file);
                 ((Department) toReturn).setVersion(dto.version);
+                ((Department) toReturn).setIntegrationId(dto.integrationId);
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Department dep = departmentService.loadDepartmentFat(dto.id);
                     for (Category cat : dep.getCategories()) {
@@ -58,14 +59,15 @@ public class CategoryTranslator {
                     for(Characteristic characteristic: ((Category)father).getCharacteristics()){
                         if(!dto.characteristics.contains(characteristic)) dto.characteristics.add(characteristic);
                     }
-                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Category) father, dto.nameMount, dto.active, dto.image);
+                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Category) father, dto.nameMount, dto.active, dto.file);
                 } else {
                     for(Characteristic characteristic: ((Department)father).getCharacteristics()){
                         if(!dto.characteristics.contains(characteristic)) dto.characteristics.add(characteristic);
                     }
-                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.image);
+                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.file);
                 }
                 ((Category) toReturn).setVersion(dto.version);
+                ((Category) toReturn).setIntegrationId(dto.integrationId);
 
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Category dep = categoryService.loadCategoriaFat(dto.id);
@@ -101,8 +103,9 @@ public class CategoryTranslator {
                     }
                 }
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
-                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.image, dto.especification);
+                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.file, dto.especification);
                 ((ProductType) toReturn).setVersion(dto.version);
+                ((ProductType) toReturn).setIntegrationId(dto.integrationId);
                 break;
         }
 
@@ -124,7 +127,8 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.nameMount = department.getNameMount();
         dto.active = department.getActive();
-        dto.image = department.getImage();
+        dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         return dto;
     }
 
@@ -145,7 +149,8 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.nameMount = category.getNameMount();
         dto.active = category.getActive();
-        dto.image = category.getImage();
+        dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -160,8 +165,9 @@ public class CategoryTranslator {
         dto.nameMount = productType.getNameMount();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
-        dto.image = productType.getImage();
+        dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -178,7 +184,8 @@ public class CategoryTranslator {
         }
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
-        dto.image = department.getImage();
+        dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         return dto;
     }
 
@@ -197,7 +204,8 @@ public class CategoryTranslator {
         }
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
-        dto.image = category.getImage();
+        dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -211,8 +219,9 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
-        dto.image = productType.getImage();
+        dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -238,8 +247,9 @@ public class CategoryTranslator {
         dto.variation = obj.getVariation();
         dto.typeLabeling = obj.getTypeLabeling();
         dto.active = obj.getActive();
-        dto.image = obj.getImage();
+        dto.file = obj.getFile();
         dto.especification = obj.getEspecification();
+        dto.integrationId = obj.getIntegrationId();
         return dto;
     }
 
@@ -266,7 +276,8 @@ public class CategoryTranslator {
         dto.characteristics = null;
         dto.nameMount = null;
         dto.active = obj.getActive();
-        dto.image = obj.getImage();
+        dto.file = obj.getFile();
+        dto.integrationId = obj.getIntegrationId();
         return dto;
     }
 
@@ -277,7 +288,8 @@ public class CategoryTranslator {
         dto.nameMount = null;
         dto.variation = obj.getVariation();
         dto.active = obj.getActive();
-        dto.image = obj.getImage();
+        dto.file = obj.getFile();
+        dto.integrationId = obj.getIntegrationId();
         return dto;
     }
 
@@ -292,7 +304,8 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.nameMount = department.getNameMount();
         dto.active = department.getActive();
-        dto.image = department.getImage();
+        dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         return dto;
     }
 
@@ -306,7 +319,8 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.nameMount = category.getNameMount();
         dto.active = category.getActive();
-        dto.image = category.getImage();
+        dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -317,8 +331,9 @@ public class CategoryTranslator {
         dto.variation = productType.getVariation();
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
-        dto.image = productType.getImage();
+        dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -332,7 +347,8 @@ public class CategoryTranslator {
         dto.name = category.getName();
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
-        dto.image = category.getImage();
+        dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         return dto;
     }
 
@@ -346,8 +362,9 @@ public class CategoryTranslator {
         dto.name = productType.getName();
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.active = productType.getActive();
-        dto.image = productType.getImage();
+        dto.file = productType.getFile();
         dto.especification = productType.getEspecification();
+        dto.integrationId = productType.getIntegrationId();
         return dto;
     }
 
@@ -386,7 +403,8 @@ public class CategoryTranslator {
         dto.name = department.getName();
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
-        dto.image = department.getImage();
+        dto.file = department.getFile();
+        dto.integrationId = department.getIntegrationId();
         List<CategoryDTO> childrens = new ArrayList<>();
         if (department.getCategories() != null) {
             for (Category cat : department.getCategories()) {
@@ -409,7 +427,8 @@ public class CategoryTranslator {
         dto.name = category.getName();
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
-        dto.image = category.getImage();
+        dto.file = category.getFile();
+        dto.integrationId = category.getIntegrationId();
         List<CategoryDTO> childrens = new ArrayList<>();
         for (Category cat : category.getCategories()) {
             childrens.add(fromWithoutCharacteristics(cat));

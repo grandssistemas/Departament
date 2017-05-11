@@ -12,6 +12,7 @@
         <spring.version>4.2.6.RELEASE</spring.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
         <buddycharacteristic.version>1.1</buddycharacteristic.version>
+        <mobiagecore.version>1.0</mobiagecore.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -258,6 +259,33 @@
                 <groupId>br.com.codein</groupId>
                 <artifactId>buddycharacteristic-gateway</artifactId>
                 <version>${buddycharacteristic.version}</version>
+            </dependency>
+            <!--MobiAgeCore-->
+            <dependency>
+                <groupId>br.com.codein</groupId>
+                <artifactId>mobiagecore-domain</artifactId>
+                <version>${mobiagecore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com.codein</groupId>
+                <artifactId>mobiagecore-application</artifactId>
+                <version>${mobiagecore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com.codein</groupId>
+                <artifactId>mobiagecore-api</artifactId>
+                <version>${mobiagecore.version}</version>
+                <type>war</type>
+            </dependency>
+            <dependency>
+                <groupId>br.com.codein</groupId>
+                <artifactId>mobiagecore-gateway</artifactId>
+                <version>${mobiagecore.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>br.com.codein</groupId>
+                <artifactId>mobiagecore-integration</artifactId>
+                <version>${mobiagecore.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

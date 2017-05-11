@@ -348,4 +348,107 @@
         </preConditions>
         <addForeignKeyConstraint baseColumnNames="rev" baseTableName="producttype_associativecharacteristic_aud" constraintName="fk_ru8nj7awysm6bc7d4wj65md6p" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="gumgarevisionentity" referencedTableSchemaName="${referenced.name}"/>
     </changeSet>
+
+    <changeSet author="Bruno Gelatti" id="DEP-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="department_aud" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="department_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="category_aud" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="category_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_name"/>
+        </preConditions>
+        <dropColumn columnName="image_name" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_size"/>
+        </preConditions>
+        <dropColumn columnName="image_size" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_type"/>
+        </preConditions>
+        <dropColumn columnName="image_type" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="producttype_aud" columnName="image_bytes"/>
+        </preConditions>
+        <dropColumn columnName="image_bytes" tableName="producttype_aud"/>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="department_aud" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="department_aud">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="category_aud" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="category_aud">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Bruno Gelatti" id="DEP-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="producttype_aud" columnName="file_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="producttype_aud">
+            <column name="file_id" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
