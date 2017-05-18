@@ -125,6 +125,18 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
         this.setCharacteristics(list);
     }
 
+    public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid, Characteristic row, Characteristic col, Long integrationId) {
+        this.name = name;
+        this.isGrid = isGrid;
+        this.nameMount = nameMount;
+        this.typeLabeling = typeLabeling;
+        this.integrationId = integrationId;
+        List<AssociativeCharacteristic> list = new ArrayList<>();
+        list.add(new AssociativeCharacteristic(row, 1));
+        list.add(new AssociativeCharacteristic(col, 2));
+        this.setCharacteristics(list);
+    }
+
     public ProductType(String name, List<String> nameMount, TypeLabeling typeLabeling, Boolean isGrid) {
         this.name = name;
         this.isGrid = isGrid;
