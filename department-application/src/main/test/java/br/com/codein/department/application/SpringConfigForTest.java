@@ -28,6 +28,8 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = {
+        "br.com.codein.mobiagecore.integration",
+        "br.com.codein.mobiagecore.application",
         "br.com.codein.department.application",
         "br.com.codein.buddycharacteristic.application",
         "io.gumga"})
@@ -48,7 +50,7 @@ public class SpringConfigForTest {
         config.setJdbc4ConnectionTest(true);
         return new HikariDataSource(config);
 //        return new DatabaseConfigSupport().getDataSourceProvider(DatabaseConfigSupport.Database.POSTGRES).
-//                createDataSource("jdbc:postgresql://localhost:5432/grands?currentSchema=teste", "teste", "teste");
+//                createDataSource("jdbc:postgresql://localhost:5432/grands?currentSchema=mobi", "mobi", "123");
     }
 
     @Bean

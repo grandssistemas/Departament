@@ -4,39 +4,36 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
-    <changeSet author="Rafael Mangolin" id="DEP-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="Rafael Mangolin" id="DEP-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists tableName="department" columnName="skuid"/>
+                <columnExists tableName="department_aud" columnName="skuid"/>
             </not>
         </preConditions>
-        <addColumn tableName="department">
+        <addColumn tableName="department_aud">
             <column name="skuid" type="VARCHAR(3)">
-                <constraints nullable="false"/>
             </column>
         </addColumn>
     </changeSet>
-    <changeSet author="Rafael Mangolin" id="DEP-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="Rafael Mangolin" id="DEP-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists tableName="category" columnName="skuid"/>
+                <columnExists tableName="category_aud" columnName="skuid"/>
             </not>
         </preConditions>
-        <addColumn tableName="category">
+        <addColumn tableName="category_aud">
             <column name="skuid" type="VARCHAR(3)">
-                <constraints nullable="false"/>
             </column>
         </addColumn>
     </changeSet>
-    <changeSet author="Rafael Mangolin" id="DEP-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+    <changeSet author="Rafael Mangolin" id="DEP-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists tableName="producttype" columnName="skuid"/>
+                <columnExists tableName="producttype_aud" columnName="skuid"/>
             </not>
         </preConditions>
-        <addColumn tableName="producttype">
+        <addColumn tableName="producttype_aud">
             <column name="skuid" type="VARCHAR(4)">
-                <constraints nullable="false"/>
             </column>
         </addColumn>
     </changeSet>

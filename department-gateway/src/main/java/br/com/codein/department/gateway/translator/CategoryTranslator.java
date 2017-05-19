@@ -41,7 +41,7 @@ public class CategoryTranslator {
 
         switch (dto.categoryType) {
             case DEPARTMENT:
-                toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.variation, dto.active, dto.file);
+                toReturn = new Department(dto.id, dto.name, categories, dto.characteristics, dto.nameMount, dto.variation, dto.active, dto.file,dto.skuId);
                 ((Department) toReturn).setVersion(dto.version);
                 ((Department) toReturn).setIntegrationId(dto.integrationId);
                 if (dto.childrens.size() == 0 && dto.id != null) {
@@ -59,12 +59,12 @@ public class CategoryTranslator {
                     for(Characteristic characteristic: ((Category)father).getCharacteristics()){
                         if(!dto.characteristics.contains(characteristic)) dto.characteristics.add(characteristic);
                     }
-                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Category) father, dto.nameMount, dto.active, dto.file);
+                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Category) father, dto.nameMount, dto.active, dto.file,dto.skuId);
                 } else {
                     for(Characteristic characteristic: ((Department)father).getCharacteristics()){
                         if(!dto.characteristics.contains(characteristic)) dto.characteristics.add(characteristic);
                     }
-                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.file);
+                    toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.file,dto.skuId);
                 }
                 ((Category) toReturn).setVersion(dto.version);
                 ((Category) toReturn).setIntegrationId(dto.integrationId);
@@ -103,7 +103,7 @@ public class CategoryTranslator {
                     }
                 }
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
-                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.file, dto.especification);
+                        dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.file, dto.especification,dto.skuId);
                 ((ProductType) toReturn).setVersion(dto.version);
                 ((ProductType) toReturn).setIntegrationId(dto.integrationId);
                 break;
@@ -116,6 +116,7 @@ public class CategoryTranslator {
     public CategoryDTO from(Department department) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = department.getId();
+        dto.skuId = department.getSkuId();
         dto.version = department.getVersion();
         dto.name = department.getName();
         dto.variation = department.getVariation();
@@ -136,6 +137,7 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = category.getId();
         dto.version = category.getVersion();
+        dto.skuId = category.getSkuId();
         dto.name = category.getName();
         dto.description = category.getDescription();
         dto.characteristics = category.getCharacteristics();
@@ -159,6 +161,8 @@ public class CategoryTranslator {
         dto.id = productType.getId();
         dto.version = productType.getVersion();
         dto.name = productType.getName();
+        dto.skuId = productType.getSkuId();
+
         dto.characteristicsPT = productType.getCharacteristics();
         dto.isGrid = productType.getIsGrid();
         dto.categoryType = CategoryType.PRODUCTTYPE;
@@ -177,6 +181,7 @@ public class CategoryTranslator {
         dto.id = department.getId();
         dto.version = department.getVersion();
         dto.name = department.getName();
+        dto.skuId = department.getSkuId();
 
         dto.childrens = new ArrayList<>();
         for (Category category : department.getCategories()) {
@@ -192,6 +197,8 @@ public class CategoryTranslator {
     public CategoryDTO fromWithNoCharacteristic(Category category) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = category.getId();
+        dto.skuId = category.getSkuId();
+
         dto.version = category.getVersion();
         dto.name = category.getName();
         dto.description = category.getDescription();
@@ -213,6 +220,8 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = productType.getId();
         dto.version = productType.getVersion();
+        dto.skuId = productType.getSkuId();
+
         dto.variation = productType.getVariation();
         dto.name = productType.getName();
         dto.isGrid = productType.getIsGrid();
@@ -248,6 +257,8 @@ public class CategoryTranslator {
         dto.typeLabeling = obj.getTypeLabeling();
         dto.active = obj.getActive();
         dto.file = obj.getFile();
+        dto.skuId = obj.getSkuId();
+
         dto.especification = obj.getEspecification();
         dto.integrationId = obj.getIntegrationId();
         return dto;
@@ -276,6 +287,8 @@ public class CategoryTranslator {
         dto.characteristics = null;
         dto.nameMount = null;
         dto.active = obj.getActive();
+        dto.skuId = obj.getSkuId();
+
         dto.file = obj.getFile();
         dto.integrationId = obj.getIntegrationId();
         return dto;
@@ -297,6 +310,8 @@ public class CategoryTranslator {
     public CategoryDTO fromWithoutChildrens(Department department) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = department.getId();
+        dto.skuId = department.getSkuId();
+
         dto.version = department.getVersion();
         dto.name = department.getName();
 //        dto.variation = department.getVariation();
@@ -313,6 +328,8 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = category.getId();
         dto.version = category.getVersion();
+        dto.skuId = category.getSkuId();
+
         dto.name = category.getName();
         dto.description = category.getDescription();
         dto.characteristics = category.getCharacteristics();
@@ -332,6 +349,8 @@ public class CategoryTranslator {
         dto.typeLabeling = productType.getTypeLabeling();
         dto.active = productType.getActive();
         dto.file = productType.getFile();
+        dto.skuId = productType.getSkuId();
+
         dto.especification = productType.getEspecification();
         dto.integrationId = productType.getIntegrationId();
         return dto;
@@ -345,6 +364,8 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = category.getId();
         dto.name = category.getName();
+        dto.skuId = category.getSkuId();
+
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
         dto.file = category.getFile();
@@ -359,6 +380,8 @@ public class CategoryTranslator {
     private CategoryDTO fromWithoutCharacteristics(ProductType productType) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = productType.getId();
+        dto.skuId = productType.getSkuId();
+
         dto.name = productType.getName();
         dto.categoryType = CategoryType.PRODUCTTYPE;
         dto.active = productType.getActive();
@@ -400,6 +423,8 @@ public class CategoryTranslator {
     public CategoryDTO getWithLazyChildrens(Department department) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = department.getId();
+        dto.skuId = department.getSkuId();
+
         dto.name = department.getName();
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
@@ -425,6 +450,8 @@ public class CategoryTranslator {
         CategoryDTO dto = new CategoryDTO();
         dto.id = category.getId();
         dto.name = category.getName();
+        dto.skuId = category.getSkuId();
+
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
         dto.file = category.getFile();

@@ -11,9 +11,12 @@ import io.gumga.domain.domains.GumgaImage;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Columns;
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -70,31 +73,53 @@ public class Category extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(value = "Imagem da categoria do produto", position = 11)
     private StorageFile file;
 
+    @Size(max = 3,message = "skuId cant have more than 3 characters.")
+    @ApiModelProperty(value = "Identificado que será utilizado para montar o SKU do produto.", position = 16)
+    private String skuId;
+
     public Category() {
     }
 
     public Category(String name) {
         this.name = name;
+        
     }
 
     public Category(String name, Department department) {
         this.name = name;
         this.department = department;
+        
     }
 
     public Category(String name, Category category) {
         this.name = name;
         this.category = category;
+        
     }
 
     public Category(String name, Set<ProductType> productTypes) {
         this.name = name;
         this.productTypes = productTypes;
+        
     }
 
-    public Category(String name, String description, Department department, Category category, Set<Category> categories,
-                    Set<ProductType> productTypes, StorageFile file, Set<Characteristic> characteristics,
-                    List<String> nameMount, Long integrationId, Boolean active) {
+    public Category(String name, Set<ProductType> productTypes, String skuId) {
+        this.name = name;
+        this.productTypes = productTypes;
+        this.skuId = skuId;
+    }
+
+    public Category(String name,
+                    String description,
+                    Department department,
+                    Category category,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    StorageFile file,
+                    Set<Characteristic> characteristics,
+                    List<String> nameMount,
+                    Long integrationId,
+                    Boolean active) {
         this.name = name;
         this.description = description;
         this.department = department;
@@ -106,12 +131,19 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.nameMount = nameMount;
         this.integrationId = integrationId;
         this.active = active;
+        
     }
 
-    public Category(Long id, String name,
-                    String description, Set<Category> categories,
+    public Category(Long id,
+                    String name,
+                    String description,
+                    Set<Category> categories,
                     Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Category father, List<String> nameMount, Boolean active, StorageFile file) {
+                    Set<Characteristic> characteristics,
+                    Category father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -122,10 +154,43 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.nameMount = nameMount;
         this.active = active;
         this.category = father;
+        
     }
 
-    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, StorageFile file) {
+    public Category(Long id,
+                    String name,
+                    String description,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics,
+                    Category father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file,
+                    String skuId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.file = file;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
+        this.active = active;
+        this.category = father;
+        this.skuId = skuId;
+    }
+
+    public Category(Long id,
+                    String name,
+                    String description,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics,
+                    Department father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -136,6 +201,23 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.nameMount = nameMount;
         this.active = active;
         this.department = father;
+    }
+
+    public Category(Long id,
+                    String name, String description, Set<Category> categories, Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, StorageFile file,
+                    String skuId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.file = file;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
+        this.active = active;
+        this.department = father;
+        this.skuId = skuId;
     }
 
     public Long getIntegrationId() {
@@ -241,5 +323,13 @@ public class Category extends GumgaModel<Long> implements Serializable {
 
     public void setFile(StorageFile file) {
         this.file = file;
+    }
+
+    public String getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(String skuId) {
+        this.skuId = skuId;
     }
 }

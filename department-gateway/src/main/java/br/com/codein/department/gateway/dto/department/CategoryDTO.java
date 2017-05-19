@@ -33,6 +33,7 @@ public class CategoryDTO {
     public StorageFile file;
     public ProductEspecification especification;
     public Long integrationId;
+    public String skuId;
 
     public CategoryDTO() {
     }
