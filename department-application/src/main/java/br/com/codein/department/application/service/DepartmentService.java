@@ -125,7 +125,14 @@ public class DepartmentService extends GumgaService<Department, Long> {
     }
 
     public Department recoveryByName(String name) {
-        return repository.findByName(name);
+        QueryObject qo = new QueryObject();
+        qo.setSearchFields("name");
+        qo.setQ(name);
+        SearchResult<Department> result = pesquisa(qo);
+        if(result.getValues().isEmpty()){
+            return null;
+        }
+        return result.getValues().get(0);
     }
 
     public Department loadDepartmentFat(Long id) {
@@ -139,7 +146,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
 
     @Transactional
     public Department loadDepartmentFatWithCategories(Long id) {
-        Department obj = repository.findById(id);
+        Department obj = view(id);
         if (obj != null) {
             Hibernate.initialize(obj.getCharacteristics());
             Hibernate.initialize(obj.getCategories());

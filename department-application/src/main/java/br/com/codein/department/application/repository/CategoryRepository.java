@@ -8,9 +8,4 @@ import io.gumga.domain.repository.GumgaCrudRepository;
  */
 public interface CategoryRepository extends GumgaCrudRepository<Category, Long> {
 
-    Category findByName(String name);
-
-    Category findById(Long id);
-
-    Category findByIntegrationId(Long id);
 }

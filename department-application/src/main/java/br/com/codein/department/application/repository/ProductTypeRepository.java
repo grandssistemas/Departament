@@ -8,7 +8,4 @@ import io.gumga.domain.repository.GumgaCrudRepository;
  */
 public interface ProductTypeRepository extends GumgaCrudRepository<ProductType, Long> {
 
-    ProductType findByName(String name);
-
-    ProductType findByIntegrationId(Long id);
 }

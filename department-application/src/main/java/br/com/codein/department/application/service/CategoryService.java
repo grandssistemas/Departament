@@ -62,7 +62,14 @@ public class CategoryService extends GumgaService<Category, Long> {
     }
 
     public Category recoveryByName(String name) {
-        return repository.findByName(name);
+        QueryObject qo = new QueryObject();
+        qo.setSearchFields("name");
+        qo.setQ(name);
+        SearchResult<Category> result = pesquisa(qo);
+        if (result.getValues().isEmpty()) {
+            return null;
+        }
+        return result.getValues().get(0);
     }
 
     public SearchResult<Category> recupera(String father, String hql) {
@@ -96,7 +103,7 @@ public class CategoryService extends GumgaService<Category, Long> {
     }
 
     public Category loadCategoryFatWithCategories(Long id) {
-        Category obj = repository.findById(id);
+        Category obj = this.view(id);
         if (obj != null) {
             Hibernate.initialize(obj.getCharacteristics());
             Hibernate.initialize(obj.getCategories());
@@ -151,7 +158,7 @@ public class CategoryService extends GumgaService<Category, Long> {
         return resource;
     }
 
-    public void validateCategory(Category resource){
+    public void validateCategory(Category resource) {
         if (!haveFather(resource)) {
             throw new ValidationException("Category should have a father");
         } else if (!checkFatherCountIsRight(resource)) {
@@ -187,14 +194,14 @@ public class CategoryService extends GumgaService<Category, Long> {
             }
         }
         Hibernate.initialize(resource.getCharacteristics());
-        if(resource.getCharacteristics() != null){
-            for(Characteristic c: resource.getCharacteristics()){
+        if (resource.getCharacteristics() != null) {
+            for (Characteristic c : resource.getCharacteristics()) {
                 characteristicService.initializeCharacteristic(c);
             }
         }
         Hibernate.initialize(resource.getProductTypes());
-        if(resource.getProductTypes() != null){
-            for(ProductType p: resource.getProductTypes()){
+        if (resource.getProductTypes() != null) {
+            for (ProductType p : resource.getProductTypes()) {
                 productTypeService.initializeProductType(p);
             }
         }
@@ -202,13 +209,13 @@ public class CategoryService extends GumgaService<Category, Long> {
 
     }
 
-    public List<ProductType> getProductTypes(Collection<Category> categories){
+    public List<ProductType> getProductTypes(Collection<Category> categories) {
         List<ProductType> productTypes = new ArrayList<>();
-        for(Category c:categories){
-            if(c.getCategories() != null){
+        for (Category c : categories) {
+            if (c.getCategories() != null) {
                 productTypes.addAll(getProductTypes(c.getCategories()));
             }
-            if(c.getProductTypes() != null){
+            if (c.getProductTypes() != null) {
                 productTypes.addAll(c.getProductTypes());
             }
         }
@@ -219,7 +226,7 @@ public class CategoryService extends GumgaService<Category, Long> {
         Category category = loadCategoryFatWithCategories(id);
         initializeCategory(category);
         List<ProductType> productTypes = new ArrayList<>();
-        if(category.getProductTypes() != null){
+        if (category.getProductTypes() != null) {
             productTypes.addAll(category.getProductTypes());
         }
         productTypes.addAll(getProductTypes(category.getCategories()));
@@ -232,7 +239,7 @@ public class CategoryService extends GumgaService<Category, Long> {
     @Transactional
     public List<Category> loadAllWithFirstChildrens() {
         List<Category> toReturn = repository.findAllWithTenancy().getValues();
-        for(Category cat :toReturn){
+        for (Category cat : toReturn) {
             Hibernate.initialize(cat.getCategories());
             Hibernate.initialize(cat.getProductTypes());
         }
@@ -249,22 +256,23 @@ public class CategoryService extends GumgaService<Category, Long> {
 
     /**
      * Função para encontrar uma categoria pelo id de integração
+     *
      * @param id ID de integração
      * @return A categoria encontrado
      */
     @Transactional
     public Category findByIntegrationId(Long id) {
         QueryObject qo = new QueryObject();
-        qo.setAq("obj.integrationId = "+id);
+        qo.setAq("obj.integrationId = " + id);
         SearchResult<Category> result = repository.search(qo);
-        if(result.getValues().isEmpty()){
+        if (result.getValues().isEmpty()) {
             return null;
         }
         return result.getValues().get(0);
     }
 
     @Transactional
-    public List<Category> findAll(){
+    public List<Category> findAll() {
         return repository.findAllWithTenancy().getValues();
     }
 }

@@ -11,6 +11,7 @@ import br.com.codein.department.application.utils.AssociativeCharacteristicUtils
 import br.com.codein.department.application.utils.CategoryUtil;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.ProductType;
+import br.com.codein.department.domain.model.exception.ValidationException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -96,8 +97,9 @@ public class ProductTypeServiceTest extends AbstractTest {
         try{
             productTypeService.save(productType2);
             Assert.fail();
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"The grid characteristics values is not in the right quantity");
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("The grid characteristics values is not in the right quantity", e.getMessage());
         }
     }
 
@@ -117,8 +119,9 @@ public class ProductTypeServiceTest extends AbstractTest {
         try{
             productTypeService.save(productType2);
             Assert.fail();
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"The grid characteristics values types are not matching the valid grid type values");
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("The grid characteristics values types are not matching the valid grid type values", e.getMessage());
         }
     }
 
@@ -138,8 +141,9 @@ public class ProductTypeServiceTest extends AbstractTest {
         try{
             productTypeService.save(productType2);
             Assert.fail();
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"This product type grid characteristic count is not right");
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("This product type grid characteristic count is not right", e.getMessage());
         }
     }
 
@@ -155,8 +159,9 @@ public class ProductTypeServiceTest extends AbstractTest {
         try{
             productTypeService.save(productType3);
             Assert.fail();
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"This product type should not have grid characteristic");
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("This product type should not have grid characteristic", e.getMessage());
         }
     }
 
@@ -174,8 +179,9 @@ public class ProductTypeServiceTest extends AbstractTest {
         try{
             productTypeService.save(productType);
             Assert.fail();
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"The father characteristics are no contained in characteristics");
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("The father characteristics are no contained in characteristics", e.getMessage());
         }
     }
 }
