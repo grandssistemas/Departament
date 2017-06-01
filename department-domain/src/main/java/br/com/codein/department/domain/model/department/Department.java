@@ -1,6 +1,8 @@
 package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
+import br.com.codein.department.domain.model.department.enums.VariationType;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -8,10 +10,14 @@ import io.gumga.domain.domains.GumgaImage;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Columns;
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -28,102 +34,111 @@ public class Department extends GumgaModel<Long> implements Serializable {
     @ApiModelProperty(hidden = true)
     private Integer version;
     @NotNull(message = "Name should be informed.")
-    @ApiModelProperty(position = 1, value="O nome do Departamento.", required = true)
+    @ApiModelProperty(position = 1, value = "O nome do Departamento.", required = true)
     private String name;
-    @Columns(columns = {
-            @Column(name = "image_name"),
-            @Column(name = "image_size"),
-            @Column(name = "image_type"),
-            @Column(name = "image_bytes", length = 50 * 1024 * 1024)
-    })
-    @ApiModelProperty(position = 2, value="A imagem de descrição do departamento.")
-    private GumgaImage image;
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
     @ApiModelProperty(hidden = true)
     private Set<Category> categories;
     @ManyToMany
-    @ApiModelProperty(position = 3, value="As caracteristicas que todos os filhos desse departamento irão ter.")
+    @ApiModelProperty(position = 3, value = "As caracteristicas que todos os filhos desse departamento irão ter.")
     private Set<Characteristic> characteristics = new HashSet<>();
     @ElementCollection
-    @Column(name="name_mount")
+    @Column(name = "name_mount")
     @ApiModelProperty(hidden = true)
     private List<String> nameMount;
-    //Os tipos são separados por ";"
-    @ApiModelProperty(value = "Guarda 1 ou 2 valores separados por ';' que podem ser: MULTISELECAO, COR, TAMANHO, LOGICO", position = 4)
-    private String patterns;
     @ApiModelProperty(value = "Nome do tipo de variação que o departamento segue.", position = 5)
-    private String variation;
+    private VariationType variation;
     @ApiModelProperty(value = "ID usado para integração com outros softwares", position = 14)
     private Long integrationId;
     @ApiModelProperty(value = "Determina se o departamento esta ativo ou não", position = 15)
-    private Boolean active;
+    private Boolean active = Boolean.TRUE;
+    @OneToOne
+    @ApiModelProperty(value = "Imagem do departamento", position = 11)
+    private StorageFile file;
+
+    @Size(max = 3, message = "skuId cant have more than 3 characters.")
+    @ApiModelProperty(value = "Identificado que será utilizado para montar o SKU do produto.", position = 16)
+    private String skuId;
 
     public Department() {
+        this.categories = new HashSet<>();
+        this.characteristics = new HashSet<>();
+        this.nameMount = new ArrayList<>();
     }
 
-    public Department(String name, Boolean active,Set<Category> categories, GumgaImage image) {
+    public Department(String name) {
         this.name = name;
+
+    }
+
+    public Department(String name, Set<Category> categories) {
+        this.name = name;
+
         this.categories = categories;
-        this.active = active;
-        this.image = image;
     }
 
-    public Department(String name, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.active = active;
-        this.image = image;
-    }
 
-    public Department(String name, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+    public Department(String name, Set<Category> categories, String skuId) {
         this.name = name;
-        this.characteristics = characteristics;
-        this.active = active;
-        this.image = image;
-    }
-    public Department(Long id, String name, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.characteristics = characteristics;
-        this.id = id;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Department(String name, String patterns, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.patterns = patterns;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Department(String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
+        this.skuId = skuId;
         this.categories = categories;
-        this.active = active;
-        this.image = image;
     }
 
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+    public Department(String name, Set<Category> categories, Set<Characteristic> characteristics) {
         this.name = name;
         this.categories = categories;
         this.characteristics = characteristics;
-        this.id = id;
-        this.active = active;
-        this.image = image;
+
     }
 
-    public Department(Long id, String name, Set<Category> categories, Set<Characteristic> characteristics, List<String> nameMount, String patterns, String variation, Boolean active, GumgaImage image) {
+    public Department(String name, StorageFile file, Set<Category> categories, Set<Characteristic> characteristics,
+                      List<String> nameMount, VariationType variation, Long integrationId, Boolean active) {
         this.name = name;
+        this.file = file;
         this.categories = categories;
         this.characteristics = characteristics;
-        this.id = id;
         this.nameMount = nameMount;
-        this.patterns = patterns;
+        this.variation = variation;
+        this.integrationId = integrationId;
+        this.active = active;
+
+    }
+
+    public Department(Long id, String name,
+                      Set<Category> categories,
+                      Set<Characteristic> characteristics,
+                      List<String> nameMount,
+                      VariationType variation,
+                      Boolean active,
+                      StorageFile file) {
+        this.id = id;
+        this.name = name;
+        this.file = file;
+        this.categories = categories;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
         this.variation = variation;
         this.active = active;
-        this.image = image;
     }
 
-
+    public Department(Long id, String name,
+                      Set<Category> categories,
+                      Set<Characteristic> characteristics,
+                      List<String> nameMount,
+                      VariationType variation,
+                      Boolean active,
+                      StorageFile file,
+                      String skuId) {
+        this.id = id;
+        this.name = name;
+        this.file = file;
+        this.categories = categories;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
+        this.variation = variation;
+        this.active = active;
+        this.skuId = skuId;
+    }
 
     public Long getIntegrationId() {
         return integrationId;
@@ -139,14 +154,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public GumgaImage getImage() {
-        return image;
-    }
-
-    public void setImage(GumgaImage image) {
-        this.image = image;
     }
 
     public Set<Category> getCategories() {
@@ -173,14 +180,6 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.nameMount = nameMount;
     }
 
-    public String getPatterns() {
-        return patterns;
-    }
-
-    public void setPatterns(String patterns) {
-        this.patterns = patterns;
-    }
-
     public Integer getVersion() {
         return version;
     }
@@ -189,19 +188,41 @@ public class Department extends GumgaModel<Long> implements Serializable {
         this.version = version;
     }
 
-    public String getVariation() {
-        return variation;
-    }
-
-    public void setVariation(String variation) {
-        this.variation = variation;
-    }
-
     public Boolean getActive() {
         return active;
     }
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public VariationType getVariation() {
+        return variation;
+    }
+
+    public void setVariation(VariationType variation) {
+        this.variation = variation;
+    }
+
+    public void setOnChildrens() {
+        if (this.categories != null) {
+            this.categories.forEach(category -> category.setDepartment(this));
+        }
+    }
+
+    public StorageFile getFile() {
+        return file;
+    }
+
+    public void setFile(StorageFile file) {
+        this.file = file;
+    }
+
+    public String getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(String skuId) {
+        this.skuId = skuId;
     }
 }

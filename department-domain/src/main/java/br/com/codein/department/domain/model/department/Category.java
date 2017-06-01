@@ -1,7 +1,9 @@
 package br.com.codein.department.domain.model.department;
 
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.gumga.domain.GumgaModel;
 import io.gumga.domain.GumgaMultitenancy;
 import io.gumga.domain.GumgaMultitenancyPolicy;
@@ -9,9 +11,12 @@ import io.gumga.domain.domains.GumgaImage;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.Columns;
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -24,8 +29,8 @@ import static javax.persistence.InheritanceType.SINGLE_TABLE;
  */
 @Entity
 @GumgaMultitenancy(policy = GumgaMultitenancyPolicy.ORGANIZATIONAL)
-@Table(name="Category")
-@Inheritance(strategy=SINGLE_TABLE)
+@Table(name = "Category")
+@Inheritance(strategy = SINGLE_TABLE)
 @SequenceGenerator(name = GumgaModel.SEQ_NAME, sequenceName = "SEQ_CATEGORY")
 @DiscriminatorColumn
 @DiscriminatorValue(value = "category")
@@ -39,7 +44,7 @@ public class Category extends GumgaModel<Long> implements Serializable {
     private String name;
     @ApiModelProperty(value = "Descrição da categoria", position = 2)
     private String description;
-    @JsonIgnore
+    @JsonIgnoreProperties(value = {"categories"})
     @ManyToOne
     @ApiModelProperty(value = "Especifica a qual departamento pertence esta categoria", position = 3)
     private Department department;
@@ -53,159 +58,166 @@ public class Category extends GumgaModel<Long> implements Serializable {
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     @ApiModelProperty(value = "Set de tipo de produtos referentes a esta categoria", position = 6)
     private Set<ProductType> productTypes;
-    @Columns(columns = {
-            @Column(name = "image_name"),
-            @Column(name = "image_size"),
-            @Column(name = "image_type"),
-            @Column(name = "image_bytes",length = 50*1024*1024)
-    })
-    @ApiModelProperty(value = "Salva dados da imagem da categoria", position = 7)
-    private GumgaImage image;
     @ManyToMany
     @ApiModelProperty(value = "Especifica um set de caracteristicas referentes a esta categoria", position = 8)
     private Set<Characteristic> characteristics = new HashSet<>();
-
     @ElementCollection
-    @Column(name="name_mount")
+    @Column(name = "name_mount")
     @ApiModelProperty(hidden = true)
     private List<String> nameMount;
     @ApiModelProperty(value = "ID usado para integração com outros softwares", position = 9)
     private Long integrationId;
     @ApiModelProperty(value = "Determina se a categoria esta ativa ou não", position = 10)
-    private Boolean active;
+    private Boolean active = Boolean.TRUE;
+    @OneToOne
+    @ApiModelProperty(value = "Imagem da categoria do produto", position = 11)
+    private StorageFile file;
+
+    @Size(max = 3,message = "skuId cant have more than 3 characters.")
+    @ApiModelProperty(value = "Identificado que será utilizado para montar o SKU do produto.", position = 16)
+    private String skuId;
 
     public Category() {
     }
 
-    public Category(String name, Boolean active, GumgaImage image) {
+    public Category(String name) {
         this.name = name;
-        this.active = active;
-        this.image = image;
+        
     }
 
-    public Category(String name, Department department, Boolean active, GumgaImage image) {
+    public Category(String name, Department department) {
         this.name = name;
         this.department = department;
-        this.active = active;
-        this.image = image;
+        
     }
 
-    public Category(String name, Category category, Boolean active, GumgaImage image) {
+    public Category(String name, Category category) {
         this.name = name;
         this.category = category;
-        this.active = active;
-        this.image = image;
+        
     }
 
-    public Category(String name, Department department, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
+    public Category(String name, Set<ProductType> productTypes) {
         this.name = name;
+        this.productTypes = productTypes;
+        
+    }
+
+    public Category(String name, Set<ProductType> productTypes, String skuId) {
+        this.name = name;
+        this.productTypes = productTypes;
+        this.skuId = skuId;
+    }
+
+    public Category(String name,
+                    String description,
+                    Department department,
+                    Category category,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    StorageFile file,
+                    Set<Characteristic> characteristics,
+                    List<String> nameMount,
+                    Long integrationId,
+                    Boolean active) {
+        this.name = name;
+        this.description = description;
         this.department = department;
-        this.characteristics = characteristics;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Category(String name, String description, Department department, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.description = description;
-        this.department = department;
-        this.categories = categories;
-        this.characteristics = characteristics;
-        this.active = active;
-        this.image = image;
-    }
-    public Category(String name, String description, Set<Category> categories, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.description = description;
-        this.categories = categories;
-        this.characteristics = characteristics;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Category(String name, String description, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.name = name;
-        this.description = description;
-        this.characteristics = characteristics;
-        this.active = active;
-    }
-
-    public Category(String description, String name, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.description = description;
-        this.name = name;
+        this.category = category;
         this.categories = categories;
         this.productTypes = productTypes;
+        this.file = file;
         this.characteristics = characteristics;
+        this.nameMount = nameMount;
+        this.integrationId = integrationId;
         this.active = active;
-        this.image = image;
+        
     }
 
-    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Boolean active, GumgaImage image) {
-        this.description = description;
-        this.name = name;
-        this.categories = categories;
-        this.productTypes = productTypes;
-        this.characteristics = characteristics;
+    public Category(Long id,
+                    String name,
+                    String description,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics,
+                    Category father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file) {
         this.id = id;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department, Boolean active, GumgaImage image) {
-        this.description = description;
         this.name = name;
+        this.description = description;
         this.categories = categories;
         this.productTypes = productTypes;
+        this.file = file;
         this.characteristics = characteristics;
-        this.id = id;
-        this.department =department;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Category(Long id,String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Department department,List<String> nameMount, Boolean active, GumgaImage image) {
-        this.description = description;
-        this.name = name;
-        this.categories = categories;
-        this.productTypes = productTypes;
-        this.characteristics = characteristics;
-        this.id = id;
-        this.department =department;
         this.nameMount = nameMount;
         this.active = active;
-        this.image = image;
+        this.category = father;
+        
     }
 
-    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category, Boolean active, GumgaImage image) {
-        this.description = description;
+    public Category(Long id,
+                    String name,
+                    String description,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics,
+                    Category father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file,
+                    String skuId) {
+        this.id = id;
         this.name = name;
+        this.description = description;
         this.categories = categories;
         this.productTypes = productTypes;
+        this.file = file;
         this.characteristics = characteristics;
-        this.id = id;
-        this.category = category;
-        this.active = active;
-        this.image = image;
-    }
-
-    public Category(Long id, String name, String description, Set<Category> categories, Set<ProductType> productTypes, Set<Characteristic> characteristics, Category category,List<String> nameMount, Boolean active, GumgaImage image) {
-        this.description = description;
-        this.name = name;
-        this.categories = categories;
-        this.productTypes = productTypes;
-        this.characteristics = characteristics;
-        this.id = id;
-        this.category = category;
         this.nameMount = nameMount;
         this.active = active;
-        this.image = image;
+        this.category = father;
+        this.skuId = skuId;
     }
 
-    public Category(String name, HashSet<ProductType> productTypes, boolean active, GumgaImage image) {
+    public Category(Long id,
+                    String name,
+                    String description,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics,
+                    Department father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file) {
+        this.id = id;
         this.name = name;
+        this.description = description;
+        this.categories = categories;
         this.productTypes = productTypes;
+        this.file = file;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
         this.active = active;
-        this.image = image;
+        this.department = father;
+    }
+
+    public Category(Long id,
+                    String name, String description, Set<Category> categories, Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, StorageFile file,
+                    String skuId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
+        this.productTypes = productTypes;
+        this.file = file;
+        this.characteristics = characteristics;
+        this.nameMount = nameMount;
+        this.active = active;
+        this.department = father;
+        this.skuId = skuId;
     }
 
     public Long getIntegrationId() {
@@ -256,14 +268,6 @@ public class Category extends GumgaModel<Long> implements Serializable {
         this.productTypes = productTypes;
     }
 
-    public GumgaImage getImage() {
-        return image;
-    }
-
-    public void setImage(GumgaImage image) {
-        this.image = image;
-    }
-
     public Set<Characteristic> getCharacteristics() {
         return characteristics;
     }
@@ -302,5 +306,30 @@ public class Category extends GumgaModel<Long> implements Serializable {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public void setOnChildrens(){
+        if(this.categories != null){
+            this.categories.forEach(category -> category.setCategory(this));
+        }
+        if(this.productTypes != null){
+            this.productTypes.forEach(pt -> pt.setCategory(this));
+        }
+    }
+
+    public StorageFile getFile() {
+        return file;
+    }
+
+    public void setFile(StorageFile file) {
+        this.file = file;
+    }
+
+    public String getSkuId() {
+        return skuId;
+    }
+
+    public void setSkuId(String skuId) {
+        this.skuId = skuId;
     }
 }

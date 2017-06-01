@@ -10,6 +10,8 @@ import br.com.codein.department.domain.model.exception.ParamWrongException;
 import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.department.gateway.dto.department.CategoryDTO;
 import br.com.codein.department.gateway.dto.department.CategoryType;
+import br.com.codein.department.gateway.dto.department.ProductEspecificationDTO;
+import br.com.codein.department.gateway.dto.department.VariationTypeDTO;
 import br.com.codein.department.gateway.translator.CategoryTranslator;
 import io.gumga.annotations.GumgaSwagger;
 import io.gumga.application.GumgaService;
@@ -31,6 +33,7 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by gelatti on 21/02/17.
@@ -222,7 +225,6 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
 
     @Override
     public RestResponse<Category> save(@RequestBody @Valid Category model, BindingResult result) {
-        model.setImage((GumgaImage) gumgaTempFileService.find(model.getImage().getName()));
         return super.save(model, result);
     }
 
@@ -244,5 +246,40 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     @RequestMapping(method = RequestMethod.GET, value = "/image/{fileName}")
     public GumgaImage logoGet(@PathVariable(value = "fileName") String fileName) {
         return (GumgaImage) gumgaTempFileService.find(fileName);
+    }
+
+    @RequestMapping(value = "/variationtype", method = RequestMethod.GET)
+    public RestResponse<List<VariationTypeDTO>> getVariationType() {
+        List<VariationTypeDTO> typeDTOS = VariationTypeDTO.getValues();
+        return new RestResponse<>(typeDTOS,"sucesso");
+    }
+
+    @RequestMapping(value = "/productespecification", method = RequestMethod.GET)
+    public RestResponse<List<ProductEspecificationDTO>> getProductEspecification() {
+        List<ProductEspecificationDTO> especificationDTOS = ProductEspecificationDTO.getValues();
+        return new RestResponse<>(especificationDTOS,"sucesso");
+    }
+
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "/search/{type}/{name}", method = RequestMethod.GET)
+    public RestResponse<List<CategoryDTO>> searchByNameByType(@PathVariable("type") CategoryType type, @PathVariable("name") String name){
+        List<CategoryDTO> result = new ArrayList<>();
+        QueryObject qo = new QueryObject();
+        qo.setAq(String.format("lower(obj.name) = lower(\'%s\')",name));
+        switch (type) {
+            case DEPARTMENT:
+                List<Department> dep = departmentService.pesquisa(qo).getValues();
+                result = dep.stream().map(department -> translator.from(department)).collect(Collectors.toList());
+                break;
+            case CATEGORY:
+                List<Category> cat = categoryService.pesquisa(qo).getValues();
+                result = cat.stream().map(category -> translator.from(category)).collect(Collectors.toList());
+                break;
+            case PRODUCTTYPE:
+                List<ProductType> pt  = productTypeService.pesquisa(qo).getValues();
+                result = pt.stream().map(productType -> translator.from(productType)).collect(Collectors.toList());
+                break;
+        }
+        return new RestResponse<>(result, "Sucesso");
     }
 }

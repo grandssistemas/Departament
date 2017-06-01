@@ -6,8 +6,10 @@ import br.com.codein.department.application.utils.CategoryUtil;
 import br.com.codein.department.application.utils.DepartmentCrudUtil;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
+import br.com.codein.department.domain.model.exception.ValidationException;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.transaction.Transactional;
@@ -15,6 +17,7 @@ import java.util.HashSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 /**
  * Created by rafael on 10/07/15.
@@ -39,21 +42,28 @@ public class CategoryServiceTest extends AbstractTest {
 
     @Test
     @Transactional
-    public void testHaveFather(){
+    public void testHaveFatherDep(){
         assertNotNull(categoryService.save(categoryWithDep).getId());
         categoryWithDep.setDepartment(null);
         try{
             categoryService.save(categoryWithDep);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"Category should have a father");
+            fail();
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("Category should have a father", e.getMessage());
         }
-
+    }
+    @Test
+    @Transactional
+    public void testHaveFatherCat(){
         assertNotNull(categoryService.save(categoryWithCat).getId());
         categoryWithCat.setCategory(null);
         try{
             categoryService.save(categoryWithCat);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"Category should have a father");
+            fail();
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("Category should have a father", e.getMessage());
         }
     }
 
@@ -64,8 +74,10 @@ public class CategoryServiceTest extends AbstractTest {
         categoryWithDep.setCategory(CategoryUtil.category());
         try{
             categoryService.save(categoryWithDep);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"Category father quantity is not right");
+            fail();
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("Category father quantity is not right", e.getMessage());
         }
     }
 
@@ -78,8 +90,10 @@ public class CategoryServiceTest extends AbstractTest {
         categoryWithDep.setCharacteristics(new HashSet<>());
         try{
             categoryService.save(categoryWithDep);
-        }catch (RuntimeException e){
-            assertEquals(e.getMessage(),"Category should have father's characteristics");
+            fail();
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("Category should have father's characteristics", e.getMessage());
         }
     }
 }

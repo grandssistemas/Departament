@@ -1,24 +1,22 @@
 package br.com.codein.department.application.service;
 
 import br.com.codein.buddycharacteristic.application.service.characteristic.AssociativeCharacteristicService;
-import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
-import br.com.codein.department.domain.model.department.Category;
-import br.com.codein.department.domain.model.department.Department;
-import br.com.codein.department.domain.model.department.ProductType;
-import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.buddycharacteristic.application.service.characteristic.CharacteristicService;
+import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.enums.ValueTypeCharacteristic;
 import br.com.codein.department.application.repository.DepartmentRepository;
+import br.com.codein.department.domain.model.department.Category;
+import br.com.codein.department.domain.model.department.Department;
+import br.com.codein.department.domain.model.department.ProductType;
+import br.com.codein.mobiagecore.application.service.storage.StorageFileService;
+import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import io.gumga.application.GumgaService;
 import io.gumga.application.GumgaTempFileService;
 import io.gumga.core.GumgaThreadScope;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
-import io.gumga.domain.GumgaMultitenancy;
-import io.gumga.domain.GumgaMultitenancyPolicy;
 import io.gumga.domain.domains.GumgaImage;
-import io.gumga.domain.repository.GumgaMultitenancyUtil;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,49 +39,42 @@ public class DepartmentService extends GumgaService<Department, Long> {
     @Autowired
     private AssociativeCharacteristicService associativeCharacteristicService;
     @Autowired
-    private GumgaTempFileService gumgaTempFileService;
+    private StorageFileService storageFileService;
+    @Autowired
+    private ProductTypeService productTypeService;
 
 
     @Override
     @Transactional
     public Department save(Department resource) {
         initializeDepartment(resource);
-        resource.setImage(setImage(resource.getImage()));
         if (resource.getCategories() != null) {
             resource.getCategories().forEach(category -> {
-                if (category.getImage() != null) {
-                    category.setImage(setImage(category.getImage()));
+                if (category.getDepartment() == null){
+                    category.setDepartment(resource);
+                }
+                if (category.getFile() != null) {
+                    storageFileService.save(category.getFile());
                 }
                 if (category.getProductTypes() != null) {
                     category.getProductTypes().forEach(productType -> {
-                        if (productType.getImage() != null) {
-                            productType.setImage(setImage(productType.getImage()));
+                        if (productType.getCategory() == null){
+                            productType.setCategory(category);
                         }
+                        if (productType.getFile() != null) {
+                            storageFileService.save(productType.getFile());
+                        }
+                        productTypeService.validateProductType(productType);
                     });
                 }
+                categoryService.validateCategory(category);
             });
         }
-
-        if (resource.getPatterns() != null) {
-            if (!this.isPatternTypesCountRight(resource.getPatterns())) {
-                throw new ValidationException("In Department patterns count isn't right");
-            } else if (!this.isPatternTypesRight(resource.getPatterns())) {
-                throw new ValidationException("In Department patterns types aren't right");
-            }
+        if (resource.getFile() != null) {
+            storageFileService.save(resource.getFile());
         }
         super.save(resource);
         return resource;
-    }
-
-    private GumgaImage setImage(GumgaImage image) {
-        if (image != null) {
-            if ("null".equals(image.getName())) {
-                return null;
-            } else if (image.getName() != null && !image.getName().equals("image")) {
-                return (GumgaImage) gumgaTempFileService.find(image.getName());
-            }
-        }
-        return image;
     }
 
     @Override
@@ -134,7 +125,14 @@ public class DepartmentService extends GumgaService<Department, Long> {
     }
 
     public Department recoveryByName(String name) {
-        return repository.findByName(name);
+        QueryObject qo = new QueryObject();
+        qo.setSearchFields("name");
+        qo.setQ(name);
+        SearchResult<Department> result = pesquisa(qo);
+        if(result.getValues().isEmpty()){
+            return null;
+        }
+        return result.getValues().get(0);
     }
 
     public Department loadDepartmentFat(Long id) {
@@ -148,7 +146,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
 
     @Transactional
     public Department loadDepartmentFatWithCategories(Long id) {
-        Department obj = repository.findById(id);
+        Department obj = view(id);
         if (obj != null) {
             Hibernate.initialize(obj.getCharacteristics());
             Hibernate.initialize(obj.getCategories());
@@ -165,12 +163,17 @@ public class DepartmentService extends GumgaService<Department, Long> {
     }
 
     @Transactional
-    public Department loadDepartmentFatWithCategoriesAndProductType(Long id) {
-        Department obj = this.loadDepartmentFatWithCategories(id);
+    public Department loadFat(Department obj) {
+        Hibernate.initialize(obj.getCategories());
         for (Category category : obj.getCategories()) {
             categoryService.initializeCategory(category);
         }
         return obj;
+    }
+
+    @Transactional
+    public Department loadDepartmentFatWithCategoriesAndProductType(Long id) {
+        return loadFat(this.loadDepartmentFatWithCategories(id));
     }
 
     public SearchResult<Department> recupera(String father, String hql) {
@@ -308,8 +311,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
                     pt.getCharacteristics().forEach(associativeCharacteristic -> {
                         associativeCharacteristic.setCharacteristic(createFindCharacteristic(associativeCharacteristic.getCharacteristic()));
                         AssociativeCharacteristic associativeCharacteristic1 = associativeCharacteristicService.save(
-                                new AssociativeCharacteristic(associativeCharacteristic.getHaveRequired(),
-                                        associativeCharacteristic.getCharacteristic(), associativeCharacteristic.getIsGrid(),
+                                new AssociativeCharacteristic(associativeCharacteristic.getCharacteristic(),
                                         associativeCharacteristic.getGridCount()));
                         associativeCharacteristicList.add(associativeCharacteristic1);
                     });
@@ -327,7 +329,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         SearchResult<Characteristic> characterSearchResult = characteristicService.recoveryByNameWithTenancy(characteristic.getName());
         if (characterSearchResult.getValues().isEmpty()) {
             Characteristic newCharacter = new Characteristic(characteristic.getName(),
-                    characteristic.getTipoDeValorCaracteristica(), characteristic.getValues(),
+                    characteristic.getCharacteristicValueType(), characteristic.getValues(),
                     characteristic.getOrigin());
             Characteristic charac = characteristicService.save(newCharacter);
             return charac;

@@ -1,14 +1,15 @@
 package br.com.codein.department.application.service;
 
-import br.com.codein.department.domain.model.department.Category;
-import br.com.codein.department.domain.model.department.Department;
-import br.com.codein.department.domain.model.department.ProductType;
-import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.buddycharacteristic.application.service.characteristic.CharacteristicService;
 import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharacteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.buddycharacteristic.domain.characteristic.enums.ValueTypeCharacteristic;
 import br.com.codein.department.application.repository.CategoryRepository;
+import br.com.codein.department.domain.model.department.Category;
+import br.com.codein.department.domain.model.department.Department;
+import br.com.codein.department.domain.model.department.ProductType;
+import br.com.codein.department.domain.model.exception.ValidationException;
+import br.com.codein.mobiagecore.application.service.storage.StorageFileService;
 import io.gumga.application.GumgaService;
 import io.gumga.core.QueryObject;
 import io.gumga.core.SearchResult;
@@ -38,6 +39,8 @@ public class CategoryService extends GumgaService<Category, Long> {
     private DepartmentService departmentService;
     @Autowired
     private CharacteristicService characteristicService;
+    @Autowired
+    private StorageFileService storageFileService;
 
     @Autowired
     public CategoryService(CategoryRepository repository) {
@@ -59,7 +62,14 @@ public class CategoryService extends GumgaService<Category, Long> {
     }
 
     public Category recoveryByName(String name) {
-        return repository.findByName(name);
+        QueryObject qo = new QueryObject();
+        qo.setSearchFields("name");
+        qo.setQ(name);
+        SearchResult<Category> result = pesquisa(qo);
+        if (result.getValues().isEmpty()) {
+            return null;
+        }
+        return result.getValues().get(0);
     }
 
     public SearchResult<Category> recupera(String father, String hql) {
@@ -93,7 +103,7 @@ public class CategoryService extends GumgaService<Category, Long> {
     }
 
     public Category loadCategoryFatWithCategories(Long id) {
-        Category obj = repository.findById(id);
+        Category obj = this.view(id);
         if (obj != null) {
             Hibernate.initialize(obj.getCharacteristics());
             Hibernate.initialize(obj.getCategories());
@@ -117,13 +127,12 @@ public class CategoryService extends GumgaService<Category, Long> {
         return obj;
     }
 
-    //TODO ARRUMAR A REGRA DE NEGOCIO PARA COMPARAR A CARACTERISTICA DE TAMANHO DO PAI
     private Boolean checkCharacteristicContain(Category category) {
         if (category.getDepartment() != null) {
             List<Characteristic> list = new ArrayList<>(category.getDepartment().getCharacteristics());
             for (int i = list.size() - 1; i >= 0; i--) {
                 Characteristic characteristic = list.get(i);
-                if (characteristic.getTipoDeValorCaracteristica() == ValueTypeCharacteristic.TAMANHO) {
+                if (ValueTypeCharacteristic.TAMANHO.equals(characteristic.getCharacteristicValueType())) {
                     list.remove(characteristic);
                 }
             }
@@ -141,6 +150,15 @@ public class CategoryService extends GumgaService<Category, Long> {
     @Override
     @Transactional
     public Category save(Category resource) {
+        validateCategory(resource);
+        if (resource.getFile() != null) {
+            storageFileService.save(resource.getFile());
+        }
+        super.save(resource);
+        return resource;
+    }
+
+    public void validateCategory(Category resource) {
         if (!haveFather(resource)) {
             throw new ValidationException("Category should have a father");
         } else if (!checkFatherCountIsRight(resource)) {
@@ -148,8 +166,6 @@ public class CategoryService extends GumgaService<Category, Long> {
         } else if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("Category should have father's characteristics");
         }
-        super.save(resource);
-        return resource;
     }
 
     @Override
@@ -178,14 +194,14 @@ public class CategoryService extends GumgaService<Category, Long> {
             }
         }
         Hibernate.initialize(resource.getCharacteristics());
-        if(resource.getCharacteristics() != null){
-            for(Characteristic c: resource.getCharacteristics()){
+        if (resource.getCharacteristics() != null) {
+            for (Characteristic c : resource.getCharacteristics()) {
                 characteristicService.initializeCharacteristic(c);
             }
         }
         Hibernate.initialize(resource.getProductTypes());
-        if(resource.getProductTypes() != null){
-            for(ProductType p: resource.getProductTypes()){
+        if (resource.getProductTypes() != null) {
+            for (ProductType p : resource.getProductTypes()) {
                 productTypeService.initializeProductType(p);
             }
         }
@@ -193,13 +209,13 @@ public class CategoryService extends GumgaService<Category, Long> {
 
     }
 
-    public List<ProductType> getProductTypes(Collection<Category> categories){
+    public List<ProductType> getProductTypes(Collection<Category> categories) {
         List<ProductType> productTypes = new ArrayList<>();
-        for(Category c:categories){
-            if(c.getCategories() != null){
+        for (Category c : categories) {
+            if (c.getCategories() != null) {
                 productTypes.addAll(getProductTypes(c.getCategories()));
             }
-            if(c.getProductTypes() != null){
+            if (c.getProductTypes() != null) {
                 productTypes.addAll(c.getProductTypes());
             }
         }
@@ -210,7 +226,7 @@ public class CategoryService extends GumgaService<Category, Long> {
         Category category = loadCategoryFatWithCategories(id);
         initializeCategory(category);
         List<ProductType> productTypes = new ArrayList<>();
-        if(category.getProductTypes() != null){
+        if (category.getProductTypes() != null) {
             productTypes.addAll(category.getProductTypes());
         }
         productTypes.addAll(getProductTypes(category.getCategories()));
@@ -223,7 +239,7 @@ public class CategoryService extends GumgaService<Category, Long> {
     @Transactional
     public List<Category> loadAllWithFirstChildrens() {
         List<Category> toReturn = repository.findAllWithTenancy().getValues();
-        for(Category cat :toReturn){
+        for (Category cat : toReturn) {
             Hibernate.initialize(cat.getCategories());
             Hibernate.initialize(cat.getProductTypes());
         }
@@ -240,24 +256,23 @@ public class CategoryService extends GumgaService<Category, Long> {
 
     /**
      * Função para encontrar uma categoria pelo id de integração
+     *
      * @param id ID de integração
      * @return A categoria encontrado
      */
     @Transactional
     public Category findByIntegrationId(Long id) {
         QueryObject qo = new QueryObject();
-        qo.setAq("obj.integrationId = "+id);
+        qo.setAq("obj.integrationId = " + id);
         SearchResult<Category> result = repository.search(qo);
-        if(result.getValues().isEmpty()){
+        if (result.getValues().isEmpty()) {
             return null;
         }
         return result.getValues().get(0);
     }
 
     @Transactional
-    public List<Category> findAll(){
+    public List<Category> findAll() {
         return repository.findAllWithTenancy().getValues();
     }
 }
-
-

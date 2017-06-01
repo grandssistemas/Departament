@@ -8,9 +8,4 @@ import io.gumga.domain.repository.GumgaCrudRepository;
  */
 public interface DepartmentRepository extends GumgaCrudRepository<Department, Long> {
 
-    Department findByName(String name);
-
-    Department findById(Long id);
-
-    Department findByIntegrationId(Long id);
 }

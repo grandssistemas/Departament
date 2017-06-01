@@ -6,7 +6,8 @@ package br.com.codein.department.domain.model.department.enums;
 public enum TypeLabeling {
 
     COMMON("Comum"),
-    BALANCE("Balança");
+    BALANCE_UNIT("Balança Unitário"),
+    BALANCE_WEIGHT("Balança Peso");
 
     private final String label;
 
@@ -14,11 +15,24 @@ public enum TypeLabeling {
         this.label = label;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name();
     }
 
     public String getLabel() {
         return label;
+    }
+
+    public static TypeLabeling findByName(String name) {
+        switch (name) {
+            case "COMMON":
+                return COMMON;
+            case "BALANCE_UNIT":
+                return BALANCE_UNIT;
+            case "BALANCE_WEIGHT":
+                return BALANCE_WEIGHT;
+            default:
+                return null;
+        }
     }
 }
