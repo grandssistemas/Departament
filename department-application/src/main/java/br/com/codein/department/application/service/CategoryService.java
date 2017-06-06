@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by gelatti on 21/02/17.
@@ -129,13 +130,11 @@ public class CategoryService extends GumgaService<Category, Long> {
 
     private Boolean checkCharacteristicContain(Category category) {
         if (category.getDepartment() != null) {
-            List<Characteristic> list = new ArrayList<>(category.getDepartment().getCharacteristics());
-            for (int i = list.size() - 1; i >= 0; i--) {
-                Characteristic characteristic = list.get(i);
-                if (ValueTypeCharacteristic.TAMANHO.equals(characteristic.getCharacteristicValueType())) {
-                    list.remove(characteristic);
-                }
-            }
+            List<Characteristic> list = new ArrayList<>(category.getDepartment().getCharacteristics())
+                    .stream()
+                    .filter(characteristic -> ValueTypeCharacteristic.TAMANHO.equals(characteristic.getCharacteristicValueType()))
+                    .collect(Collectors.toList());
+
             return category.getCharacteristics().containsAll(list);
         } else if (category.getCategory() != null) {
             return category.getCharacteristics().containsAll(category.getCategory().getCharacteristics());

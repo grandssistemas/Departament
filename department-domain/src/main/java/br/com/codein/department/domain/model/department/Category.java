@@ -204,8 +204,15 @@ public class Category extends GumgaModel<Long> implements Serializable {
     }
 
     public Category(Long id,
-                    String name, String description, Set<Category> categories, Set<ProductType> productTypes,
-                    Set<Characteristic> characteristics, Department father, List<String> nameMount, Boolean active, StorageFile file,
+                    String name,
+                    String description,
+                    Set<Category> categories,
+                    Set<ProductType> productTypes,
+                    Set<Characteristic> characteristics,
+                    Department father,
+                    List<String> nameMount,
+                    Boolean active,
+                    StorageFile file,
                     String skuId) {
         this.id = id;
         this.name = name;
@@ -257,7 +264,14 @@ public class Category extends GumgaModel<Long> implements Serializable {
     }
 
     public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+        if (this.categories == null) {
+            this.categories = categories;
+        } else {
+            this.categories.clear();
+            if (categories != null) {
+                this.categories.addAll(categories);
+            }
+        }
     }
 
     public Set<ProductType> getProductTypes() {
@@ -265,7 +279,14 @@ public class Category extends GumgaModel<Long> implements Serializable {
     }
 
     public void setProductTypes(Set<ProductType> productTypes) {
-        this.productTypes = productTypes;
+        if (this.productTypes == null) {
+            this.productTypes = productTypes;
+        } else {
+            this.productTypes.clear();
+            if (productTypes != null) {
+                this.productTypes.addAll(productTypes);
+            }
+        }
     }
 
     public Set<Characteristic> getCharacteristics() {
@@ -273,7 +294,14 @@ public class Category extends GumgaModel<Long> implements Serializable {
     }
 
     public void setCharacteristics(Set<Characteristic> characteristics) {
-        this.characteristics = characteristics;
+        if (this.characteristics == null) {
+            this.characteristics = characteristics;
+        } else {
+            this.characteristics.clear();
+            if (characteristics != null) {
+                this.characteristics.addAll(characteristics);
+            }
+        }
     }
 
     public Category getCategory() {
@@ -289,7 +317,14 @@ public class Category extends GumgaModel<Long> implements Serializable {
     }
 
     public void setNameMount(List<String> nameMount) {
-        this.nameMount = nameMount;
+        if (this.nameMount == null) {
+            this.nameMount = nameMount;
+        } else {
+            this.nameMount.clear();
+            if (nameMount != null) {
+                this.nameMount.addAll(nameMount);
+            }
+        }
     }
 
     public Integer getVersion() {
