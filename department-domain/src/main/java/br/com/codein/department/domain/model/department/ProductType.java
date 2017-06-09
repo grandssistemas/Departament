@@ -220,7 +220,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     public void setCharacteristics(List<AssociativeCharacteristic> characteristics) {
         if (this.characteristics == null) {
             this.characteristics = characteristics;
-        } else {
+        } else if(this.characteristics != characteristics) {
             this.characteristics.clear();
             if (characteristics != null) {
                 this.characteristics.addAll(characteristics);
@@ -251,7 +251,7 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     public void setNameMount(List<String> nameMount) {
         if (this.nameMount == null) {
             this.nameMount = nameMount;
-        } else {
+        } else if(this.nameMount != nameMount) {
             this.nameMount.clear();
             if (nameMount != null) {
                 this.nameMount.addAll(nameMount);

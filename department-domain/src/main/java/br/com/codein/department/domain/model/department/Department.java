@@ -161,7 +161,14 @@ public class Department extends GumgaModel<Long> implements Serializable {
     }
 
     public void setCategories(Set<Category> categories) {
-        this.categories = categories;
+        if (this.categories == null) {
+            this.categories = categories;
+        } else if(this.categories != categories) {
+            this.categories.clear();
+            if (categories != null) {
+                this.categories.addAll(categories);
+            }
+        }
     }
 
     public Set<Characteristic> getCharacteristics() {
@@ -171,7 +178,7 @@ public class Department extends GumgaModel<Long> implements Serializable {
     public void setCharacteristics(Set<Characteristic> characteristics) {
         if (this.characteristics == null) {
             this.characteristics = characteristics;
-        } else {
+        } else if(this.characteristics != characteristics) {
             this.characteristics.clear();
             if (characteristics != null) {
                 this.characteristics.addAll(characteristics);
@@ -186,7 +193,7 @@ public class Department extends GumgaModel<Long> implements Serializable {
     public void setNameMount(List<String> nameMount) {
         if (this.nameMount == null) {
             this.nameMount = nameMount;
-        } else {
+        } else if(this.nameMount != nameMount) {
             this.nameMount.clear();
             if (nameMount != null) {
                 this.nameMount.addAll(nameMount);
