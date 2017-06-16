@@ -284,4 +284,27 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         }
         return new RestResponse<>(result, "Sucesso");
     }
+
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "/searchid/{type}/{id}", method = RequestMethod.GET)
+    public RestResponse<List<CategoryDTO>> searchByIdByType(@PathVariable("type") CategoryType type, @PathVariable("id") String id){
+        List<CategoryDTO> result = new ArrayList<>();
+        QueryObject qo = new QueryObject();
+        qo.setAq(String.format("obj.id = %s",id));
+        switch (type) {
+            case DEPARTMENT:
+                List<Department> dep = departmentService.pesquisa(qo).getValues();
+                result = dep.stream().map(department -> translator.from(department)).collect(Collectors.toList());
+                break;
+            case CATEGORY:
+                List<Category> cat = categoryService.pesquisa(qo).getValues();
+                result = cat.stream().map(category -> translator.from(category)).collect(Collectors.toList());
+                break;
+            case PRODUCTTYPE:
+                List<ProductType> pt  = productTypeService.pesquisa(qo).getValues();
+                result = pt.stream().map(productType -> translator.from(productType)).collect(Collectors.toList());
+                break;
+        }
+        return new RestResponse<>(result, "Sucesso");
+    }
 }
