@@ -82,7 +82,6 @@ public class CategoryServiceTest extends AbstractTest {
     }
 
     @Test
-    @Transactional
     public void testCheckCharacteristicValid(){
         categoryWithDep.setDepartment(department);
         categoryWithDep.setCharacteristics(department.getCharacteristics());

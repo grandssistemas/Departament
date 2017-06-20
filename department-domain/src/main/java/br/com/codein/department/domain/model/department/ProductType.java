@@ -218,7 +218,14 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     }
 
     public void setCharacteristics(List<AssociativeCharacteristic> characteristics) {
-        this.characteristics = characteristics;
+        if (this.characteristics == null) {
+            this.characteristics = characteristics;
+        } else if(this.characteristics != characteristics) {
+            this.characteristics.clear();
+            if (characteristics != null) {
+                this.characteristics.addAll(characteristics);
+            }
+        }
     }
 
     public Boolean getIsGrid() {
@@ -242,7 +249,14 @@ public class ProductType extends GumgaModel<Long> implements Serializable {
     }
 
     public void setNameMount(List<String> nameMount) {
-        this.nameMount = nameMount;
+        if (this.nameMount == null) {
+            this.nameMount = nameMount;
+        } else if(this.nameMount != nameMount) {
+            this.nameMount.clear();
+            if (nameMount != null) {
+                this.nameMount.addAll(nameMount);
+            }
+        }
     }
 
     public Integer getVersion() {

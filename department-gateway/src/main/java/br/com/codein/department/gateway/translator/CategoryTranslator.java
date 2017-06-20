@@ -429,6 +429,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.DEPARTMENT;
         dto.active = department.getActive();
         dto.file = department.getFile();
+        dto.version = department.getVersion();
         dto.integrationId = department.getIntegrationId();
         List<CategoryDTO> childrens = new ArrayList<>();
         if (department.getCategories() != null) {
@@ -455,6 +456,7 @@ public class CategoryTranslator {
         dto.categoryType = CategoryType.CATEGORY;
         dto.active = category.getActive();
         dto.file = category.getFile();
+        dto.version = category.getVersion();
         dto.integrationId = category.getIntegrationId();
         List<CategoryDTO> childrens = new ArrayList<>();
         for (Category cat : category.getCategories()) {

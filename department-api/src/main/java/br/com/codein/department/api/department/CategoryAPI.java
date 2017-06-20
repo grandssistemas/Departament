@@ -62,13 +62,14 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
 
     @Override
     @GumgaSwagger
+    @Transactional(readOnly = true)
     public Category load(@PathVariable Long id) {
         return ((CategoryService)service).loadCategoriaFat(id);
     }
 
+    @Transactional(readOnly = true)
     @RequestMapping(value = "/searchfather",  method = RequestMethod.GET)
     public ResponseEntity searchFather(String param){
-
         return categoryService.getFatherOptions(param);
     }
 
@@ -110,13 +111,13 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         return new RestResponse<>(toReturn, "Sucesso");
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @RequestMapping(value = "/tree/{id}", method = RequestMethod.GET)
     public RestResponse<CategoryDTO> loadFork(@PathVariable("id") Long id) {
         return new RestResponse<>(translator.fork(productTypeService.loadProductTypeFat(id)), "Sucesso");
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @RequestMapping(value = "/tree", method = RequestMethod.GET)
     public RestResponse<List<CategoryDTO>> loadTree() {
         //TODO ARRUMAR PARA TRAZER TODOS OS DEPARTAMENTOS
@@ -134,7 +135,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         return new RestResponse<>(dtos, "Sucesso");
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @RequestMapping(value = "/tree/childrens/{type}/{id}", method = RequestMethod.GET)
     public RestResponse<List<CategoryDTO>> loadChildrens(@PathVariable("id") Long id, @PathVariable("type")CategoryType type) {
         List<CategoryDTO> dto = new ArrayList<>();
@@ -181,7 +182,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         return (CategoryService) service;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @RequestMapping(value = "/tree/level/{type}", method = RequestMethod.GET)
     public RestResponse<List<CategoryDTO>> loadLevel(@PathVariable("type")CategoryType type) {
         List<CategoryDTO> dto = new ArrayList<>();
@@ -204,7 +205,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         return new RestResponse<>(dto, "Sucesso");
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @RequestMapping(value = "/tree/fatherlevel/{type}/{id}", method = RequestMethod.GET)
     public RestResponse<CategoryDTO> loadFatherLevel(@PathVariable("type")CategoryType type, @PathVariable("id") Long id) {
         CategoryDTO dto;
@@ -243,6 +244,7 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         return gumgaTempFileService.delete(fileName);
     }
 
+    @Transactional(readOnly = true)
     @RequestMapping(method = RequestMethod.GET, value = "/image/{fileName}")
     public GumgaImage logoGet(@PathVariable(value = "fileName") String fileName) {
         return (GumgaImage) gumgaTempFileService.find(fileName);
@@ -266,6 +268,29 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         List<CategoryDTO> result = new ArrayList<>();
         QueryObject qo = new QueryObject();
         qo.setAq(String.format("lower(obj.name) = lower(\'%s\')",name));
+        switch (type) {
+            case DEPARTMENT:
+                List<Department> dep = departmentService.pesquisa(qo).getValues();
+                result = dep.stream().map(department -> translator.from(department)).collect(Collectors.toList());
+                break;
+            case CATEGORY:
+                List<Category> cat = categoryService.pesquisa(qo).getValues();
+                result = cat.stream().map(category -> translator.from(category)).collect(Collectors.toList());
+                break;
+            case PRODUCTTYPE:
+                List<ProductType> pt  = productTypeService.pesquisa(qo).getValues();
+                result = pt.stream().map(productType -> translator.from(productType)).collect(Collectors.toList());
+                break;
+        }
+        return new RestResponse<>(result, "Sucesso");
+    }
+
+    @Transactional(readOnly = true)
+    @RequestMapping(value = "/searchid/{type}/{id}", method = RequestMethod.GET)
+    public RestResponse<List<CategoryDTO>> searchByIdByType(@PathVariable("type") CategoryType type, @PathVariable("id") String id){
+        List<CategoryDTO> result = new ArrayList<>();
+        QueryObject qo = new QueryObject();
+        qo.setAq(String.format("obj.id = %s",id));
         switch (type) {
             case DEPARTMENT:
                 List<Department> dep = departmentService.pesquisa(qo).getValues();
