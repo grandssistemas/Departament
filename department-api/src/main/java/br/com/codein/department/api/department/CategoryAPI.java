@@ -94,6 +94,28 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
     }
 
     @Transactional
+    @RequestMapping(value = "/tree/saveall", method = RequestMethod.POST, consumes = "application/json")
+    @GumgaSwagger
+    public RestResponse<List<CategoryDTO>> saveAll(@RequestBody List<CategoryDTO> arvore) {
+        for (CategoryDTO category : arvore){
+            switch (category.categoryType){
+                case DEPARTMENT:
+                    Department department = (Department) translator.to(category, null);
+                    departmentService.save(department);
+                    break;
+                case CATEGORY:
+                    categoryService.save((Category) translator.to(category, null));
+                    break;
+                case PRODUCTTYPE:
+                    productTypeService.save((ProductType) translator.to(category, null));
+                    break;
+            }
+        }
+        
+        return new RestResponse<>(arvore, "Sucesso");
+    }
+
+    @Transactional
     @RequestMapping(value = "/editable", method = RequestMethod.GET, consumes = "application/json")
     public RestResponse<Boolean> editable(@RequestBody CategoryDTO nodo) {
         Boolean toReturn = false;
