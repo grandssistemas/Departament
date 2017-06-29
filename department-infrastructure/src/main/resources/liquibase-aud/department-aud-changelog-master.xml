@@ -4,9 +4,9 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="classpath:liquibase-aud/characteristic-aud-changelog-master.xml"/>
-
     <include file="DEP-AUD-v1.0.0-changelog.xml" relativeToChangelogFile="true"/>
     <include file="DEP-AUD-v1.1.0-changelog.xml" relativeToChangelogFile="true"/>
     <include file="DEP-AUD-v1.4.0-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="DEP-AUD-v1.5.0-changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
