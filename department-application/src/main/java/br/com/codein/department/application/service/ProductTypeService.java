@@ -56,7 +56,7 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
         }
         if (resource.getIsGrid()) {
             if (!isGridCharacteristicRight(resource)) {
-                throw new ValidationException("The grid characteristics values is not in the right quantity");
+                throw new ValidationException("characvalue02;;The grid characteristics values is not in the right quantity");
             } else if (!isGridValuesTypeRight(resource)) {
                 throw new ValidationException("The grid characteristics values types are not matching the valid grid type values");
             } else if (gridCharacteristicCount(resource) < 1 || gridCharacteristicCount(resource) > 2) {
