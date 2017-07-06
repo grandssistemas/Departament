@@ -4,15 +4,13 @@
     <groupId>br.com.codein</groupId>
     <artifactId>department</artifactId>
     <name>department</name>
-    <version>1.0</version>
+    <version>1.5.0</version>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <io.gumga.version>1.5.9</io.gumga.version>
         <spring.version>4.2.6.RELEASE</spring.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
-        <buddycharacteristic.version>1.1</buddycharacteristic.version>
-        <mobiagecore.version>1.0</mobiagecore.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -309,7 +307,34 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <extensions>
+            <extension>
+                <groupId>org.springframework.build</groupId>
+                <artifactId>aws-maven</artifactId>
+                <version>5.0.0.RELEASE</version>
+            </extension>
+        </extensions>
     </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <buddycharacteristic.version>[0.0-SNAPSHOT,)</buddycharacteristic.version>
+                <mobiagecore.version>[0.0-SNAPSHOT,)</mobiagecore.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <buddycharacteristic.version>LATEST</buddycharacteristic.version>
+                <mobiagecore.version>LATEST</mobiagecore.version>
+            </properties>
+        </profile>
+    </profiles>
     <modules>
         <module>department-domain</module>
         <module>department-infrastructure</module>
@@ -317,4 +342,40 @@
         <module>department-gateway</module>
         <module>department-api</module>
     </modules>
+    <distributionManagement>
+        <repository>
+            <id>maven-s3-release-repo</id>
+            <name>AWS Release Repository</name>
+            <url>s3://repository.mobiage/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>maven-s3-snapshot-repo</id>
+            <name>AWS Snapshot Repository</name>
+            <url>s3://repository.mobiage/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>maven-s3-release-repo</id>
+            <name>S3 Release Repository for component1</name>
+            <url>s3://repository.mobiage/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven-s3-snapshot-repo</id>
+            <name>Component1-s3-snapshot-repo</name>
+            <url>s3://repository.mobiage/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>
