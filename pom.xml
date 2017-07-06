@@ -11,8 +11,6 @@
         <io.gumga.version>1.5.9</io.gumga.version>
         <spring.version>4.2.6.RELEASE</spring.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
-        <buddycharacteristic.version>1.1</buddycharacteristic.version>
-        <mobiagecore.version>1.0</mobiagecore.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -317,6 +315,26 @@
             </extension>
         </extensions>
     </build>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <buddycharacteristic.version>[0.0-SNAPSHOT,)</buddycharacteristic.version>
+                <mobiagecore.version>[0.0-SNAPSHOT,)</mobiagecore.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <buddycharacteristic.version>LATEST</buddycharacteristic.version>
+                <mobiagecore.version>LATEST</mobiagecore.version>
+            </properties>
+        </profile>
+    </profiles>
     <modules>
         <module>department-domain</module>
         <module>department-infrastructure</module>
