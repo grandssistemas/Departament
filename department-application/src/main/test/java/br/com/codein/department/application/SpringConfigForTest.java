@@ -70,6 +70,8 @@ public class SpringConfigForTest {
         properties.put("hibernate.connection.characterEncoding", "UTF-8");
         properties.put("hibernate.connection.useUnicode", "true");
         properties.put("hibernate.jdbc.batch_size", "50");
+        properties.put("hibernate.integration.envers.enabled", "false");
+        properties.put("hibernate.listeners.envers.autoRegister", "false");
         GumgaQueryParserProvider.defaultMap = GumgaQueryParserProvider.getH2LikeMap();
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
