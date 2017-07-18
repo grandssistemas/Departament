@@ -99,7 +99,7 @@ public class ProductTypeServiceTest extends AbstractTest {
             Assert.fail();
         }catch (Exception e){
             assertEquals(ValidationException.class, e.getClass());
-            assertEquals("The grid characteristics values is not in the right quantity", e.getMessage());
+            assertEquals("characvalue02;;The grid characteristics values is not in the right quantity", e.getMessage());
         }
     }
 
