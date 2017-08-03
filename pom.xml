@@ -4,11 +4,11 @@
     <groupId>br.com.codein</groupId>
     <artifactId>department</artifactId>
     <name>department</name>
-    <version>1.6.0</version>
+    <version>1.7.0</version>
     <packaging>pom</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <io.gumga.version>1.5.9</io.gumga.version>
+        <io.gumga.version>1.5.17</io.gumga.version>
         <spring.version>4.2.6.RELEASE</spring.version>
         <hibernate.version>4.3.1.Final</hibernate.version>
     </properties>

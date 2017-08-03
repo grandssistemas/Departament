@@ -4,7 +4,7 @@
     <parent>
         <groupId>br.com.codein</groupId>
         <artifactId>department</artifactId>
-        <version>1.6.0</version>
+        <version>1.7.0</version>
     </parent>
 
     <artifactId>department-domain</artifactId>
@@ -87,18 +87,18 @@
                 </executions>
             </plugin>
             <!-- Plugin Para gerar o diagrama toda a vez que da build    -->
-                       <plugin>
-                           <groupId>io.gumga</groupId>
-                           <artifactId>gumgag</artifactId>
-                           <executions>
-                               <execution>
-                                   <phase>install</phase>
-                                   <goals>
-                                       <goal>diagrama</goal>
-                                   </goals>
-                               </execution>
-                           </executions>
-                       </plugin>
+                       <!--<plugin>-->
+                           <!--<groupId>io.gumga</groupId>-->
+                           <!--<artifactId>gumgag</artifactId>-->
+                           <!--<executions>-->
+                               <!--<execution>-->
+                                   <!--<phase>install</phase>-->
+                                   <!--<goals>-->
+                                       <!--<goal>diagrama</goal>-->
+                                   <!--</goals>-->
+                               <!--</execution>-->
+                           <!--</executions>-->
+                       <!--</plugin>-->
         </plugins>
     </build>
 </project>
