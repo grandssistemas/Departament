@@ -1,6 +1,8 @@
 package br.com.codein.department.api.department;
 
+import br.com.codein.department.application.service.CategoryService;
 import br.com.codein.department.application.service.ProductTypeService;
+import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.ProductType;
 import br.com.codein.department.domain.model.exception.ValidationException;
 import io.gumga.annotations.GumgaSwagger;
@@ -68,4 +70,10 @@ public class ProductTypeAPI extends GumgaAPI<ProductType, Long> implements CSVGe
     public RestResponse<ProductType> save(@RequestBody @Valid ProductType model, BindingResult result) {
         return super.save(model, result);
     }
+
+    @RequestMapping(value = "/allwithtenancy",method = RequestMethod.GET)
+    public SearchResult<ProductType> getAllWithTenancy(){
+        return ((ProductTypeService) service).getAllWithTenancy();
+    }
+
 }

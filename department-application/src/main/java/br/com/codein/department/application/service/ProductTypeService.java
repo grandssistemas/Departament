@@ -1,5 +1,6 @@
 package br.com.codein.department.application.service;
 
+import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
 import br.com.codein.department.domain.model.exception.ValidationException;
@@ -53,6 +54,8 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     public void validateProductType(ProductType resource){
         if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("The father characteristics are no contained in characteristics");
+        } else if(productTypeIsAlreadyRegistered(resource)){
+            throw new ValidationException("prodtype001;;ProductType already registered");
         }
         if (resource.getIsGrid()) {
             if (!isGridCharacteristicRight(resource)) {
@@ -67,6 +70,11 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
                 throw new ValidationException("This product type should not have grid characteristic");
             }
         }
+    }
+
+    private boolean productTypeIsAlreadyRegistered(ProductType resource) {
+        ProductType productType = this.recoveryByName(resource.getName());
+        return (productType != null && productType.getId() != resource.getId());
     }
 
     @Override
@@ -165,7 +173,8 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
 
     public ProductType recoveryByName(String name) {
         QueryObject qo = new QueryObject();
-        qo.setAq("obj.name = '" + name + "'");
+        qo.setSearchFields("name");
+        qo.setQ(name);
         SearchResult<ProductType> result = repository.search(qo);
         if (result.getValues().isEmpty()) {
             return null;
@@ -220,6 +229,10 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     @Transactional
     public List<ProductType> findAll() {
         return repository.findAllWithTenancy().getValues();
+    }
+
+    public SearchResult<ProductType> getAllWithTenancy() {
+        return repository.findAllWithTenancy();
     }
 }
 
