@@ -9,6 +9,7 @@ import br.com.codein.department.application.repository.DepartmentRepository;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
+import br.com.codein.department.domain.model.exception.ValidationException;
 import br.com.codein.mobiagecore.application.service.storage.StorageFileService;
 import br.com.codein.mobiagecore.domain.model.storage.StorageFile;
 import io.gumga.application.GumgaService;
@@ -47,6 +48,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
     @Override
     @Transactional
     public Department save(Department resource) {
+        validateDepartment(resource);
         initializeDepartment(resource);
         if (resource.getCategories() != null) {
             resource.getCategories().forEach(category -> {
@@ -86,8 +88,18 @@ public class DepartmentService extends GumgaService<Department, Long> {
                 category.getProductTypes().forEach(pt -> pt.setActive(entity.getActive()));
             }
         }
-
         super.beforeSave(entity);
+    }
+
+    public void validateDepartment(Department resource){
+        if(departmentIsAlreadyRegistered(resource)){
+            throw new ValidationException("dep001;;Department already registered");
+        }
+    }
+
+    private boolean departmentIsAlreadyRegistered(Department resource) {
+        Department department = this.recoveryByName(resource.getName());
+        return (department != null && department.getId() != resource.getId());
     }
 
     public Boolean isPatternTypesCountRight(String patterns) {

@@ -164,7 +164,14 @@ public class CategoryService extends GumgaService<Category, Long> {
             throw new ValidationException("Category father quantity is not right");
         } else if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("Category should have father's characteristics");
+        } else if(categoryIsAlreadyRegistered(resource)){
+            throw new ValidationException("cat001;;Category already registered");
         }
+    }
+
+    private boolean categoryIsAlreadyRegistered(Category resource) {
+        Category category = this.recoveryByName(resource.getName());
+        return (category != null && category.getId() != resource.getId());
     }
 
     @Override
@@ -273,5 +280,9 @@ public class CategoryService extends GumgaService<Category, Long> {
     @Transactional
     public List<Category> findAll() {
         return repository.findAllWithTenancy().getValues();
+    }
+
+    public SearchResult<Category> getAll() {
+        return repository.findAllWithTenancy();
     }
 }

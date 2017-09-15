@@ -3,4 +3,29 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
+    <changeSet id="DEP-22" author="nakamura" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="uk_department_name"/>
+            </not>
+        </preConditions>
+        <addUniqueConstraint columnNames="name, oi" constraintName="uk_department_name" tableName="department"/>
+    </changeSet>
+    <changeSet id="DEP-23" author="nakamura" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="uk_category_name"/>
+            </not>
+        </preConditions>
+        <addUniqueConstraint columnNames="name, oi" constraintName="uk_categoryname" tableName="category"/>
+    </changeSet>
+    <changeSet id="DEP-24" author="nakamura" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="uk_producttype_name"/>
+            </not>
+        </preConditions>
+        <addUniqueConstraint columnNames="name, oi" constraintName="uk_producttype_name" tableName="producttype"/>
+    </changeSet>
+
 </databaseChangeLog>
