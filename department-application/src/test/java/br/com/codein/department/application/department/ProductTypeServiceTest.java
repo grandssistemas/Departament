@@ -9,6 +9,7 @@ import br.com.codein.department.application.service.DepartmentService;
 import br.com.codein.department.application.service.ProductTypeService;
 import br.com.codein.department.application.utils.AssociativeCharacteristicUtils;
 import br.com.codein.department.application.utils.CategoryUtil;
+import br.com.codein.department.application.utils.ProductTypeUtil;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.ProductType;
 import br.com.codein.department.domain.model.exception.ValidationException;
@@ -65,8 +66,6 @@ public class ProductTypeServiceTest extends AbstractTest {
         characteristicService.save(characProdLogic2.getCharacteristic());
         associativeCharacteristicService.save(characProdLogic2);
 
-
-
         characList = new ArrayList<>();
 
         characList1 = new ArrayList<>();
@@ -84,15 +83,16 @@ public class ProductTypeServiceTest extends AbstractTest {
     @Test
     @Transactional
     public void testIsGridCharacteriticCountRight(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        Category category = CategoryUtil.categoryWithDepartment();
+        assertNotNull(departmentService.save(category.getDepartment()).getId());
+        assertNotNull(categoryService.save(category).getId());
+
+        productType.setCategory(category);
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
         assertNotNull(productTypeService.save(productType).getId());
         productType2.setIsGrid(true);
-        Category c = CategoryUtil.categoryWithDepartment();
-        departmentService.save(c.getDepartment());
-        categoryService.save(c);
-        productType2.setCategory(c);
+        productType2.setCategory(category);
         productType2.setCharacteristics(characList2);
         try{
             productTypeService.save(productType2);
@@ -106,12 +106,17 @@ public class ProductTypeServiceTest extends AbstractTest {
     @Test
     @Transactional
     public void testIsGridCharacteristicRight(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        Category category = CategoryUtil.categoryWithDepartment();
+
+        assertNotNull(departmentService.save(category.getDepartment()).getId());
+        assertNotNull(categoryService.save(category).getId());
+
+        productType.setCategory(category);
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
         assertNotNull(productTypeService.save(productType).getId());
         productType2.setIsGrid(true);
-        productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        productType2.setCategory(category);
         AssociativeCharacteristic tamanho = AssociativeCharacteristicUtils.textoGrade();
         tamanho.setCharacteristic(characteristicService.save(tamanho.getCharacteristic()));
         characList2.add(tamanho);
@@ -129,11 +134,16 @@ public class ProductTypeServiceTest extends AbstractTest {
     @Test
     @Transactional
     public void testgridCharacteristicCount(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        Category category = CategoryUtil.categoryWithDepartment();
+
+        assertNotNull(departmentService.save(category.getDepartment()).getId());
+        assertNotNull(categoryService.save(category).getId());
+
+        productType.setCategory(category);
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
         assertNotNull(productTypeService.save(productType).getId());
-        productType2.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        productType2.setCategory(category);
         productType2.setIsGrid(true);
         characList2.add(AssociativeCharacteristicUtils.tamanhoGrid1());
         characList2.add(AssociativeCharacteristicUtils.tamanhoGrid3());
@@ -149,11 +159,15 @@ public class ProductTypeServiceTest extends AbstractTest {
 
     @Test
     public void testShouldNotExistCharacteristic(){
-        productType3.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        Category category = CategoryUtil.categoryWithDepartment();
+
+        assertNotNull(departmentService.save(category.getDepartment()).getId());
+        assertNotNull(categoryService.save(category).getId());
+
+        productType3.setCategory(category);
         productType3.setCharacteristics(characList);
         productType3.setIsGrid(false);
         assertNotNull(productTypeService.save(productType3).getId());
-        productType3.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
         productType3.setCharacteristics(characList2);
         productType3.setIsGrid(false);
         try{
@@ -168,7 +182,12 @@ public class ProductTypeServiceTest extends AbstractTest {
     @Test
     @Transactional
     public void testCheckCharacteristicContain(){
-        productType.setCategory(categoryService.save(CategoryUtil.categoryWithDepartment()));
+        Category category = CategoryUtil.categoryWithDepartment();
+
+        assertNotNull(departmentService.save(category.getDepartment()).getId());
+        assertNotNull(categoryService.save(category).getId());
+
+        productType.setCategory(category);
         productType.setCharacteristics(characList1);
         productType.setIsGrid(true);
         assertNotNull(productTypeService.save(productType).getId());
@@ -187,14 +206,18 @@ public class ProductTypeServiceTest extends AbstractTest {
 
     @Test
     public void testValidateDuplicateNameProductType(){
+        ProductType productType = ProductTypeUtil.productType();
+        departmentService.save(productType.getCategory().getDepartment());
+        categoryService.save(productType.getCategory());
         assertNotNull(productTypeService.save(productType).getId());
-        ProductType newProductType = new ProductType("ProductType", true);
+        ProductType newProductType = new ProductType("ProductType");
+        newProductType.setCategory(productType.getCategory());
         try{
             productTypeService.save(newProductType);
             Assert.fail();
         }catch (Exception e){
             assertEquals(ValidationException.class, e.getClass());
-            assertEquals("ProductType already registered", e.getMessage());
+            assertEquals("prodtype001;;ProductType already registered", e.getMessage());
         }
     }
 

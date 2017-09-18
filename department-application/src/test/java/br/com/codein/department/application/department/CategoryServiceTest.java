@@ -2,6 +2,7 @@ package br.com.codein.department.application.department;
 
 import br.com.codein.department.application.AbstractTest;
 import br.com.codein.department.application.service.CategoryService;
+import br.com.codein.department.application.service.DepartmentService;
 import br.com.codein.department.application.utils.CategoryUtil;
 import br.com.codein.department.application.utils.DepartmentCrudUtil;
 import br.com.codein.department.domain.model.department.Category;
@@ -27,6 +28,9 @@ public class CategoryServiceTest extends AbstractTest {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private DepartmentService departmentService;
 
     Department department;
     Category categoryWithDep;
@@ -98,14 +102,18 @@ public class CategoryServiceTest extends AbstractTest {
 
     @Test
     public void testValidateDuplicateNameCategory(){
+        Department departmentOnlyName = DepartmentCrudUtil.departmentOnlyName();
+        departmentService.save(departmentOnlyName);
+        categoryWithDep.setDepartment(departmentOnlyName);
         assertNotNull(categoryService.save(categoryWithDep).getId());
-        Category newCategory = CategoryUtil.categoryWithDepartment();
+        Category newCategory = new Category("Category", departmentOnlyName);
+
         try{
             categoryService.save(newCategory);
             fail();
         }catch (Exception e){
             assertEquals(ValidationException.class, e.getClass());
-            assertEquals("Category already registered", e.getMessage());
+            assertEquals("cat001;;Category already registered", e.getMessage());
         }
     }
 
