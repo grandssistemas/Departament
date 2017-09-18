@@ -184,4 +184,18 @@ public class ProductTypeServiceTest extends AbstractTest {
             assertEquals("The father characteristics are no contained in characteristics", e.getMessage());
         }
     }
+
+    @Test
+    public void testValidateDuplicateNameProductType(){
+        assertNotNull(productTypeService.save(productType).getId());
+        ProductType newProductType = new ProductType("ProductType", true);
+        try{
+            productTypeService.save(newProductType);
+            Assert.fail();
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("ProductType already registered", e.getMessage());
+        }
+    }
+
 }

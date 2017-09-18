@@ -95,4 +95,18 @@ public class CategoryServiceTest extends AbstractTest {
             assertEquals("Category should have father's characteristics", e.getMessage());
         }
     }
+
+    @Test
+    public void testValidateDuplicateNameCategory(){
+        assertNotNull(categoryService.save(categoryWithDep).getId());
+        Category newCategory = CategoryUtil.categoryWithDepartment();
+        try{
+            categoryService.save(newCategory);
+            fail();
+        }catch (Exception e){
+            assertEquals(ValidationException.class, e.getClass());
+            assertEquals("Category already registered", e.getMessage());
+        }
+    }
+
 }
