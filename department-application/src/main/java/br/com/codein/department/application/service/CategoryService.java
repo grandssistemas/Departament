@@ -64,8 +64,7 @@ public class CategoryService extends GumgaService<Category, Long> {
 
     public Category recoveryByName(String name) {
         QueryObject qo = new QueryObject();
-        qo.setSearchFields("name");
-        qo.setQ(name);
+        qo.setAq("upper(obj.name) = '" + name.toUpperCase() + "'");
         SearchResult<Category> result = pesquisa(qo);
         if (result.getValues().isEmpty()) {
             return null;

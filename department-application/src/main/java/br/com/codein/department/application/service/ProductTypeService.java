@@ -173,8 +173,7 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
 
     public ProductType recoveryByName(String name) {
         QueryObject qo = new QueryObject();
-        qo.setSearchFields("name");
-        qo.setQ(name);
+        qo.setAq("upper(obj.name) = '" + name.toUpperCase() + "'");
         SearchResult<ProductType> result = repository.search(qo);
         if (result.getValues().isEmpty()) {
             return null;
