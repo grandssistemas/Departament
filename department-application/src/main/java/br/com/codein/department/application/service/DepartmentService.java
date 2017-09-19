@@ -138,8 +138,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
 
     public Department recoveryByName(String name) {
         QueryObject qo = new QueryObject();
-        qo.setSearchFields("name");
-        qo.setQ(name);
+        qo.setAq("upper(obj.name) = '" + name.toUpperCase() + "'");
         SearchResult<Department> result = pesquisa(qo);
         if(result.getValues().isEmpty()){
             return null;
