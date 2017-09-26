@@ -329,4 +329,10 @@ public class CategoryAPI extends GumgaAPI<Category, Long> implements CSVGenerato
         }
         return new RestResponse<>(result, "Sucesso");
     }
+
+    @RequestMapping(value = "/all",method = RequestMethod.GET)
+    public SearchResult<Category> getAll(){
+        return ((CategoryService) service).getAll();
+    }
+
 }
