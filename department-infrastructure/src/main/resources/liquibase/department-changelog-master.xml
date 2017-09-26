@@ -10,5 +10,6 @@
     <include file="DEP-v1.6.0-changelog.xml" relativeToChangelogFile="true"/>
     <include file="DEP-v1.7.0-changelog.xml" relativeToChangelogFile="true"/>
     <include file="DEP-v1.8.0-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="DEP-v1.9.0-changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
