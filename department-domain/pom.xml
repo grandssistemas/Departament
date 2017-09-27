@@ -4,7 +4,7 @@
     <parent>
         <groupId>br.com.codein</groupId>
         <artifactId>department</artifactId>
-        <version>1.8.0</version>
+        <version>1.8.1</version>
     </parent>
 
     <artifactId>department-domain</artifactId>
