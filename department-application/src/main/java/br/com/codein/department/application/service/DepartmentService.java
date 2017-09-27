@@ -25,6 +25,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
+import static br.com.codein.department.domain.model.department.QDepartment.department;
+
 /**
  * Created by gelatti on 21/02/17.
  */
@@ -98,8 +100,13 @@ public class DepartmentService extends GumgaService<Department, Long> {
     }
 
     private boolean departmentIsAlreadyRegistered(Department resource) {
-        Department department = this.recoveryByName(resource.getName());
-        return (department != null && department.getId() != resource.getId());
+        String hql = "lower('"+resource.getName()+"') = lower(obj.name)";
+        if(resource.getId() != null){
+            hql+=" AND obj.id != "+resource.getId();
+        }
+        QueryObject qo = new QueryObject();
+        qo.setAq(hql);
+        return !this.pesquisa(qo).getValues().isEmpty();
     }
 
     public Boolean isPatternTypesCountRight(String patterns) {
