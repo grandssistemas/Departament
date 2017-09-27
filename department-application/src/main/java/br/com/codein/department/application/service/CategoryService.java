@@ -169,8 +169,13 @@ public class CategoryService extends GumgaService<Category, Long> {
     }
 
     private boolean categoryIsAlreadyRegistered(Category resource) {
-        Category category = this.recoveryByName(resource.getName());
-        return (category != null && category.getId() != resource.getId());
+        String hql = "lower('"+resource.getName()+"') = lower(obj.name)";
+        if(resource.getId() != null){
+            hql+=" AND obj.id != "+resource.getId();
+        }
+        QueryObject qo = new QueryObject();
+        qo.setAq(hql);
+        return !this.pesquisa(qo).getValues().isEmpty();
     }
 
     @Override
