@@ -73,8 +73,13 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
     }
 
     private boolean productTypeIsAlreadyRegistered(ProductType resource) {
-        ProductType productType = this.recoveryByName(resource.getName());
-        return (productType != null && productType.getId() != resource.getId());
+        String hql = "lower('"+resource.getName()+"') = lower(obj.name)";
+        if(resource.getId() != null){
+            hql+=" AND obj.id != "+resource.getId();
+        }
+        QueryObject qo = new QueryObject();
+        qo.setAq(hql);
+        return !this.pesquisa(qo).getValues().isEmpty();
     }
 
     @Override
