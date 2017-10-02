@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static br.com.codein.department.domain.model.department.QDepartment.department;
 
@@ -53,7 +54,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         validateDepartment(resource);
         initializeDepartment(resource);
         if (resource.getCategories() != null) {
-            resource.getCategories().forEach(category -> {
+            Set<Category> categories = resource.getCategories().stream().map(category -> {
                 if (category.getDepartment() == null){
                     category.setDepartment(resource);
                 }
@@ -61,18 +62,28 @@ public class DepartmentService extends GumgaService<Department, Long> {
                     storageFileService.save(category.getFile());
                 }
                 if (category.getProductTypes() != null) {
-                    category.getProductTypes().forEach(productType -> {
+                    Set<ProductType> productTypes = category.getProductTypes().stream().map(productType -> {
                         if (productType.getCategory() == null){
                             productType.setCategory(category);
                         }
                         if (productType.getFile() != null) {
                             storageFileService.save(productType.getFile());
                         }
+                        productType.getCharacteristics().forEach(ac -> {
+                            if(ac.getId() == null) {
+                               associativeCharacteristicService.save(ac);
+                            }
+                        });
                         productTypeService.validateProductType(productType);
-                    });
+                        return productType;
+                    }).collect(Collectors.toSet());
+                    category.setProductTypes(productTypes);
                 }
                 categoryService.validateCategory(category);
-            });
+                return category;
+            }).collect(Collectors.toSet());
+
+            resource.setCategories(categories);
         }
         if (resource.getFile() != null) {
             storageFileService.save(resource.getFile());
@@ -93,6 +104,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         super.beforeSave(entity);
     }
 
+    @Transactional(readOnly = true)
     public void validateDepartment(Department resource){
         if(departmentIsAlreadyRegistered(resource)){
             throw new ValidationException("dep001;;Department already registered");
@@ -153,6 +165,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         return result.getValues().get(0);
     }
 
+    @Transactional(readOnly = true)
     public Department loadDepartmentFat(Long id) {
         Department obj = repository.findOne(id);
         Hibernate.initialize(obj.getCharacteristics());
@@ -212,6 +225,7 @@ public class DepartmentService extends GumgaService<Department, Long> {
         }
     }
 
+    @Transactional(readOnly = true)
     public void initializeDepartment(Department resource) {
         Hibernate.initialize(resource);
         Hibernate.initialize(resource.getCharacteristics());

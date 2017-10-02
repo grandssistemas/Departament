@@ -49,7 +49,7 @@ public class CategoryService extends GumgaService<Category, Long> {
         this.repository = repository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Category loadCategoriaFat(Long id) {
         Category obj = repository.findOne(id);
         Hibernate.initialize(obj.getCategories());
@@ -156,6 +156,7 @@ public class CategoryService extends GumgaService<Category, Long> {
         return resource;
     }
 
+    @Transactional(readOnly = true)
     public void validateCategory(Category resource) {
         if (!haveFather(resource)) {
             throw new ValidationException("Category should have a father");

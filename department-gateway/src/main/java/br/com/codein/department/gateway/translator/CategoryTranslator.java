@@ -5,6 +5,7 @@ import br.com.codein.buddycharacteristic.domain.characteristic.AssociativeCharac
 import br.com.codein.buddycharacteristic.domain.characteristic.Characteristic;
 import br.com.codein.department.application.service.CategoryService;
 import br.com.codein.department.application.service.DepartmentService;
+import br.com.codein.department.application.service.ProductTypeService;
 import br.com.codein.department.domain.model.department.Category;
 import br.com.codein.department.domain.model.department.Department;
 import br.com.codein.department.domain.model.department.ProductType;
@@ -30,10 +31,12 @@ public class CategoryTranslator {
     @Autowired
     private DepartmentService departmentService;
     @Autowired
+    private ProductTypeService productTypeService;
+    @Autowired
     private AssociativeCharacteristicService associativeCharacteristicService;
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Object to(CategoryDTO dto, Object father) {
         Object toReturn = new Object();
         Set<Category> categories = new HashSet<>();
@@ -46,6 +49,7 @@ public class CategoryTranslator {
                 ((Department) toReturn).setIntegrationId(dto.integrationId);
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Department dep = departmentService.loadDepartmentFat(dto.id);
+                    ((Department) toReturn).setVersion(dep.getVersion());
                     for (Category cat : dep.getCategories()) {
                         dto.childrens.add(from(cat));
                     }
@@ -66,11 +70,18 @@ public class CategoryTranslator {
                     }
                     toReturn = new Category(dto.id, dto.name, dto.description, categories, productTypes, dto.characteristics, (Department) father, dto.nameMount, dto.active, dto.file,dto.skuId);
                 }
-                ((Category) toReturn).setVersion(dto.version);
+
+                if(((Category) toReturn).getId() != null){
+                    categoryService.forceFlush();
+                    ((Category) toReturn).setVersion(categoryService.loadCategoriaFat(((Category) toReturn).getId()).getVersion());
+                }else{
+                    ((Category) toReturn).setVersion(dto.version);
+                }
                 ((Category) toReturn).setIntegrationId(dto.integrationId);
 
                 if (dto.childrens.size() == 0 && dto.id != null) {
                     Category dep = categoryService.loadCategoriaFat(dto.id);
+                    ((Category) toReturn).setVersion(dep.getVersion());
                     for (Category cat : dep.getCategories()) {
                         dto.childrens.add(from(cat));
                     }
@@ -102,9 +113,17 @@ public class CategoryTranslator {
 
                     }
                 }
+
+
                 toReturn = new ProductType(dto.id, dto.name, dto.characteristicsPT, dto.isGrid, (Category) father,
                         dto.nameMount, dto.variation, dto.typeLabeling, dto.active, dto.file, dto.especification,dto.skuId);
-                ((ProductType) toReturn).setVersion(dto.version);
+
+                if(((ProductType) toReturn).getId() == null){
+                    ((ProductType) toReturn).setVersion(dto.version);
+                }else{
+                    productTypeService.forceFlush();
+                    ((ProductType) toReturn).setVersion(productTypeService.loadProductTypeFat(((ProductType) toReturn).getId()).getVersion());
+                }
                 ((ProductType) toReturn).setIntegrationId(dto.integrationId);
                 break;
         }
@@ -133,6 +152,7 @@ public class CategoryTranslator {
         return dto;
     }
 
+    @Transactional(readOnly = true)
     public CategoryDTO from(Category category) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = category.getId();
@@ -156,6 +176,7 @@ public class CategoryTranslator {
         return dto;
     }
 
+    @Transactional(readOnly = true)
     public CategoryDTO from(ProductType productType) {
         CategoryDTO dto = new CategoryDTO();
         dto.id = productType.getId();
