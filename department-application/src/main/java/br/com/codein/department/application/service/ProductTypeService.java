@@ -51,6 +51,7 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
         return resource;
     }
 
+    @Transactional(readOnly = true)
     public void validateProductType(ProductType resource){
         if (!checkCharacteristicContain(resource)) {
             throw new ValidationException("The father characteristics are no contained in characteristics");
@@ -106,7 +107,7 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
         this.repository = repository;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ProductType loadProductTypeFat(ProductType obj) {
         Hibernate.initialize(obj.getCharacteristics());
         Hibernate.initialize(obj.getNameMount());
@@ -117,7 +118,7 @@ public class ProductTypeService extends GumgaService<ProductType, Long> {
         }
         return obj;
     }
-    @Transactional
+    @Transactional(readOnly = true)
     public ProductType loadProductTypeFat(Long id) {
         ProductType obj = repository.findOne(id);
         return this.loadProductTypeFat(obj);
