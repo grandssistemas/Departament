@@ -61,7 +61,7 @@ public class CategoryService extends GumgaService<Category, Long> {
         Hibernate.initialize(obj.getNameMount());
         return obj;
     }
-
+// teste
     public Category recoveryByName(String name) {
         QueryObject qo = new QueryObject();
         qo.setAq("upper(obj.name) = '" + name.toUpperCase() + "'");
