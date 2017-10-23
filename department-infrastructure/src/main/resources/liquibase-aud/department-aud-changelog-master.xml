@@ -12,5 +12,6 @@
     <include file="DEP-AUD-v1.7.0-changelog.xml" relativeToChangelogFile="true"/>
     <include file="DEP-AUD-v1.8.0-changelog.xml" relativeToChangelogFile="true"/>
     <include file="DEP-AUD-v1.9.0-changelog.xml" relativeToChangelogFile="true"/>
+    <include file="DEP-AUD-v1.10.0-changelog.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
